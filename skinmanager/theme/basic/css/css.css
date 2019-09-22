@@ -1,0 +1,262 @@
+* {
+	padding					:0px;
+	margin					:0px;
+}
+
+/* dropdown выпадающий список */
+ul li {
+	display					:inline-block;
+}
+
+ul li:hover ul {
+	display					:block;
+} 
+
+ul li ul {
+	padding-top				:5px;
+	display					:none;
+}
+
+ul li ul li {
+	display					:block;
+}
+
+.border {
+	background				:white;
+	padding					:5px;
+	border					:2px solid lightpink;
+}
+
+p {
+	padding-bottom			:5px;
+}
+
+/* modal */
+/* Базовые стили слоя затемнения и модального окна  */
+.overlay {
+	top						:0px;
+	right					:0px;
+	bottom					:0px;
+	left					:0px;
+	z-index					:10;
+	display					:none;
+    
+/* фон затемнения */
+	background-color		:rgba(0, 0, 0, 0.65);
+	position				:fixed; /* фиксированное поцизионирование */
+	cursor					:default; /* тип курсара */
+}
+
+/* активируем слой затемнения */
+.overlay:target {
+	display					:block;
+}
+
+/* стили модального окна */
+.popup {
+	top						:-100%;
+	right					:0;
+	left					:50%;
+	font-size				:14px;
+	z-index					:20;
+	margin					:0;
+	width					:85%;
+	min-width				:320px;
+	max-width				:600px;
+/* фиксированное позиционирование, окно стабильно при прокрутке */
+	position				:fixed;
+	padding					:15px;
+	border					:1px solid #383838;
+	background				:#fefefe;
+/* скругление углов */
+	-webkit-border-radius	:4px;
+	-moz-border-radius		:4px;
+	-ms-border-radius		:4px;
+	border-radius			:4px;
+	font					:14px/18px 'Tahoma', Arial, sans-serif;
+/* внешняя тень */
+	-webkit-box-shadow		:0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
+	-moz-box-shadow			:0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
+	-ms-box-shadow			:0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
+	box-shadow				:0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
+	-webkit-transform		:translate(-50%, -500%);
+	-ms-transform			:translate(-50%, -500%);
+	-o-transform			:translate(-50%, -500%);
+	transform				:translate(-50%, -500%);
+	-webkit-transition		:-webkit-transform 0.6s ease-out;
+	-moz-transition			:-moz-transform 0.6s ease-out;
+	-o-transition			:-o-transform 0.6s ease-out;
+	transition				:transform 0.6s ease-out;
+}
+
+/* активируем модальный блок */
+.overlay:target+.popup {
+	-webkit-transform		:translate(-50%, 0);
+	-ms-transform			:translate(-50%, 0);
+	-o-transform			:translate(-50%, 0);
+	transform				:translate(-50%, 0);
+	top						:20%;
+}
+
+/* формируем кнопку закрытия */
+.close {
+	top						:-10px;
+	right					:-10px;
+	width					:20px;
+	height					:20px;
+	position				:absolute;
+	padding					:0;
+	border					:2px solid #ccc;
+	-webkit-border-radius	:15px;
+	-moz-border-radius		:15px;
+	-ms-border-radius		:15px;
+	-o-border-radius		:15px;
+	border-radius			:15px;
+	background-color		:rgba(61, 61, 61, 0.8);
+	-webkit-box-shadow		:0px 0px 10px #000;
+	-moz-box-shadow			:0px 0px 10px #000;
+	box-shadow				:0px 0px 10px #000;
+	text-align				:center;
+	text-decoration			:none;
+	font					:13px/20px 'Tahoma', Arial, sans-serif;
+	font-weight				:bold;
+	-webkit-transition		:all ease .8s;
+	-moz-transition			:all ease .8s;
+	-ms-transition			:all ease .8s;
+	-o-transition			:all ease .8s;
+	transition				:all ease .8s;
+}
+
+.close:before {
+	color					:rgba(255, 255, 255, 0.9);
+	content					:"X";
+	text-shadow				:0 -1px rgba(0, 0, 0, 0.9);
+	font-size				:12px;
+}
+
+.close:hover {
+	background-color		:rgba(252, 20, 0, 0.8);
+	-webkit-transform		:rotate(360deg);
+	-moz-transform			:rotate(360deg);
+	-ms-transform			:rotate(360deg);
+	-o-transform			:rotate(360deg);
+	transform				:rotate(360deg);
+}
+
+/* Styles the thumbnail */
+a.lightbox img {
+	
+}
+
+/* Styles the lightbox, removes it from sight and adds the fade-in transition */
+.lightbox-target {
+	position				:fixed;
+	top						:-100%;
+	width					:100%;
+	background				:rgba(0,0,0,.7);
+	width					:100%;
+	opacity					:0;
+	-webkit-transition		:opacity .5s ease-in-out;
+	-moz-transition			:opacity .5s ease-in-out;
+	-o-transition			:opacity .5s ease-in-out;
+	transition				:opacity .5s ease-in-out;
+	overflow				:hidden;
+}
+
+/* Styles the lightbox image, centers it vertically and horizontally, adds the zoom-in transition and makes it responsive using a combination of margin and absolute positioning */
+.lightbox-target img {
+	margin					:auto;
+	position				:absolute;
+	top						:0;
+	left					:0;
+	right					:0;
+	bottom					:0;
+	max-height				:0%;
+	max-width				:0%;
+	border					:3px solid white;
+	box-shadow				:0px 0px 8px rgba(0,0,0,.3);
+	box-sizing				:border-box;
+	-webkit-transition		:.5s ease-in-out;
+	-moz-transition			:.5s ease-in-out;
+	-o-transition			:.5s ease-in-out;
+	transition				:.5s ease-in-out;
+}
+
+/* Styles the close link, adds the slide down transition */
+a.lightbox-close {
+	display					:block;
+	width					:50px;
+	height					:50px;
+	box-sizing				:border-box;
+	background				:white;
+	color					:black;
+	text-decoration			:none;
+	position				:absolute;
+	top						:-80px;
+	right					:0;
+	-webkit-transition		:.5s ease-in-out;
+	-moz-transition			:.5s ease-in-out;
+	-o-transition			:.5s ease-in-out;
+	transition				:.5s ease-in-out;
+}
+
+/* Provides part of the "X" to eliminate an image from the close link */
+a.lightbox-close:before {
+	content					:"";
+	display					:block;
+	height					:30px;
+	width					:1px;
+	background				:black;
+	position				:absolute;
+	left					:26px;
+	top						:10px;
+	-webkit-transform		:rotate(45deg);
+	-moz-transform			:rotate(45deg);
+	-o-transform			:rotate(45deg);
+	transform				:rotate(45deg);
+}
+
+/* Provides part of the "X" to eliminate an image from the close link */
+a.lightbox-close:after {
+	content					:"";
+	display					:block;
+	height					:30px;
+	width					:1px;
+	background				:black;
+	position				:absolute;
+	left					:26px;
+	top						:10px;
+	-webkit-transform		:rotate(-45deg);
+	-moz-transform			:rotate(-45deg);
+	-o-transform			:rotate(-45deg);
+	transform				:rotate(-45deg);
+}
+
+/* Uses the :target pseudo-class to perform the animations upon clicking the .lightbox-target anchor */
+.lightbox-target:target {
+	opacity					:1;
+	top						:0;
+	bottom					:0;
+}
+
+.lightbox-target:target img {
+	max-height				:100%;
+	max-width				:100%;
+}
+
+.lightbox-target:target a.lightbox-close {
+	top						:0px;
+}
+
+/* modal form */
+
+/* Header */
+.modal-header {
+	padding					:15px;
+	border-bottom			:1px solid #e5e5e5;
+}
+
+/* body */
+.modal-body {
+	padding-top				:5px;
+}
