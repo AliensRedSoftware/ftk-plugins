@@ -70,8 +70,9 @@ class syntax extends xlib {
 								$name	=	$exp[1]; //Имя стикера
 								$uuid	=	$exp[2]; //Ид пака
 								if (file_exists("../sticker/$uuid/$name")) {
-									$img	=	$this->getPathModules("xmessage/sticker/$uuid/$name");
-									$val	=	$this->str_replace("<c>=$name=$uuid", "<img src=\"$img\">", $val, 1);
+									$src	=	$this->getPathModules("xmessage/sticker/$uuid/$name");
+									$img = "<img src=\"$src\" style=\"pointer-events:none;\">";
+									$val	=	$this->str_replace("<c>=$name=$uuid", $img, $val, 1);
 									$val	.=	'</img>';
 								}
 								unset($startxIndex);
