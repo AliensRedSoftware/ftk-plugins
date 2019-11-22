@@ -151,19 +151,19 @@ class ini {
         if (count($sectionList) == 0) {
             $tmp = "[$section]\n\n";
             file_put_contents($this->file, $tmp);
-            die();
-        }
-        foreach ($sectionList as $selectedSection) { 
-            $getKeys = $this->getKeys($selectedSection);
-            $tmp .= "[$selectedSection]" . "\n";
-            foreach ($getKeys as $selectedKey) {
-                $val = $this->get($selectedSection, $selectedKey);
-                $tmp .= "$selectedKey" . ' = ' . "\"$val\"" . "\n";
+        } else {
+            foreach ($sectionList as $selectedSection) { 
+                $getKeys = $this->getKeys($selectedSection);
+                $tmp .= "[$selectedSection]" . "\n";
+                foreach ($getKeys as $selectedKey) {
+                    $val = $this->get($selectedSection, $selectedKey);
+                    $tmp .= "$selectedKey" . ' = ' . "\"$val\"" . "\n";
+                }
+                $tmp .= "\n";
             }
-            $tmp .= "\n";
+            $tmp .= "\n[$section]\n";
+            file_put_contents($this->file, ltrim($tmp));
         }
-        $tmp .= "\n[$section]\n";
-        file_put_contents($this->file, ltrim($tmp));
     }
 
     /**
