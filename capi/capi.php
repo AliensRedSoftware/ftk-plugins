@@ -1,4 +1,6 @@
 <?php
+error_reporting(0);
+require_once $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 /**
  * Api для всего сайта
@@ -11,7 +13,7 @@ class capi {
 	 * ---------------------------------
 	 */
 	function execute () {
-    	$xlib = new xlib();
+        $xlib = new xlib();
     	if (capi::getSuccess()) {
         	if (capi::getType()) {
             	$func = capi::getFunc();
@@ -24,17 +26,25 @@ class capi {
                 }
             }
         }
-  
     }
-	
+
 	/**
 	 * Возвращаем набор api
 	 * --------------------
 	 */
-	protected function getSuccess() {
+	public function getSuccess() {
     	$xlib = new xlib();
     	if($xlib->geturi(1) == 'capi') {
-        	return true;
+            if (!$xlib->geturi(2)) {
+                $func = capi::getFunc();
+                require_once $func;
+                if(is_callable(array('manual', 'execute'))) {
+                    $func = array('manual', 'execute');
+                    $func();
+                }
+            } else {
+        	   return true;
+            }
         } else {
     		return false;
         }
@@ -95,6 +105,10 @@ class capi {
 	 */
 	protected function getFunc() {
     	$xlib = new xlib();
-    	return '.' . $xlib->getPathModules('capi' . DIRECTORY_SEPARATOR . 'execute' . DIRECTORY_SEPARATOR . $xlib->geturi(3) . '.php');
+        if (!$xlib->geturi(3)) {
+            return '.' . $xlib->getPathModules('capi' . DIRECTORY_SEPARATOR . 'execute' . DIRECTORY_SEPARATOR . 'manual' . '.php');
+        } else {
+    	   return '.' . $xlib->getPathModules('capi' . DIRECTORY_SEPARATOR . 'execute' . DIRECTORY_SEPARATOR . $xlib->geturi(3) . '.php');
+        }
     }
 }
