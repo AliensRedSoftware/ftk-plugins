@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 
 /**
  * Стандартный модуль для создание сайта
@@ -17,10 +18,12 @@ class xlib {
      * Действие при подключение
      */
     function execute () {
-		error_reporting(0);
+        $view = new view();
         xlib::getmysql();
-        setcookie("__JsEnabled", false);
-        echo "<script>document.cookie = \"__JsEnabled=true;\"</script>";
+        if ($view->getDisabled()) {
+            setcookie("__JsEnabled", false);
+            echo "<script>document.cookie = \"__JsEnabled=true;\"</script>";
+        }
         //setcookie("__JsEnabled", false);
         //xlib::js("document.cookie = \"__JsEnabled=true;\"");
         //echo "<script>document.cookie = \"__JsEnabled=true;\"</script>";
@@ -30,13 +33,13 @@ class xlib {
      * Возвращает массив с модулями
      */
     public function getModules() {
-		$script = explode(DIRECTORY_SEPARATOR, $_SERVER['PHP_SELF']);
-		if($script[1] == 'theme') {
-			$theme = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $script[1] . DIRECTORY_SEPARATOR . $script[2] . DIRECTORY_SEPARATOR . $script[3] . DIRECTORY_SEPARATOR . $script[4];
-		} else {
-			$xlib = new xlib();
-			$theme = '.' . $this->getPathModules(null);
-		}
+        $script = explode(DIRECTORY_SEPARATOR, $_SERVER['PHP_SELF']);
+        if($script[1] == 'theme') {
+            $theme = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $script[1] . DIRECTORY_SEPARATOR . $script[2] . DIRECTORY_SEPARATOR . $script[3] . DIRECTORY_SEPARATOR . $script[4];
+        } else {
+            $xlib = new xlib();
+            $theme = '.' . $this->getPathModules(null);
+        }
         $modules = scandir($theme);
         $output = [];
         foreach ($modules as $value) {
@@ -47,14 +50,14 @@ class xlib {
         return $output;
     }
 
-	public function import ($class) {
-		$dir = constant('modules');
-		foreach ($dir as $value) {
-			if ($value == $class) {
-				return 'yes yes';
-			}
-		}
-	}
+    public function import ($class) {
+        $dir = constant('modules');
+        foreach ($dir as $value) {
+            if ($value == $class) {
+                return 'yes yes';
+            }
+        }
+    }
 
     /*
      * Возвращает простой html код
@@ -148,64 +151,64 @@ class xlib {
      * $folder_js - папка с js скриптами
      */
     public function loader_js($folder_js = "js") {
-		if ($_COOKIE['__SKINMANAGER_SKIN'] && $_COOKIE['__SKINMANAGER_SKIN'] != 'basic') {
-			$path = $this->getTheme() . $this->getPlatform() . DIRECTORY_SEPARATOR . $folder_js . DIRECTORY_SEPARATOR;
-			$jsfile = scandir('.' . $path);
-			foreach($jsfile as $js){
-				if ($js != '.' && $js != '..') {
-					echo "<script type=\"text/javascript\" src=\"$path$js\"></script>";
-				}
-			}
-		}
+        if ($_COOKIE['__SKINMANAGER_SKIN'] && $_COOKIE['__SKINMANAGER_SKIN'] != 'basic') {
+            $path = $this->getTheme() . $this->getPlatform() . DIRECTORY_SEPARATOR . $folder_js . DIRECTORY_SEPARATOR;
+            $jsfile = scandir('.' . $path);
+            foreach($jsfile as $js){
+                if ($js != '.' && $js != '..') {
+                    echo "<script type=\"text/javascript\" src=\"$path$js\"></script>";
+                }
+            }
+        }
     }
 
-	/**
-	 * Возвращает блок стиля
-	 * ---------------------
-	 * opt - Основные стили (Кастомный)
-	 */
-	public function css($opt) {
-		unset($GLOBALS['style']);
-		foreach ($opt as $val => $key) {
-			$i++;
-			$style .= "$val:$key";
-			if (count($opt) + 1 != $i) {
-				$style .= ';';
-			}
-		}
-		if ($style) {
-			$css = "style=\"$style\"";
-		}
-		$GLOBALS['style'] = $style;
-		return  $css;
-	}
+    /**
+     * Возвращает блок стиля
+     * ---------------------
+     * opt - Основные стили (Кастомный)
+     */
+    public function css($opt) {
+        unset($GLOBALS['style']);
+        foreach ($opt as $val => $key) {
+            $i++;
+            $style .= "$val:$key";
+            if (count($opt) + 1 != $i) {
+                $style .= ';';
+            }
+        }
+        if ($style) {
+            $css = "style=\"$style\"";
+        }
+        $GLOBALS['style'] = $style;
+        return  $css;
+    }
 
-	/**
-	 * Добавляет к основному блоку стиль
-	 * ---------------------------------
-	 * opt - Основые стили (Кастомный)
-	 */
-	public function addCss ($opt) {
-		foreach ($opt as $val => $key) {
-			$i++;
-			$style .= "$val:$key";
-			if (count($opt) + 1 != $i) {
-				$style .= ';';
-			}
-		}
-		$GLOBALS['style'] .= $style;
-	}
+    /**
+     * Добавляет к основному блоку стиль
+     * ---------------------------------
+     * opt - Основые стили (Кастомный)
+     */
+    public function addCss ($opt) {
+        foreach ($opt as $val => $key) {
+            $i++;
+            $style .= "$val:$key";
+            if (count($opt) + 1 != $i) {
+                $style .= ';';
+            }
+        }
+        $GLOBALS['style'] .= $style;
+    }
 
-	/**
-	 * Возвращаем стиль
-	 * ----------------
-	 * @return string
-	 */
-	public function getCss () {
-		$sty = $GLOBALS['style'];
-		$style .= "style=\"$sty\" ";
-		return $style;
-	}
+    /**
+     * Возвращаем стиль
+     * ----------------
+     * @return string
+     */
+    public function getCss () {
+        $sty = $GLOBALS['style'];
+        $style .= "style=\"$sty\" ";
+        return $style;
+    }
 
     /**
      * Добавление js из папки
@@ -213,16 +216,16 @@ class xlib {
      * $folder_js - папка где лежат js
      */
     public function add_js(array $js, $folder_js = 'js') {
-		if ($_COOKIE['__SKINMANAGER_SKIN'] && $_COOKIE['__SKINMANAGER_SKIN'] != 'basic') {
-			foreach($js as $js){
-				if ($folder_js != null) {
-					$path = $this->getTheme() . $this->getPlatform() . DIRECTORY_SEPARATOR . $folder_js . DIRECTORY_SEPARATOR . $js;
-				} else {
-					$path = $this->getTheme() . $this->getPlatform() . DIRECTORY_SEPARATOR . $js;
-				}
-				echo "<script type=\"text/javascript\" src=\"$path\"></script>";
-			}
-		}
+        if ($_COOKIE['__SKINMANAGER_SKIN'] && $_COOKIE['__SKINMANAGER_SKIN'] != 'basic') {
+            foreach($js as $js){
+                if ($folder_js != null) {
+                    $path = $this->getTheme() . $this->getPlatform() . DIRECTORY_SEPARATOR . $folder_js . DIRECTORY_SEPARATOR . $js;
+                } else {
+                    $path = $this->getTheme() . $this->getPlatform() . DIRECTORY_SEPARATOR . $js;
+                }
+                echo "<script type=\"text/javascript\" src=\"$path\"></script>";
+            }
+        }
     }
 
     /**
@@ -232,26 +235,26 @@ class xlib {
      */
     public function add_css(array $css, $folder_css = 'css') {
         foreach($css as $css){
-			if ($folder_css != null) {
-				$path = $this->getTheme() . $this->getPlatform() . DIRECTORY_SEPARATOR . $folder_css . DIRECTORY_SEPARATOR . $css;
-			} else {
-				$path = $this->getTheme() . $this->getPlatform() . DIRECTORY_SEPARATOR . $css;
-			}
+            if ($folder_css != null) {
+                $path = $this->getTheme() . $this->getPlatform() . DIRECTORY_SEPARATOR . $folder_css . DIRECTORY_SEPARATOR . $css;
+            } else {
+                $path = $this->getTheme() . $this->getPlatform() . DIRECTORY_SEPARATOR . $css;
+            }
             echo "<link rel=\"stylesheet\" text=\"type/css\" href=\"$path\">";
         }
     }
 
     /**
      * Возвращаем mysql подключение
-	 * ----------------------------
+     * ----------------------------
      * @return sql
      */
     public function getmysql () {
         require_once $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'theme' . DIRECTORY_SEPARATOR . 'mysql.php';
-        $mysql	=	new mysql();
-        $sql	=	mysqli_connect($mysql->ip , $mysql->user , $mysql->password , $mysql->database);
+        $mysql  =   new mysql();
+        $sql    =   mysqli_connect($mysql->ip , $mysql->user , $mysql->password , $mysql->database);
         if (!$sql) {
-			die("Ошибка подключение sql!");
+            die("Ошибка подключение sql!");
         } else {
             return $sql;
         }
@@ -312,19 +315,19 @@ class xlib {
         echo "<script>$code</script>";
     }
 
-	/**
-	 * Возвращаем svg
-	 * --------------
-	 */
-	public function svg ($svg, $width = false, $height = false) {
-    	if ($width) {
-        	$style .= "width=\"$width\" ";
+    /**
+     * Возвращаем svg
+     * --------------
+     */
+    public function svg ($svg, $width = false, $height = false) {
+        if ($width) {
+            $style .= "width=\"$width\" ";
         }
-    	if ($height) {
-        	$style .= "height=\"$height\" ";
+        if ($height) {
+            $style .= "height=\"$height\" ";
         }
-    	$svg = "<svg viewBox=\"-70 0 1214.4733 1081.6177\" $style>$svg</svg>";
-    	return $svg;
+        $svg = "<svg viewBox=\"-70 0 1214.4733 1081.6177\" $style>$svg</svg>";
+        return $svg;
     }
 
     /**
@@ -351,12 +354,12 @@ class xlib {
      * @return string
      */
     public function geturi ($value = 0) {
-    	$uri = urldecode(trim(explode('/', $_SERVER['REQUEST_URI'])[$value]));
-    	$a = explode('?', $uri);
-    	if($a[1]) {
-        	return $a[0];
+        $uri = urldecode(trim(explode('/', $_SERVER['REQUEST_URI'])[$value]));
+        $a = explode('?', $uri);
+        if($a[1]) {
+            return $a[0];
         } else {
-        	return $a[0];
+            return $a[0];
         }
     }
 
@@ -437,17 +440,17 @@ class xlib {
             $bottom = $optionsOLD['bottom'];
         }
         if ($all == null) {
-			if ($style == null) {
-				return "<div style=\"padding-left: $left; padding-top: $top; padding-right: $right; padding-bottom: $bottom;\">$content</div>";
-			} else {
-				return "<div style=\"padding-left: $left; padding-top: $top; padding-right: $right; padding-bottom: $bottom;$style\">$content</div>";
-			}
+            if ($style == null) {
+                return "<div style=\"padding-left: $left; padding-top: $top; padding-right: $right; padding-bottom: $bottom;\">$content</div>";
+            } else {
+                return "<div style=\"padding-left: $left; padding-top: $top; padding-right: $right; padding-bottom: $bottom;$style\">$content</div>";
+            }
         } else {
-			if ($style == null) {
-				return "<div style=\"padding-left: $left; padding-top: $top; padding-right: $right; padding-bottom: $bottom; padding: $all;\">$content</div>";
-			} else {
-				return "<div style=\"padding-left: $left; padding-top: $top; padding-right: $right; padding-bottom: $bottom;padding: $all; $style\">$content</div>";
-			}
+            if ($style == null) {
+                return "<div style=\"padding-left: $left; padding-top: $top; padding-right: $right; padding-bottom: $bottom; padding: $all;\">$content</div>";
+            } else {
+                return "<div style=\"padding-left: $left; padding-top: $top; padding-right: $right; padding-bottom: $bottom;padding: $all; $style\">$content</div>";
+            }
         }
     }
 
@@ -527,27 +530,27 @@ class xlib {
 
     /**
      * Возвращаем блок
-	 * ---------------
-     * content	-	Контент
-     * class	-	Класс
-     * id		-	Индентификатор
-	 * css		-	Стиль
+     * ---------------
+     * content  -   Контент
+     * class    -   Класс
+     * id       -   Индентификатор
+     * css      -   Стиль
      * @return string
      */
     public function div ($opt) {
-		$content	=	$opt['content'];
-		$class		=	$opt['class'];
-        $id			=	$opt['id'];
-		$css		=	$this->css($opt['css']);
+        $content    =   $opt['content'];
+        $class      =   $opt['class'];
+        $id         =   $opt['id'];
+        $css        =   $this->css($opt['css']);
         if ($class) {
             $tag .= "class=\"$class\" ";
         }
         if ($id) {
             $tag .= "id=\"$id\" ";
         }
-		$tag	.=	$css;
-		$tag	=	trim($tag);
-		return "<div $tag>$content</div>";
+        $tag    .=  $css;
+        $tag    =   trim($tag);
+        return "<div $tag>$content</div>";
     }
 
     /**
@@ -587,12 +590,12 @@ class xlib {
      * @return array
      */
     public function getCheckMd5Array ($item) {
-    	if ($item) {
-        	$output	=	[];
-        	foreach ($item as $value_img) {
-                $imagefile	=	getimagesize($value_img);
-                $width		=	$imagefile[0];
-                $height		=	$imagefile[1];
+        if ($item) {
+            $output =   [];
+            foreach ($item as $value_img) {
+                $imagefile  =   getimagesize($value_img);
+                $width      =   $imagefile[0];
+                $height     =   $imagefile[1];
                 if ($width != 0 && $height != 0) {
                     $currentmd5 = md5_file($value_img);
                     array_push($output, $value_img);
@@ -601,12 +604,12 @@ class xlib {
                     foreach ($next as $key) {
                         if ($currentmd5 == md5_file($key)) {
                             array_pop($output);
-                    	}
-					}
-            	}
-        	}
-        	return $output;
-    	}
+                        }
+                    }
+                }
+            }
+            return $output;
+        }
     }
 
     /**
@@ -697,31 +700,31 @@ class xlib {
      * Возвращает uuidv4
      */
     public function uuidv4() {
-		return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-			// 32 bits for "time_low"
-			mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-			// 16 bits for "time_mid"
-			mt_rand(0, 0xffff),
-			// 16 bits for "time_hi_and_version",
-			// four most significant bits holds version number 4
-			mt_rand(0, 0x0fff) | 0x4000,
-			// 16 bits, 8 bits for "clk_seq_hi_res",
-			// 8 bits for "clk_seq_low",
-			// two most significant bits holds zero and one for variant DCE1.1
-			mt_rand(0, 0x3fff) | 0x8000,
-			// 48 bits for "node"
-			mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
-		);
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            // 32 bits for "time_low"
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            // 16 bits for "time_mid"
+            mt_rand(0, 0xffff),
+            // 16 bits for "time_hi_and_version",
+            // four most significant bits holds version number 4
+            mt_rand(0, 0x0fff) | 0x4000,
+            // 16 bits, 8 bits for "clk_seq_hi_res",
+            // 8 bits for "clk_seq_low",
+            // two most significant bits holds zero and one for variant DCE1.1
+            mt_rand(0, 0x3fff) | 0x8000,
+            // 48 bits for "node"
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
     }
 
     /**
      * Возвращает валидный ли uuidv4
      */
     public function is_uuidv4 ($uuid) {
-		if(preg_match('/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i', $uuid)) {
-			return true;
-		}
-		return false;
+        if(preg_match('/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i', $uuid)) {
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -735,31 +738,31 @@ class xlib {
         }
     }
 
-	/**
-	 * Возвращает замененную строку
-	 * search	-	Строка которую нужно найти
-	 * replace	-	На что изменить строку
-	 * str		-	В которой будет пойск строки
-	 * count	-	Кол-во цикл моментов изменение ;) (все)
-	 */
-	public function str_replace ($search = 'саша', $replace = 'Катя', $str = "Шла саша по шоссе и сосала сушку\nШла саша по шоссе и сосала сушку", $count = 1) {
-		foreach(explode("\n", $str) as $string) {
-			foreach(explode(" ", $string) as $foo) {
-				if ($foo == $search) {
-					if ($count > $i || $count == 0)  {
-						$txt .= $replace;
-						$i++;
-					} else {
-						$txt .= $foo;
-					}
-				} else {
-					$txt .= $foo;
-				}
-				$txt .= ' ';
-			}
-		}
-		return trim($txt);
-	}
+    /**
+     * Возвращает замененную строку
+     * search   -   Строка которую нужно найти
+     * replace  -   На что изменить строку
+     * str      -   В которой будет пойск строки
+     * count    -   Кол-во цикл моментов изменение ;) (все)
+     */
+    public function str_replace ($search = 'саша', $replace = 'Катя', $str = "Шла саша по шоссе и сосала сушку\nШла саша по шоссе и сосала сушку", $count = 1) {
+        foreach(explode("\n", $str) as $string) {
+            foreach(explode(" ", $string) as $foo) {
+                if ($foo == $search) {
+                    if ($count > $i || $count == 0)  {
+                        $txt .= $replace;
+                        $i++;
+                    } else {
+                        $txt .= $foo;
+                    }
+                } else {
+                    $txt .= $foo;
+                }
+                $txt .= ' ';
+            }
+        }
+        return trim($txt);
+    }
 
     /**
      * Возвращает сообщение стандартное об ошибки
