@@ -1,6 +1,7 @@
 <?php
+error_reporting(0);
 function getSkins () {
-	$ls = scandir('theme');
+	$ls = scandir('./theme');
 	array_shift($ls);
 	array_shift($ls);
 	return $ls;
@@ -46,7 +47,7 @@ class skinmanager extends xlib {
 	 * Выполнить
 	 * ----------
 	 */
-	function __construct($skin = false) {
+	function __construct ($skin = false) {
 		if ($_COOKIE['__SKINMANAGER_SKIN'] == false) {
 			//$GLOBALS['__SKINMANAGER_SKIN'] = 'basic';
 		} else {
