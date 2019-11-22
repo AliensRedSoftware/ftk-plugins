@@ -3,7 +3,7 @@
 /*
  * Отправка сообщение (Создание своего форума)
  * ---------------------------------------------
- * ver beta 1.37
+ * ver 1.40
  */
 class xmessage extends xlib {
 
@@ -14,15 +14,15 @@ class xmessage extends xlib {
 	 */
 	public function getVersion () {
 		$skinmanager = new skinmanager();
-		return ' (' . __CLASS__ . ' ' . $skinmanager->badge('beta 1.37') . ')';
+		return ' (' . __CLASS__ . ' ' . $skinmanager->badge('1.40') . ')';
 	}
 
 	/**
-     * Возвращает кол-во тредов в доске
+     * Возвращает кол-во нити в пространстве
 	 * $id - название доски
      */
-	public function getCountDoska ($id) {
-		$path = "../../../../uri/о/$id";
+	public function getCountThread ($dot, $space) {
+		$path = "../../../../uri/о/$dot/$space";
 		if (is_dir($path) == false) {
 			return -1;
 		}
@@ -234,7 +234,7 @@ if ($response == true) {
 	}
 
 	/**
-     * Возвращаем форму (Создание нить)
+     * Возвращаем форму (Создание нити)
 	 * -------------------------------
 	 * @return string
      */
@@ -242,7 +242,7 @@ if ($response == true) {
 		$skinmanager	=	new skinmanager();
 		$jquery			=	new jquery();
         $action	    	=	$this->getPathModules("xmessage/execute/newThread.php");
-		$dot			=	$_REQUEST['dot'];
+		$dot			=	$this->getDotSelected();
 		//-->Название нити
 		$title	=	$skinmanager->p([
 							'content'	=>	$skinmanager->input([
@@ -419,6 +419,7 @@ if ($response == true) {
 	    ]);
 	    * */
     }
+
 	/**
      * Возвращает меню создание точки в виде элемента
      * $skinmanager->input([
@@ -483,6 +484,22 @@ if ($response == true) {
 		$length = 32;
 		$_SESSION[$name . '4'] = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $length);
 		return $name;
+	}
+
+	/**
+	 * Возвращаем выбранную точку
+	 * @return string
+	 */
+	public function getDotSelected () {
+		return $this->geturi(2);
+	}
+
+	/**
+	 * Возвращаем выбранную пространство
+	 * @return string
+	 */
+	public function getSpaceSelected () {
+		return $this->geturi(3);
 	}
 
 	/**
@@ -655,7 +672,7 @@ if ($response == true) {
 	 * count	-	Кол-во постов (5)
 	 * title	-	Загаловок
 	 * --------------------------------------------
-	 * @return string
+	 * @return array
 	 */
 	public function getThreadToSpace ($space, $dot, $count = 5, $title = 'Сообщение') {
 		$arr = [];
@@ -667,12 +684,12 @@ if ($response == true) {
 	}
 
 	/**
-     * Возвращаем форму с отправки постов
-	 * ----------------------------------
+     * Возвращаем форму с нити и форму отправки постов
+	 * -----------------------------------------------
 	 * id		-	Адрес нити
 	 * count	-	Кол-во постов (Все)
 	 * title	-	Загаловок
-	 * ----------------------------------
+	 * -----------------------------------------------
 	 * @return string
      */
 	public function multiForm ($id, $count = 0, $title = 'Сообщение') {
@@ -832,6 +849,7 @@ if ($response == true) {
      * Возвращаем мульти-форму отправки постов
 	 * ----------------------------------------
 	 * id	-	ид отправки в нить
+	 * ----------------------------------------
 	 * @return string
      */
 	public function getSendBox ($id) {
@@ -876,10 +894,19 @@ if ($response == true) {
 									'title'	=>	'Отправить'
 								]);
 		//-->Модальная форма (#donate)
+		$звезда = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/звезда');
+		$зубы = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/зубы');
+		$любовь = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/любовь');
+		$подмигнуть = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/подмигнуть');
+		$прищелец = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/прищелец');
+		$радость = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/радость');
+		$рассплакаться = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/рассплакаться');
+		$сердце = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/сердце');
+		$удивление = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/удивление');
 		$skinmanager->modal([
 			'id'		=>	'syntax',
 			'title'		=>	'Помощь ;)',
-			'content'	=>	'Привет это страница помощь написание своей первой статьи :)<br>-------------------------------------------------------------------------------------------------------------<br>Об синтаксисе испольнозвание<br>-------------------------------------------------------------------------------------------------------------<br>/bЖирность/ - <b>Жирность</b><br>/sЗачеркнутый текст/ - <s>Зачеркнутый текст</s><br>/iНаклоненные буквы/ - <i>Наклоненные буквы</i><br>-------------------------------------------------------------------------------------------------------------<br>Ссылки использование их<br>-------------------------------------------------------------------------------------------------------------<br>Ютубище - https://youtu.be/mo6APOpfS3U -> Отоброжается как видео<br>Расширение картинок - .jpeg, .jpg, .png, .gif -> Отоброжается как картинки'
+			'content'	=>	"Привет это страница помощь написание своей первой статьи :)<br><hr><br>Об синтаксисе испольнозвание<br><hr><br>/bЖирность/ - <b>Жирность</b><br>/sЗачеркнутый текст/ - <s>Зачеркнутый текст</s><br>/iНаклоненные буквы/ - <i>Наклоненные буквы</i><br><hr><br>Ссылки использование их<br><hr><br>Ютубище - https://youtu.be/mo6APOpfS3U -> Отоброжается как видео<br>Расширение картинок - .jpeg, .jpg, .png, .gif -> Отоброжается как картинки<hr>Стикеры - стандартный пак (default) | /c=звезда=default/ <hr>$звезда </br> (звезда) </br> $зубы </br> (зубы) </br> $любовь </br> (любовь) </br> $подмигнуть </br> (подмигнуть) </br> $прищелец </br> (прищелец) </br> $радость </br> (радость) </br> $рассплакаться </br> (рассплакаться) </br> $сердце </br> (сердце) </br> $удивление </br> (удивление)"
 		]);
 		//-->Открытие формы о Syntax (#syntax)
 		$syntax = $skinmanager->a([
