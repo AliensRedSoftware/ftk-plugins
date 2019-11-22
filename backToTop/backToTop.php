@@ -21,8 +21,6 @@ class backToTop {
 	 * Создание кнопки наверх
 	 */
 	public function getHtml () {
-		$jquery			=	new jquery();
-		$xlib			=	new xlib();
 		$color			=	$this->color;
 		$colorHover		=	$this->colorHover;
 		$title			=	$this->title;
@@ -34,8 +32,6 @@ class backToTop {
 		$animation		=	$this->animation;
 		$animShow		=	$animation . 'Out';
 		$animExit		=	$animation . 'In';
-		$js				=	"$(window).scroll(function(){ return $(window).scrollTop() > 200 ? $('#back-to-top').addClass('show $animShow').removeClass('$animExit') : $('#back-to-top').removeClass('$animShow').addClass('$animExit')}),$('#back-to-top').click(function() {return $('html,body').animate({scrollTop: '0'})});";
-		//$jquery->addLoad($js);
 		$style = "<style>.back-to-top{visibility: visible;position: fixed;background-color: $color;width: $width;height: $height;$align cursor: pointer;opacity: 0;$margin_left$margin_bottom$margin_right$margin_top}.back-to-top:hover{background-color: $colorHover;opacity: 1}.back-to-top.show {visibility: visible;position: fixed;$align z-index: 90;opacity: 1;transition: all .6s;}</style>";
 		return $style . "<a href='#' class='back-to-top animated show $animExit' id='back-to-top' title='$title'></a>";
 	}
