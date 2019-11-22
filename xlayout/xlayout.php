@@ -23,7 +23,7 @@ class xlayout {
 	public function setLeft_aside($width = '270',$content = null) {
         $xlib = new xlib();
 		$width .= 'px';
-	    $xlib->style(".xmiddle {border-left: $width solid white;}");
+	    $xlib->style(".xmiddle {border-left: $width solid transparent;}");
 		$xlib->style(".left-sidebar{width: $width;position: relative;left: -$width;word-wrap:break-word;display:grid;}");
 		$this->xleft_aside = "<aside class=\"left-sidebar\">$content</aside>";
 	}
