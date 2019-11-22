@@ -64,7 +64,7 @@ p {
 	min-width				:320px;
 	max-width				:600px;
 /* фиксированное позиционирование, окно стабильно при прокрутке */
-	position				:fixed;
+	position				:absolute;
 	padding					:15px;
 	border					:1px solid #383838;
 	background				:#fefefe;
