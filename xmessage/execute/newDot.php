@@ -26,23 +26,24 @@ class newDot extends xlib {
 			echo $head->execute('[Создание точки] -> ошибка!');
 			$body->layout_post('[Создание точки] -> ошибка!', "Не удается создать точку <b>[$dot]</b> потому что в последней точки <b>[$get]</b> ничего нету зачем создавать еще пустую точку ?)!");
         } else {
-			$ini->addSection($dot);
+        	$ini->addSection($dot);
+			$this->isDir("../../../../uri/о");
 			$this->isDir("../../../../uri/о/$dot");
-file_put_contents("../../../../uri/о/$dot.php" , '<?php
+file_put_contents("../../../../uri/о/$dot.php", '<?php
 class ftk extends xlib {
-    function __construct() {
-        $this->req(["head", "body", "footer"]);
-        $head = new head();
-        $body = new body();
-        $footer = new footer();
-        $this->execute($head, $body, $footer);
-    }
-    function execute ($head, $body, $footer) {
-        $selected = urldecode($this->geturi(2));
-        $head->execute("/о/" . $selected);
-        $body->layout_Dot();
-        $footer->execute();
-    }
+	function __construct() {
+		$this->req(["head", "body", "footer"]);
+		$head = new head();
+		$body = new body();
+		$footer = new footer();
+		$this->execute($head, $body, $footer);
+	}
+	function execute ($head, $body, $footer) {
+		$selected = urldecode($this->geturi(2));
+		$head->execute("/о/" . $selected);
+		$body->layout_Dot();
+		$footer->execute();
+	}
 }
 ');
 			echo $head->execute('[Создание точки] -> Успешно :)');
