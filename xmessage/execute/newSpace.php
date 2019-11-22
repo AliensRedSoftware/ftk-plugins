@@ -1,6 +1,7 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'bootstrap.php';
 error_reporting(0);
+require_once $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'bootstrap.php';
+
 class newSpace extends xlib {
 
 	/**
@@ -25,19 +26,19 @@ class newSpace extends xlib {
         $ini->set($dot, $space, $desc);
 		file_put_contents("../../../../uri/о/$dot/$space.php" , '<?php
 class ftk extends xlib {
-    function __construct() {
-        $this->req(["head", "body", "footer"]);
-        $head = new head();
-        $body = new body();
-        $footer = new footer();
-        $this->execute($head, $body, $footer);
-    }
-    function execute ($head, $body, $footer) {
-        $selected = urldecode($this->geturi(2));
-        $head->execute("/о/" . $selected);
-        $body->layout_Thread();
-        $footer->execute();
-    }
+	function __construct() {
+		$this->req(["head", "body", "footer"]);
+		$head = new head();
+		$body = new body();
+		$footer = new footer();
+		$this->execute($head, $body, $footer);
+	}
+	function execute ($head, $body, $footer) {
+		$selected = urldecode($this->geturi(2));
+		$head->execute("/о/" . $selected);
+		$body->layout_Thread();
+		$footer->execute();
+	}
 }
 ');
 		$this->isDir("../../../../uri/о/$dot/$space");
@@ -56,6 +57,10 @@ class ftk extends xlib {
 		$head			=	new head();
 		require_once	"../../../page/body.php";
 		$body			=	new body();
+		if(!$dot) {
+			echo $head->execute('[Создание пространство] -> ошибка!');
+			$body->layout_post('[Создание пространство] -> ошибка!', 'Выбранная точка не должно быть пустое! :(');
+		}
 		if(!$space) {
 			echo $head->execute('[Создание пространство] -> ошибка!');
 			$body->layout_post('[Создание пространство] -> ошибка!', 'Название пространство не должно быть пустое! :(');
