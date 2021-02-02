@@ -1,0 +1,10 @@
+.uk-input, .uk-select, .uk-textarea{
+    display: unset;
+    width: unset;
+}
+[class*="uk-list"] > *::before {
+    list-style-position: unset;
+}
+.uk-list{
+    text-align: left;
+}

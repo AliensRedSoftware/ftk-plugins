@@ -1,11 +1,17 @@
 <?php
 
-/*
+/**
  * Отправка сообщение (Создание своего форума)
  * ---------------------------------------------
- * ver 1.40
+ * ver 1.45
  */
-class xmessage extends xlib {
+use xlib as x;
+use skinmanager as sm;
+use jquery as jq;
+use xprivate as xp;
+class xmessage{
+
+	protected $pathSelected;
 
 	/**
      * Возвращаем версию
@@ -13,29 +19,128 @@ class xmessage extends xlib {
 	 * @return string
 	 */
 	public function getVersion () {
-		$skinmanager = new skinmanager();
-		return ' (' . __CLASS__ . ' ' . $skinmanager->badge('1.40') . ')';
+		return' ('.__CLASS__.' '.sm::badge(['txt'=>'1.65']).')';
 	}
-
 	/**
-     * Возвращает кол-во нити в пространстве
-	 * $id - название доски
-     */
-	public function getCountThread ($dot, $space) {
-		$path = "../../../../uri/о/$dot/$space";
-		if (is_dir($path) == false) {
-			return -1;
+	 * Возвращаем путь загрузки файлов
+	 * id - нить
+	 */
+	public function getUploadFile($id){
+		if(x::is_uuidv4($id)){
+			$id=self::getPathSelected().$id;
 		}
-		$iteam = scandir($path);
-		$i = 0;
-		foreach ($iteam as $value) {
-			if ($value != '.' && $value != '..') {
-				$i++;
+		mkdir($_SERVER['DOCUMENT_ROOT']."/tmp$id/",0777,true);
+		return "/tmp$id/";
+	}
+    /**
+     * Удаление сломанных файлов не до конца которые загрузились
+     */
+     public function ClearFileThreadBAD($id){
+     	$path='/tmp'.self::getPathSelected().$id;
+     	$DIRS=scandir($path);
+     	$DRX=[];
+     	$BAD=false;
+     	foreach($DIRS as $DIR){
+     		$DRX[$DIR]=false;
+     	}
+        $result=mysqli_query(x::getmysql(),"SELECT * FROM `$id` ORDER BY `id`");
+     	while($R=mysqli_fetch_array($result)){
+     		$files=unserialize($R['img']);
+     		foreach($files as $file){
+     			$file=$file;
+     			$DRX[$file]=true;
+     		}
+     	}
+     	foreach($DRX as $FILE=>$DELETED){
+     		if($FILE&&!$DELETED&&$FILE!='.'&&$FILE!='..'){
+     			$BAD.='|'.$FILE;
+     			unlink($_SERVER['DOCUMENT_ROOT']."/tmp".self::getPathSelected()."$id/$FILE");
+            }
+     	}
+     	return $BAD;
+     }
+	/**
+     * Возвращает кол-во Сообщение в нити
+	 * id - нить
+     */
+	public function getCountMsg($id){
+		$result=mysqli_query(x::getmysql(),"SELECT COUNT(*) FROM `$id`");
+		return mysqli_fetch_array($result)[0];
+	}
+	/**
+	 * Возвращаем все нити в виде массива
+	 * return array
+	 */
+	public function getThreadsToArray(){
+		$out=[];
+		$dot=self::getPathSelected();
+		if($dot==self::getROOT()||!$dot){
+			foreach(new RecursiveTreeIterator(new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'].x::getTheme().'uri'.self::getROOT(), RecursiveDirectoryIterator::SKIP_DOTS)) as $path){
+				foreach(explode('/',$path) as $p){
+					if($p==explode('/',self::getROOT())[1]){
+						$name=basename($path);
+						$file=explode('.',$name);
+						if($file[1]=='php'&&x::is_uuidv4($file[0])){
+							$DIR=explode('.',self::getROOT().explode(self::getROOT(),$path)[1])[0];
+							$out[$file[0]]=$DIR;
+						}
+					}
+				}
+			}
+		}else{
+			$path=$_SERVER['DOCUMENT_ROOT'].x::getTheme().'uri'.self::getPathSelected();
+			$dir=scandir($path);
+			array_shift($dir);
+			array_shift($dir);
+			foreach($dir as $dr){
+				$ext=explode('.', $dr);
+				if(x::is_uuidv4($ext[0])){
+					$out[$ext[0]]=self::getPathSelected().'/'.$ext[0];
+				}
 			}
 		}
-		return $i;
+		self::autoclear($out);
+		return $out;
 	}
-
+	/**
+	 * Очистка файлов не созданных в нити
+	 */
+	public function autoclear($threads){
+		foreach(new RecursiveTreeIterator(new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'].'/tmp', RecursiveDirectoryIterator::SKIP_DOTS)) as $path){
+			$name=new SplFileInfo(dirname($path));
+			$name=$name->getFilename();
+			if(!$threads[$name]&&x::is_uuidv4($name)){
+				$path=explode('-',dirname($path),2)[1];
+				array_map('unlink',array_filter((array)array_merge(glob("$path/*"))));
+				rmdir($path);
+			}
+		}
+	}
+	/**
+	 * Возвращаем все нити в виде объекта
+	 * ----------------------------------
+	 * @return object
+	 */
+	public function getThreadsToObject(){
+		$arr=[];
+		foreach(self::getThreadsToArray() as $id=>$thread){
+			$arr[$id]=$thread;
+		}
+		return $arr;
+	}
+	/**
+	 * Возвращаем форму удаление нити
+	 * id - Ид формы
+	 */
+	public function getDelThreadForm($id){
+		$action=x::getPathModules(__CLASS__."/execute/delThread.php?id=$id");
+		//-->Описание
+		$desc=sm::text(['text'=>'Внимание удаление нити будет навсегда</br>Обратно вернуть нить будет невозможным!']);
+		//-->Выполнить
+		$submit=sm::input(['type'=>'submit']);
+		sm::modal(['id'=>"delThread$id",'title'=>"Вы точно хотите удалить нить ".sm::badge(['txt'=>$id])." ?",
+			'content'=>sm::form(['id'=>x::RedirectUpdate(),'action'=>$action,'method'=>'post','content'=>$desc.$submit])]);
+	}
 	/**
 	 * Возвращает сообщение об ошибки запроса
 	 */
@@ -169,419 +274,293 @@ if ($response == true) {
 
 ';
 	}
-
-	/**
-	 * Возвращает postTred отправка выполение Создание категорий
-	 */
-	protected function postTred () {
-		//return ''
-	}
-
-    /**
-     * Возвращаем все пространство в виде массива
-	 * ------------------------------------------
-	 * dot - Точка
-	 * ------------------------------------------
-	 * @return Array
-     */
-    public function getSpace ($dot) {
-		$ini	=	new ini('options');
-		return $ini->getKeys($dot);
-    }
-
 	/**
      * Возвращаем все точки в виде массива
 	 * -----------------------------------
+	 * $path-путь
 	 * @return Array
      */
-    public function getDotToArray () {
-		$ini	=	new ini('options');
-		return $ini->getSections();
-    }
-
-	/**
-	 * Возвращаем id в пространство
-	 * ----------------------------
-	 * space	-	Имя пространство
-	 * dot		-	Имя точки
-	 * ----------------------------
-	 * @return array
-	 */
-	public function getIdToArray($space, $dot = false) {
-		if ($dot) {
-			$path = '.' . $this->getTheme() . "uri/о/$dot/$space";
-			$dir = scandir($path);
-			$out	=	[];
-			array_shift($dir);
-			array_shift($dir);
-			foreach ($dir as $dr) {
-				array_push($out, explode('.', $dr)[0]);
-			}
-			return $out;
-		} else {
-			foreach ($this->getDotToArray() as $dot) {
-				$path = '.' . $this->getTheme() . "uri/о/$dot/$space";
-				$dir = scandir($path);
-				$out	=	[];
-				array_shift($dir);
-				array_shift($dir);
-				foreach ($dir as $dr) {
-					array_push($out, explode('.', $dr)[0]);
+    public function getDotToArray($PATH=false){
+        $PATH=str_replace('?'.$_SERVER['QUERY_STRING'],NULL,$PATH);
+		$ROOT=explode('/',self::getROOT())[1];
+		$ARR=[];
+		if($_POST){
+			$DIRS=scandir($_SERVER['DOCUMENT_ROOT'].x::getTheme().'uri/'.$PATH);
+			array_shift($DIRS);
+			array_shift($DIRS);
+			foreach($DIRS as $DIR){
+				if(!explode('.',$DIR)[1]){
+					$ARR[$DIR]=$_SERVER['DOCUMENT_ROOT'].x::getTheme().'uri/'.$ROOT;
 				}
 			}
-			return $out;
+			return $ARR;
+		}
+		if(explode('/',$PATH)[1]!=$ROOT){
+			$PATH=self::getROOT();
+			$DIRS=scandir('.'.x::getTheme().'uri'.$PATH);
+			$R=[];
+			array_shift($DIRS);
+			array_shift($DIRS);
+			foreach($DIRS as $DIR){
+				if(!explode('.',$DIR)[1]){
+					array_push($R,$DIR[0]);
+				}
+			}
+			if(!count($R)){
+				return false;
+			}
+		}
+		$DIRS=scandir('.'.x::getTheme().'uri'.$PATH);
+		array_shift($DIRS);
+		array_shift($DIRS);
+		foreach($DIRS as $DIR){
+			if(!explode('.',$DIR)[1]){
+				$ARR[$DIR]=$PATH;
+			}
+		}
+		if(is_dir('.'.x::getTheme().'uri'.$PATH)){
+			if(!$ARR){
+				$p=explode('/',$PATH);
+				$path=str_replace($p[count($p) - 1],NULL,$PATH);
+				return self::getDotToArray(mb_substr($PATH, 0, -1));
+			}else{
+				$GLOBALS['p']=$PATH;
+			}
+		}
+		if(!$GLOBALS['p']){
+			$GLOBALS['p']=$PATH;
+		}
+		return $ARR;
+    }
+	/**
+	 * Возвращаем название ROOT
+	 */
+	public function getROOT(){
+		return DIRECTORY_SEPARATOR.'о'.DIRECTORY_SEPARATOR;
+	}
+	/**
+	 * Возвращаем выбранный путь точки
+	 */
+	protected function getPathSelectedLegacy(){
+		$DIRS=str_replace('?'.x::getData(),NULL,$_SERVER['REQUEST_URI']);
+		$ROOT=explode('/',self::getROOT())[1];
+		if($ROOT==explode('/',$DIRS)[1]){//ISROOT
+			if(is_dir('.'.x::getTheme().'uri'.x::geturi())){
+				return x::geturi();
+			}else{
+				$b=explode('/',$DIRS);
+				/*if(!$GLOBALS['p']){
+					$b=explode('/', $DIRS);
+				}else{
+					$b=explode('/', $GLOBALS['p']);
+				}
+				*/
+				$t=null;
+				foreach($b as $c){
+					if(!x::is_uuidv4($c)){
+						$t.=$c.'/';
+					}
+				}
+				if(x::endsWith($t,DIRECTORY_SEPARATOR)){
+					$t=substr($t,0,-1);
+				}
+				return $t;
+			}
+		}else{
+			return self::getROOT();
 		}
 	}
-
+	/**
+	 * Возвращаем выбранный путь точки (Исправленный)
+	 */
+	public function getPathSelected(){
+		$DOTS=[];
+		$DOT='';
+		$PATH=self::getPathSelectedLegacy();
+		foreach(explode(DIRECTORY_SEPARATOR,$PATH.DIRECTORY_SEPARATOR) as $DOT){
+			if($DOT!='.'&&$DOT!='..'&&trim($DOT)){
+				array_push($DOTS,$DOT);
+			}
+		}
+		foreach($DOTS as $D){
+			$DOT.=DIRECTORY_SEPARATOR.$D;
+		}
+		$DOT.=DIRECTORY_SEPARATOR;
+		return $DOT;
+	}
+	/**
+	 * Возвращаем выбранна ли точка
+	 */
+	public function isDot(){
+		if(self::getPathSelected()==self::getROOT()&&!$_POST['dot']||$_POST['dot']==self::getROOT()){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	/**
+	 * Возвращаем кол-во точек
+	 * -------------------------------
+	 * @return int
+	 */
+	public function getCountDot(){
+		$DIRS=scandir($_SERVER['DOCUMENT_ROOT'].x::getTheme().'uri'.self::getPathSelected());
+		$out=[];
+		array_shift($DIRS);
+		array_shift($DIRS);
+		foreach($DIRS as $DIR){
+			if(!explode('.',$DIR)[1]){
+				array_push($out, $DIR);
+			}
+		}
+		return count($out);
+	}
+	/**
+	 * Возвращаем Информацию об нити
+	 * -----------------------------
+	 * @return array
+	 */
+	public function getInfoThreadToArray(){
+		$arr=[];
+		$sql=x::getmysql();
+		foreach(self::getThreadsToArray() as $id=>$thread){
+			$result=mysqli_query($sql,"SELECT * FROM `view`");
+		 	while($R=mysqli_fetch_array($result)){
+		 		if($R['uuid']==$id){
+		 			$title=$R['title'];
+		 			$name=$R['name'];
+		 			$result=mysqli_query($sql,"SELECT * FROM `$id` LIMIT 1");
+		 			$result=mysqli_fetch_array($result);
+		 			$time=explode('(',$result[3])[0];
+		 			$arr+=[$id=>['path'=>$thread,'name'=>$name,'time'=>$time,'title'=>$title,'superuser'=>$result[4]]];
+		 			$id=false;
+		 		}
+		 	}
+		 	if(isset($id)){
+		 		$result=mysqli_query($sql,"SELECT * FROM `$id` LIMIT 1");
+		 		$result=mysqli_fetch_array($result);
+				$time=explode('(',$result[3])[0];
+		 		$arr+=[$id=>['path'=>$thread,'title'=>$id,'time'=>$time,'superuser'=>$result[4]]];
+			}
+		}
+		return $arr;
+	}
 	/**
      * Возвращаем форму (Создание нити)
 	 * -------------------------------
 	 * @return string
      */
-	public function getCreateThread() {
-		$skinmanager	=	new skinmanager();
-		$jquery			=	new jquery();
-        $action	    	=	$this->getPathModules("xmessage/execute/newThread.php");
-		$dot			=	$this->getDotSelected();
-		//-->Название нити
-		$title	=	$skinmanager->p([
-							'content'	=>	$skinmanager->input([
-								'name'			=>	'title',
-								'placeholder'	=>	'Название нити:'
-							])
-						]);
-		//-->Имя создателя
-		$name	=	$skinmanager->p([
-							'content' => $skinmanager->input([
-								'value'			=>	$_COOKIE['__xmessage_name'],
-								'name'			=>	'name',
-								'placeholder'	=>	'Имя создателя (Неизвестный)'
-							])
-						]);
-		//-->Точка выбранная
-		$dot	=	$skinmanager->p([
-							'content' => $skinmanager->input([
-								'value'	=>	$dot,
-								'name'	=>	'dot',
-								'type'	=>	'hidden'
-							])
-						]);
-		//-->Пространство
-		$space	=	$skinmanager->p([
-							'content' => $skinmanager->input([
-								'value'	=>	$this->geturi(3),
-								'type'	=>	'hidden',
-								'name'	=>	'space'
-							])
-						]);
-		//-->Описание пространство
-		$text	=	$skinmanager->p([
-							'content' => $skinmanager->textarea([
-								'name'			=>	'text',
-								'css'			=>	['width'		=>	'100%',
-														'resize'	=>	'vertical'
-													],
-								'placeholder'	=>	'Сообщение...'
-							])
-						]);
-		//-->Выполнить
-		$submit	=	$skinmanager->input([
-							'type'	=>	'submit',
-							'value'	=>	'Выполнить'
-						]);
-		return	$skinmanager->form([
-					'action'	=>	$action,
-					'method'	=>	'post',
-					'content'	=>	$title	.	$name	.	$dot	.	$space	.	$text	.	$submit
-				]);
-        /*
-        $bootstrap = new bootstrap();
-        $id = $xlib->uuidv4();
-		$progress = $this->getProgressBar();
-		$alert = $this->getAlertError();
-		$execute = $this->generateSession($xlib->uuidv4());//Создание сессий против cURL ;)
-        $tred = $xlib->getPathModules("xmessage/execute/tred.php");
-        //Создать тред
-        $js = "$('#$id').submit(function(){ $('#getTred').html('$progress');var arr=$(this).serializeArray();var y = youtube.getEmbedStr(arr[6]['value']);arr.push({name: 'youtube', value:y});arr.push({name: 'post_index', value:$('#post_index').val()});arr.push({name: 'theme', value:getThemeBootstrap()});$.post('$tred', arr, function(data){ $('#getTred').html(data);youtube.Update();}).fail(function(){ $('#getTred').html('$alert');});return false;});";
-        $jquery->addLoad($js);
-        return $xlib->evnform([
-                'id' => $id,
-			    'content' =>
-					$bootstrap->input("Как называется тред ?)", "title") .
-					$bootstrap->input("Имя создателя (Неизвестный)", "name") .
-					$bootstrap->combobox([
-						'id' => 'selected',
-						'option' => $this->getOptions()
-					]) .
-					$bootstrap->combobox([
-						'id' => 'event',
-						'option' => $bootstrap->opt('Создать тред') . $bootstrap->opt('Просмотр')
-					]) . $xlib->inputhidden($_SESSION[$execute . '4'], 'token') . $xlib->inputhidden($execute, 'execute') .
-					$bootstrap->textarea("Описание (текст) (используйте знак => \"Пробел\" чтобы добавить более одного файла)", "tredtext") .
-					    $bootstrap->sep([
-							'modal' => true,
-							'content' => $xlib->padding([
-							'top' => 15,
-								'content' => $bootstrap->btn([
-									'modal' => true,
-									'type' => 'submit',
-									'title' => 'Выполнить'
-								])
-						])
-					]) .
-					$xlib->div([
-						'id' => 'getTred'
-					])
-	    ]);
-	    */
-    }
-
+	public function getCreateThread(){
+		return sm::modal(['id'=>'thread','title'=>'Создание новой нити'.self::getVersion(),'content'=>self::getCreateThreadObject()]);
+	}
 	/**
-     * Возвращаем форму создание пространство
-	 * --------------------------------------
-	 * dot	-	Название точки
-	 * --------------------------------------
+     * Возвращаем форму (Создание нити)
+	 * -------------------------------
 	 * @return string
      */
-	public function getCreateSpace ($dot = false) {
-		$jquery			=	new jquery();
-		$skinmanager	=	new skinmanager();
-		$action			=	$this->getPathModules("xmessage/execute/newSpace.php");
-		//$execute			=	$this->generateSession($xlib->uuidv4());
-		$dots			= 	[];
-		foreach ($this->getDotToArray() as $val) {
-			$dots += [$val => []];
-		}
-		//-->Точка
-		$dot	=	$skinmanager->p([
-							'content' => $skinmanager->combobox([
-								'name'	=>	'dot',
-								'selected' => $dot,
-								$dots
-							])
-				    	]);
-		//-->Пространство
-		$space	=	$skinmanager->p([
-							'content' => $skinmanager->input([
-								'name' 			=>	'space',
-								'placeholder'	=>	'Название пространство:'
-							])
-						]);
-		//-->Описание пространство
-		$desc	=	$skinmanager->p([
-							'content' => $skinmanager->input([
-								'name'			=>	'description',
-								'placeholder'	=>	'Описание пространство:'
-							])
-						]);
+	public function getCreateThreadObject(){
+        $action=x::getPathModules("xmessage/execute/newThread.php");
+		//-->Название нити
+		$title=sm::p(['content'=>sm::input(['name'=>'title','placeholder'=>'Название нити:'])]);
+		//-->Точка выбранная
+		$dot=sm::input(['value'=>self::getPathSelected(),'name'=>'dot','type'=>'hidden']);
+		//-->Описание
+		$txt=sm::p(['content'=>sm::textarea(['name'=>'text','css'=>['width'=>'100%','resize'=>'vertical'],'rows'=>4,'placeholder'=>"Сообщение (8096)\n/bЖирность/ - Жирность\n/sЗачеркнутый текст/ - Зачеркнутый текст\n/iНаклоненные буквы/ - Наклоненные буквы"])]);
+		//-->Отправить файлы
+		$file=sm::input(['name'=>'upload[]','type'=>'file','multiple'=>1,'accept'=>'image/jpg,image/jpeg,image/png,image/gif']);
 		//-->Выполнить
-		$submit	=	$skinmanager->input([
-							'type'	=>	'submit',
-							'value'	=>	'Выполнить'
-						]);
-		return	$skinmanager->form([
-					'action'	=>	$action,
-					'method'	=>	'post',
-					'content'	=>	$dot	.	$space	.	$desc	.	$submit
-				]);
-		/*
-        $bootstrap = new bootstrap();
-        $id = $xlib->uuidv4();
-		$progress = $this->getProgressBar();
-		$alert = $this->getAlertError();
-		$execute = $this->generateSession($xlib->uuidv4());//Создание сессий против cURL ;)
-        $tred = $xlib->getPathModules("xmessage/execute/doska.php");
-        $js = "$('#$id').submit(function(){ $('#getDoska').html('$progress');var arr = $(this).serializeArray();$.post('$tred', $(this).serialize(), function(data){ $('#getDoska').html(data);}).fail(function(){ $('#getDoska').html('$alert');});return false;});";
-        $jquery->addLoad($js);
-        return $xlib->evnform([
-		    'id' => $id,
-		    'content' =>
-				$bootstrap->combobox([
-					'id' => 'type',
-					'option' => $this->getOptionsType()
-				]) .
-			    $bootstrap->input("Название", "title") .
-			    $bootstrap->input("Описание краткое", "description") .
-			    $bootstrap->sep([
-				    'modal' => true,
-				    'content' => $xlib->padding([
-					    'top' => 15,
-					    'content' => $bootstrap->btn([
-						    'modal' => true,
-						    'type' => 'submit',
-						    'title' => 'Выполнить'
-					    ]) . $xlib->inputhidden($_SESSION[$execute . '4'], 'token') . $xlib->inputhidden($execute, 'execute')
-				    ])
-			    ]) .
-		    $xlib->div([
-			    'id' => 'getDoska'
-		    ])
-	    ]);
-	    * */
+		$submit=sm::input(['type'=>'submit']);
+		$key=x::generateSession(x::uuidv4());
+		return sm::form(['id'=>x::RedirectUpdate(),'action'=>$action,'enctype'=>'multipart/form-data','method'=>'post','content'=>$title.$dot.$txt.$submit.$file.$key]);
     }
-
 	/**
      * Возвращает меню создание точки в виде элемента
-     * $skinmanager->input([
-			'type' => 'hidden',
-			'value' => $_SESSION[$execute . '4'],
-			'name' => 'token'
-		]) .
-		$skinmanager->input([
-			'type' => 'hidden',
-			'value' => $execute,
-			'name' => 'execute'
-		])
+     * -------------------------------
+     * @return string
      */
-	public function getCreateDot() {
-		$skinmanager	=	new skinmanager();
-		$action			=	$this->getPathModules("xmessage/execute/newDot.php");
-		//$execute		=	$this->generateSession($xlib->uuidv4());
+	public function getCreateDot(){
+		return sm::modal(['id'=>'dot','title'=>'Создание новой точки'.self::getVersion(),'content'=>self::getCreateDotObject()]);
+	}
+	/**
+     * Возвращает меню создание точки в виде объекта
+     * -------------------------------
+     * @return object
+     */
+	public function getCreateDotObject(){
+		$action=x::getPathModules("xmessage/execute/newDot.php");
+		$key=x::generateSession(x::uuidv4());
+		//-->Путь создание точки
+		$path=sm::input(['name'=>'path','type'=>'hidden','value'=>self::getPathSelected()]);
 		//-->Имя точки
-		$dot	=	$skinmanager->p([
-							'content'	=>	$skinmanager->input([
-								'name'			=>	'dot',
-								'placeholder'	=>	'Название точки:'
-							])
-						]);
+		$dot=sm::p(['content'=>sm::input(['name'=>'dot','placeholder'=>'Название точки:'])]);
 		//-->Выполнить
-		$submit	=	$skinmanager->input([
-							'type'	=>	'submit',
-							'value'	=>	'Выполнить'
-						]);
-		return	$skinmanager->form([
-					'action'	=>	$action,
-					'method'	=>	'post',
-					'content'	=>	$dot	.	$submit
-				]);
+		$submit=sm::input(['type'=>'submit']);
+		return sm::form(['id'=>x::RedirectUpdate(),'action'=>$action,'method'=>'post','content'=>$key.$path.$dot.$submit]);
 	}
-
-	/**
-	 * Создать уникальный пост файл с запросам
-	 * $name - имя запроса
-	 */
-	protected function post ($name = 'type', $postText = null) {
-		$xlib = new xlib();
-		$idScript = $xlib->uuidv4();
-		$ip = $_SERVER['REMOTE_ADDR'];
-		$ini = new ini($xlib->getPathModules('xmessage' . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $ip));
-		if ($ini->get('settings', 'type') != null) {
-			unlink('.' . $xlib->getPathModules('xmessage' . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $ini->get('settings', $name) . '.php'));
-		}
-		$ini->set('settings', $name, $idScript);
-		$type = $xlib->getPathModules('xmessage' . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . "$idScript.php");
-		file_put_contents('.' . $type, $postText);
-		chmod('.' . $type, 0777);
-		return $type;
-	}
-
-	/**
-	 * Создает уникальную ссесию для post запроса
-	 * $name - имя сессий
-	 */
-	protected function generateSession ($name = 'token') {
-		session_start();
-		$length = 32;
-		$_SESSION[$name . '4'] = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $length);
-		return $name;
-	}
-
 	/**
 	 * Возвращаем выбранную точку
+	 * -------------------------------
 	 * @return string
 	 */
-	public function getDotSelected () {
-		return $this->geturi(2);
+	public function getDotSelected(){
+		return x::geturi();
 	}
-
-	/**
-	 * Возвращаем выбранную пространство
-	 * @return string
-	 */
-	public function getSpaceSelected () {
-		return $this->geturi(3);
-	}
-
 	/**
      * Возвращаем точки в виде элемента
 	 * ---------------------------------
 	 * @return string
      */
-	public function getDot() {
-		$skinmanager	=	new skinmanager();
-		$jquery			=	new jquery();
-		$ini			=	new ini('options');
-		$idNew			=	$this->uuidv4();
-		$idCollaps		=	$this->uuidv4();
-		$Update			=	$this->uuidv4();
-		$gospace		=	$this->getPathModules(__CLASS__ . DIRECTORY_SEPARATOR . 'execute' . DIRECTORY_SEPARATOR . 'goSpace.php');
-		$item			=	[];
-		foreach ($this->getDotToArray() as $dot) {
-			$newSpace		=	$this->uuidv4();
-			$btnSpace		=	$skinmanager->input(['type' => 'hidden','name' => 'dot', 'form' => $newSpace, 'value' => $dot]) .
-									$skinmanager->form([
-														'action'	=>	$this->getPathModules("xmessage/form/space.php"),
-														'id'		=>	$newSpace,
-														'content' => $skinmanager->input([
-																		'value' => '+',
-																		'type'	=>	'submit'
-														])
-												   ]);
-			$index++;
-			$listspace	=	[];
-			foreach ($this->getSpace($dot) as $space) {
-				$listspace	+=	[$space	=>	[]];
+	public function getDot(){
+		$idNew=x::uuidv4();
+		$idCollaps=x::uuidv4();
+		$Update=x::uuidv4();
+		$Dot=self::getPathSelected();
+		foreach(self::getDotToArray($Dot) as $dot=>$key){
+			$item=[];
+			$path=$Dot.$dot;//Путь
+			$newSpace=x::uuidv4();
+			$btnSpace=sm::input(['type' => 'hidden','name'=>'dot','form'=>$newSpace,'value'=>$dot]) .
+			sm::btn(['title'=>'+','modal'=>'newPoint']);
+			foreach (array_keys(self::getDotToArray($path)) as $newDot){
+				array_push($item,$newDot);
 			}
-			$count		=	' ' . $skinmanager->badge(count($listspace));
-			$listview	=	$this->uuidv4();
-			$id			=	$skinmanager->modal([
-									'title'		=>	"$dot$count",
-									'css'		=>	['text-align' => 'right'],
-									'content'	=>	$btnSpace . $skinmanager->p([
-										'content'	=>	$skinmanager->listView([
-										'form'		=>	$listview,
-										'name'		=>	'space',
-										'required'	=>	true,
-										'css'		=>	['width' => '100%'],
-										$listspace
+			$count=' '.sm::badge(['txt'=>count(self::getDotToArray($path))]);
+			$listview=x::uuidv4();
+			$id=sm::modal([
+							'title'=>"$dot$count",
+							'css'=>['text-align'=>'right'],
+							'content'=>$btnSpace.sm::p([
+										'content'=>sm::listView([
+											'form'=>$listview,
+											'name'=>'selectedDot',
+											'required'=>true,
+											'css'=>['width' => '100%'],
+											$item
 									])
-								]) . $skinmanager->input(['type' => 'hidden','name' => 'dot', 'form' => $listview, 'value' => $dot])
-									. $skinmanager->form([
-										'action'	=>	$gospace,
-										'id'		=>	$listview,
-										'content'	=>	$skinmanager->input([
-														'value'	=>	'Выбрать пространство',
-														'type'	=>	'submit'
-													])
+								]).sm::input(['type'=>'hidden','name'=>'dot','form'=>$listview,'value'=>"$Dot/$dot/"])
+								.sm::form([
+									'action'=>"/theme/borda/linux/plugins/xmessage/execute/goSpace.php",
+									'id'=>$listview,
+									'content'=>sm::input([
+												'value'=>'Перейти',
+												'type'=>'submit'
+											])
 										])
 							]);
-			if (count($this->getDotToArray()) == $index) {
-				$list	.=	$skinmanager->dropdown([
-								$dot . $count => [
-									'item'	=>	[
-										'Перейти'	=> ['href' => "/о/$dot"],
-										'Создать'	=> ['href' => $this->getPathModules("xmessage/form/space.php?dot=$dot")],
-										$skinmanager->ico('eye-open') . ' ' . 'Посмотреть'	=>	['href'	=>	"#$id",	'modal'	=>	true]
+		$list.=sm::dropdown([
+								$dot.$count=>[
+									'item'=>[
+										'Перейти'=>['href'=>$Dot.$dot],
+										'Создать'=>['href'=>'#newPoint','modal'=>true],
+										sm::ico('eye-open').' '.'Посмотреть'=>['href'=>"#$id",'modal'=>true]
 									]
 								]
 							]);
-			} else {
-				$list	.=	$skinmanager->dropdown([
-								$dot . $count => [
-									'item'	=>	[
-										'Перейти'	=> ['href' => "/о/$dot"],
-										'Создать'	=> ['href' => $this->getPathModules("xmessage/form/space.php?dot=$dot")],
-										$skinmanager->ico('eye-open') . ' ' . 'Посмотреть'	=>	['href'	=>	"#$id",	'modal'	=>	true]
-									]
-								]
-							]);
-			}
 		}
-	    return $skinmanager->panel([
-					'title'		=>	"Точки " . $skinmanager->badge($ini->getCountSections()),
-					'css'		=>	['text-align' => 'center'],
-					'content'	=>	$list
-				]);
+		if(!$list){
+			$list="Упс ничего не нашлось :(".sm::a(['title'=>'Создать новую точку','href'=>'#dot','modal'=>'dot']);
+		}
+	    return sm::panel(['title'=>$Dot.' '.sm::badge(['txt'=>self::getCountDot()]),'css'=>['text-align'=>'center'],'content'=>$list]);
 		/*
 		$progress = $this->getProgressBar();
 		$alert = $this->getAlertError();
@@ -648,202 +627,84 @@ if ($response == true) {
 			])
 		]);*/	
     }
-
 	/**
 	 * Возвращаем нить
-	 * ----------------
+	 * -------------------------------
 	 * id		-	Адрес нити
 	 * count	-	Кол-во постов (Все)
 	 * title	-	Загаловок
-	 * ----------------
+	 * -------------------------------
 	 * @return string
 	 */
-	public function getThread ($id = false, $count = 0, $title = 'Сообщение') {
-		require_once	$_SERVER['DOCUMENT_ROOT'] . $this->getPathModules('xmessage' . DIRECTORY_SEPARATOR . 'execute' . DIRECTORY_SEPARATOR . 'refresh.php');
-		$refresh	=	new refresh();
-		return $refresh->get($id, $count, $title);
+	public function getThread($id=false,$count=NULL,$title=NULL){
+		require_once __dir__.DIRECTORY_SEPARATOR.'execute'.DIRECTORY_SEPARATOR. 'refresh.php';
+		$refresh=new refresh();
+		return $refresh->get($id,$count,$title);
 	}
-
 	/**
-	 * Возвращаем все нити по названию пространство
-	 * --------------------------------------------
-	 * space	-	Адрес пространство
-	 * dot		-	Точка
-	 * count	-	Кол-во постов (5)
-	 * title	-	Загаловок
-	 * --------------------------------------------
-	 * @return array
+	 * Возвращаем Настройки постинга
+	 * -------------------------------
 	 */
-	public function getThreadToSpace ($space, $dot, $count = 5, $title = 'Сообщение') {
-		$arr = [];
-		$ids = $this->getIdToArray($space, $dot);
-		foreach ($ids as $id) {
-			array_push($arr,  $this->getThread($id, $count, $title));
+	 public function getSettingsView(){
+	 	//-->ид нити
+		if($uniqid){
+			$uniqid=sm::input(['type'=>'hidden','name'=>'id','value'=>$id,'placeholder'=>"ид отправителя нити ($id)"]).sm::input(['form'=>$form,'type'=>'hidden','name'=>'id','value'=>$id,'placeholder'=>"ид отправителя нити ($id)"]);
 		}
-		return $arr;
-	}
-
+		//-->NumberPost (Номер сообщение)
+		if($_REQUEST['NUMBER']||$_SERVER['REQUEST_METHOD']=='POST'){
+			$number=$_REQUEST['NUMBER'];
+		}elseif($_COOKIE['__XMSG_NUMBER']){
+			$number=$_COOKIE['__XMSG_NUMBER'];
+		}else{
+			$number=false;
+        }
+		//-->DatePost (Дата сообщение)
+		if($_REQUEST['DATE']||$_SERVER['REQUEST_METHOD']=='POST'){
+			$date=$_REQUEST['DATE'];
+		}elseif($_COOKIE['__XMSG_DATE']){
+        	$date=$_COOKIE['__XMSG_DATE'];
+		}else{
+			$date=false;
+		}
+		//-->IdMessage (Уникальный номер сообщение)
+		if($_REQUEST['IDMSG']||$_SERVER['REQUEST_METHOD']=='POST'){
+			$idMessage=$_REQUEST['IDMSG'];
+		}elseif($_COOKIE['__XMSG_ID']){
+			$idMessage=$_COOKIE['__XMSG_ID'];
+		}else{
+			$idMessage=false;
+        }
+	 	//-->Номер поста
+		$NumberPost=sm::p(['content'=>sm::input(['type'=>'checkbox','name'=>'NUMBER','value'=>'Получение номера поста','checked'=>$number])]);
+		//-->Дата отправки
+		$date=sm::p(['content'=>sm::input(['type'=>'checkbox','name'=>'DATE','value'=>'Дата отправки','checked'=>$date])]);
+		//-->Ид сообщение
+		$idMessage=sm::p(['content'=>sm::input(['type'=>'checkbox','name'=>'IDMSG','value'=>'Ид сообщение','checked'=>$idMessage])]);
+	 }
 	/**
-     * Возвращаем форму с нити и форму отправки постов
-	 * -----------------------------------------------
+     * Возвращаем готовую форму с нити и форму отправки постов
+	 * -------------------------------
 	 * id		-	Адрес нити
 	 * count	-	Кол-во постов (Все)
 	 * title	-	Загаловок
-	 * -----------------------------------------------
+	 * -------------------------------
 	 * @return string
      */
-	public function multiForm ($id, $count = 0, $title = 'Сообщение') {
-		if ($_POST['id']) {
-			$id = $_POST['id'];
-		} elseif (!$id) {
-			$id = $this->geturi(4);
+	public function multiForm($id,$count=NULL,$title=NULL){
+		if($_POST['id']){
+			$id=$_POST['id'];
+		}elseif(!$id){
+			$uri=x::geturi();
+			$uri=str_replace('?'.x::getData(),NULL,$uri);
+			$id=explode('/',$uri)[count(explode('/',$uri)) - 1];
 		}
-		return $this->getSendBox($id)	.	$this->getThread($id, $count, $title);
+		$info=self::getInfoThreadToArray()[$id];
+		$count=self::getCountMsg($id)-1;
+		if($info['superuser']==xp::getData()['id']){
+			$menu=sm::dropdown(['Меню'=>['item'=>['Ликвидировать'=>['href'=>"#delThread$id",'modal'=>"delThread$id"]]]]);
+		}
+		return self::getThread($id,-1,$info['title'].' '.$menu).self::getSendBox($id).self::getThread($id,$count,'Сообщение '.sm::badge(['txt'=>$count]));
 	}
-
-	/**
-	 * Возвращаем (Изменение профиля)
-	 * ---------------------------
-	 */
-	public function getPanelSettingsSb($form, $id) {
-		$skinmanager	=	new skinmanager();
-		$jquery			=	new jquery();
-		$post			=	$this->getPathModules("xmessage/execute/saveSettings.php");
-    	//-->Имя
-   		if ($_REQUEST['name']) {
-			$name	=	$_REQUEST['name'];
-		} elseif ($_COOKIE['__xmessage_name']) {
-        	$name	=	$_COOKIE['__xmessage_name'];
-		} else {
-			$name	=	'Нейзвестный';
-        }
-		//-->NumberPost
-		if ($_REQUEST['number'] || $_SERVER['REQUEST_METHOD'] == 'POST') {
-			$number	=	$_REQUEST['number'];
-		} elseif ($_COOKIE['__xmessage_number']) {
-			$number	=	$_COOKIE['__xmessage_number'];
-		} else {
-			$number	=	false;
-        }
-		//-->DatePost
-		if ($_REQUEST['date'] || $_SERVER['REQUEST_METHOD'] == 'POST') {
-			$date	=	$_REQUEST['date'];
-		} elseif ($_COOKIE['__xmessage_date']) {
-        	$date	=	$_COOKIE['__xmessage_date'];
-		} else {
-			$date	=	false;
-		}
-		//-->IdMessage
-		if ($_REQUEST['idMessage'] || $_SERVER['REQUEST_METHOD'] == 'POST') {
-			$idMessage	=	$_REQUEST['idMessage'];
-		} elseif ($_COOKIE['__xmessage_IdMessage']) {
-			$idMessage	=	$_COOKIE['__xmessage_IdMessage'];
-		} else {
-			$idMessage	=	false;
-        }
-		//-->redirect
-		if ($_POST['redirect']) {
-			$redirect	=	$_POST['redirect'];
-		} else {
-			$redirect	=	$_SERVER['REQUEST_URI'];
-		}
-		$redirect		=	$skinmanager->input([
-									'name'	=>	'redirect',
-									'type'	=>	'hidden',
-									'value'	=>	$redirect
-								]);
-		//-->ид нити
-		$uniqid			=	$skinmanager->input([
-									'type'			=>	'hidden',
-									'name'			=>	'id',
-									'value'			=>	$id,
-									'placeholder'	=>	"ид отправителя нити ($id)"
-								]) . $skinmanager->input([
-									'form'			=>	$form,
-									'type'			=>	'hidden',
-									'name'			=>	'id',
-									'value'			=>	$id,
-									'placeholder'	=>	"ид отправителя нити ($id)"
-								]);
-		//-->Имя создателя поста
-		$name			=	'Имя или ник' . $skinmanager->p([
-										'content'	=>	$skinmanager->input([
-										'name'			=>	'name',
-										'value'			=>	$name,
-										'placeholder'	=>	'Имя создателя поста (Неизвестный)'
-									]) . $skinmanager->input([
-										'form'			=>	$form,
-										'name'			=>	'name',
-										'value'			=>	$name,
-										'type'			=>	'hidden',
-										'placeholder'	=>	'Имя создателя поста (Неизвестный)'
-									])
-								]);
-		//-->Номер поста
-		$NumberPost		=	$skinmanager->p([
-									'content' => $skinmanager->input([
-										'type'		=>	'checkbox',
-										'name'		=>	'number',
-										'value'		=>	'Получение номера поста',
-										'checked'	=>	$number
-									])
-								]);
-        //-->Дата отправки
-		$date		=	$skinmanager->p([
-								'content' => $skinmanager->input([
-									'type'		=>	'checkbox',
-									'name'		=>	'date',
-									'value'		=>	'Дата отправки',
-									'checked'	=>	$date
-								])
-							]);
-		//-->Ид сообщение
-		$idMessage	=	$skinmanager->p([
-								'content' => $skinmanager->input([
-									'type'		=>	'checkbox',
-									'name'		=>	'idMessage',
-									'value'		=>	'Ид сообщение',
-									'checked'	=>	$idMessage
-								])
-							]);
-		//-->Выполнить
-		$submit		=	$skinmanager->btn([
-								'type'	=>	'submit',
-								'title'	=>	$skinmanager->ico("check") . 'Изменить'
-							]);
-    	$Panel		=	$skinmanager->modal([
-								'title' 	=>	'Изменение профиля',
-								'content'	=>	$skinmanager->form([
-									'method'	=>	'post',
-									'action'	=>	$post,
-									'content'	=>  $redirect	.	$uniqid	.	$name . $NumberPost	.	$date	.	$idMessage	.	$submit
-								])
-							]);
-		$change		=	$skinmanager->a([
-								'title'	=>	$skinmanager->ico('cog') . 'Личного профиля',
-								'href'	=>	"#$Panel",
-								'modal' => $Panel
-							]);
-		$type		=	$skinmanager->modal([
-								'title'		=>	'Настройки',
-								'content'	=>	$skinmanager->p([
-									'content'	=>	$change
-								])
-							]);
-		if($skinmanager->getSkin() == 'bootstrap337'){
-			$jquery->addLoad("
-				$('#$Panel').on('show.bs.modal', function (e) {
-					$('#$type').modal('hide');
-				})");
-		}
-		return	$skinmanager->p([
-					'content' => $skinmanager->a([
-						'title'	=>	$skinmanager->ico('cog') . 'Настройки',
-						'href'	=>	"#$type",
-						'modal'	=>	$type
-					])
-				]);
-    }
 
     /**
      * Возвращаем мульти-форму отправки постов
@@ -852,85 +713,37 @@ if ($response == true) {
 	 * ----------------------------------------
 	 * @return string
      */
-	public function getSendBox ($id) {
-		$skinmanager	=	new skinmanager();
-		$jquery			=	new jquery();
-    	$form			=	$this->uuidv4();
-		$post			=	$this->getPathModules("xmessage/execute/post.php");
-		//-->redirect
-		if ($_POST['redirect']) {
-			$redirect	=	$_POST['redirect'];
-		} else {
-			$redirect	=	$_SERVER['REQUEST_URI'];
-		}
-		$redirect		=	$skinmanager->input([
-									'name'	=>	'redirect',
-									'type'	=>	'hidden',
-									'value'	=>	$redirect
-								]);
+	public function getSendBox($id){
+		$action=x::getPathModules("xmessage/execute/post.php");
 		//-->ид нити
-		$uniqid			=	$skinmanager->p([
-									'content'	=>	$skinmanager->input([
-										'name'			=>	'id',
-                            			'type'			=>	'hidden',
-										'value'			=>	$id,
-										'placeholder'	=>	"ид отправителя нити ($id)"
-									])
-								]);
-		//-->Описание поста
-		$desc			=	$skinmanager->p([
-									'content'	=>	$skinmanager->textarea([
-										'name'			=>	'text',
-										'css'			=>	[
-																'width'		=>	'100%',
-																'resize'	=>	'vertical'
-															],
-										'placeholder'	=>	"Сообщение..."
-									])
-								]);
+		if($id){
+			$id=sm::p(['content'=>sm::input(['name'=>'id','type'=>'hidden','value'=>str_replace('?'.x::getData(),NULL,$id),'placeholder'=>"ид отправителя нити ($id)"])]);
+		}
+		//-->Сообщение поста
+		$desc=sm::p(['content'=>sm::textarea(['name'=>'text','css'=>['width'=>'100%','resize'=>'vertical'],'rows'=>4,'placeholder'=>"Сообщение (8096)\n/bЖирность/ - Жирность\n/sЗачеркнутый текст/ - Зачеркнутый текст\n/iНаклоненные буквы/ - Наклоненные буквы"])]);
+		//-->Отправить файлы
+		$file=sm::input(['name'=>'upload[]','type'=>'file','multiple'=>true,'accept'=>'image/jpg,image/jpeg,image/png,image/gif']);
 		//-->Выполнить (Отправить)
-		$submit			=	$skinmanager->btn([
-									'type'	=>	'submit',
-									'title'	=>	'Отправить'
-								]);
+		$submit=sm::input(['type'=>'submit']);
+		$key=x::generateSession(x::uuidv4());
 		//-->Модальная форма (#donate)
-		$звезда = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/звезда');
-		$зубы = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/зубы');
-		$любовь = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/любовь');
-		$подмигнуть = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/подмигнуть');
-		$прищелец = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/прищелец');
-		$радость = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/радость');
-		$рассплакаться = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/рассплакаться');
-		$сердце = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/сердце');
-		$удивление = $this->img('/theme/borda/linux/plugins/xmessage/sticker/default/удивление');
-		$skinmanager->modal([
-			'id'		=>	'syntax',
-			'title'		=>	'Помощь ;)',
-			'content'	=>	"Привет это страница помощь написание своей первой статьи :)<br><hr><br>Об синтаксисе испольнозвание<br><hr><br>/bЖирность/ - <b>Жирность</b><br>/sЗачеркнутый текст/ - <s>Зачеркнутый текст</s><br>/iНаклоненные буквы/ - <i>Наклоненные буквы</i><br><hr><br>Ссылки использование их<br><hr><br>Ютубище - https://youtu.be/mo6APOpfS3U -> Отоброжается как видео<br>Расширение картинок - .jpeg, .jpg, .png, .gif -> Отоброжается как картинки<hr>Стикеры - стандартный пак (default) | /c=звезда=default/ <hr>$звезда </br> (звезда) </br> $зубы </br> (зубы) </br> $любовь </br> (любовь) </br> $подмигнуть </br> (подмигнуть) </br> $прищелец </br> (прищелец) </br> $радость </br> (радость) </br> $рассплакаться </br> (рассплакаться) </br> $сердце </br> (сердце) </br> $удивление </br> (удивление)"
+		$любовь=sm::img(['src'=>'/theme/borda/linux/plugins/xmessage/sticker/default/любовь']);
+		$радость=sm::img(['src'=>'/theme/borda/linux/plugins/xmessage/sticker/default/радость']);
+		$рассплакаться=sm::img(['src'=>'/theme/borda/linux/plugins/xmessage/sticker/default/рассплакаться']);
+		$удивление=sm::img(['src'=>'/theme/borda/linux/plugins/xmessage/sticker/default/удивление']);
+		sm::modal([
+			'id'=>'syntax',
+			'title'=>'Помощь ;)',
+			'content'=>"Привет это страница помощь написание своей первой статьи :)<br><hr><br>Ссылки использование их<br><hr><br>Ютубище - https://youtu.be/mo6APOpfS3U -> Отоброжается как видео<br>Расширение картинок - .jpeg, .jpg, .png, .gif -> Отоброжается как картинки<hr>Стикеры - стандартный пак (default)</br> $любовь </br> (любовь) </br> $радость </br> (радость) </br> $рассплакаться </br> (рассплакаться) </br> $удивление </br> (удивление)"
 		]);
 		//-->Открытие формы о Syntax (#syntax)
-		$syntax = $skinmanager->a([
-					'title'	=>	'Помощь',
-					'href'	=>	'#syntax',
-					'modal'	=>	'syntax'
-				]);
+		$syntax=sm::a(['title'=>'Помощь','href'=>'#syntax','modal'=>'syntax']);
 		//-->Syntax (Возможности упрощенного)
-		//$b				=	$skinmanager->btn(['type' => 'submit', 'title' => 'Жирный']);
-		//$s				=	$skinmanager->btn(['type' => 'submit', 'title' => 'Зачеркнутый']);
-		//$i				=	$skinmanager->btn(['type' => 'submit', 'title' => 'Курсив']);
-
-    	$GLOBALS['__PANEL_BORDER_0'] = true;
-		return	$skinmanager->panel([
-        			'title'		=>	'Ответить на сообщение',
-					'content'	=>	$this->getPanelSettingsSb($form, $id) . $syntax . $skinmanager->form([
-                    	'id'		=>	$form,
-						'method'	=>	'post',
-						'action'	=>	$post,
-						'content'	=>	$uniqid . $redirect	.	$name	.	$desc	.	$submit . $b . $s . $i
-					])
-				]);
+		//$b=$skinmanager->btn(['type'=>'submit','title'=>'Жирный']);
+		//$s=$skinmanager->btn(['type'=>'submit','title'=>'Зачеркнутый']);
+		//$i=$skinmanager->btn(['type'=>'submit','title'=>'Курсив']);
+		return	sm::panel(['title'=>'Ответить на сообщение','content'=>$syntax.sm::form(['method'=>'post','enctype'=>'multipart/form-data','action'=>$action,'id'=>x::RedirectUpdate(),'content'=>$id.$name.$desc.$submit.$file.$key.$b.$s.$i])]);
 		/*
-		
         $bootstrap = new bootstrap();
 		$progress = $this->getProgressBar();
 		$alert = $this->getAlertError();

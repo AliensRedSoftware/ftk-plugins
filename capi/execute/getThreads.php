@@ -37,11 +37,12 @@ class getThreads {
         $sql        =   $xlib->getmysql();
         $result     =   mysqli_query($sql , "SELECT * FROM `view` WHERE 1");
         $arr        =   [];
-        while ($row = mysqli_fetch_array($result)) {
+        while ($row = mysqli_fetch_array($result)){
+            var_dump($row);
             if($row['title'] != null && $row['selected'] == $space) {
                 $id = $row['uuid'];
                 $threads = $row['title'];
-                $ls     =   mysqli_query($sql, "SELECT * FROM `$id` ORDER BY `id` DESC");
+                $ls     =   mysqli_query($sql, "SELECT * FROM `$id` ORDER BY `id` DESC LIMIT 5");
                 $arr[$threads] = ['opt' => ['id' => $id]];
                 $txt    =   ['txt' => $row['description']];
                 if ($txt['txt']) {
@@ -84,7 +85,7 @@ class getThreads {
 	                }
 	                $arr[$threads]['msg'] += ['count' => $ls->num_rows];
             	}*/
-            }     
+            }
         }
         return $arr;
     }

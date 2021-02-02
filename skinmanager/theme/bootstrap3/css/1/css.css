@@ -1,0 +1,59 @@
+.btn-gentoo{
+display: inline-block;
+margin-bottom: 0;
+font-weight: normal;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+touch-action: manipulation;
+cursor: pointer;
+background-image: none;
+border: 1px solid transparent;
+padding: 6px 12px;
+font-size: 14px;
+line-height: 1.42857143;
+border-radius: 4px;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+color: #fff;
+background-color: #54487A;
+border-color: #493f6a;
+color: white !important;
+}
+.btn-gentoo:hover, .btn-gentoo:focus, .btn-gentoo.focus {
+    color: #333;
+    text-decoration: none;
+}
+.btn-gentoo:hover{
+    color: #fff;
+    background-color: #3e355a;
+    border-color: #2e2843;
+}
+.text-gentoo{
+    color: #54487A !important;
+}
+.panel-gentoo{
+    border-color: #61538D;
+    background:#f0edff;
+}
+.panel-gentoo > .panel-heading {
+    color: white;
+    background-color: #61538D;
+    border-color: #61538D;
+}
+.panel-gentoo > .panel-heading .badge {
+    color: white;
+    background-color: #54487a;
+}
+.label-gentoo{
+    background-color: #54487a;
+}
+.badge-gentoo{
+    color: #fff;
+    background-color: #54487a;
+}
+.modal{
+    overflow-y: auto;
+}

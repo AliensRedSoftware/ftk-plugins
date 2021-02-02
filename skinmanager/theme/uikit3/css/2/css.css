@@ -1,0 +1,8 @@
+.uk-dropdown-secondary{
+    background: #222;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+.uk-dropdown-primary {
+    background: #1e87f0;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}

@@ -1,44 +1,51 @@
 <?php
-error_reporting(0);
-
 /**
  * Упрощенный текстовый редактор
  * @ver 1.0
  */
-class syntax extends xlib {
-
+use xlib as x;
+use skinmanager as sm;
+use youtube as yt;
+use xprivate as xp;
+class syntax{
 	public $index;
-
 	/**
 	 * Возвращаем в виде html текста
 	 * -----------------------------
 	 * text	-	Текст
 	 */
-	public function getHtml ($text = 'Привет /s Как дела ммм ? / /b Привет / dsf /b test /') {
+	public function getHtml($text = 'Привет /s Как дела ммм ? / /b Привет / dsf /b test /'){
 		$split = explode("\n", $text);
 		foreach ($split as $spl) {
 			$arruuidUrls = [];
 			$arruuidYoutube = [];
-			$urls = $this->getUrl($spl);
-			foreach ($urls['other'] as $url) {
+			$urls=self::getUrl($spl);
+			/*foreach ($urls['other'] as $url) {
 				if ($url != $prevurl) {
 					$uuid = $this->uuidv4();
 				}
 				$spl = str_replace($url, "[$uuid]", $spl);
-				array_push ($arruuidUrls, "[$uuid]");
+				array_push($arruuidUrls,"[$uuid]");
 				$prevurl = $url;
-			}
-			foreach ($urls['youtube'] as $url) {
+			}*/
+			foreach ($urls['img'] as $url) {
 				if ($url != $prevurl) {
-					$uuid = $this->uuidv4();
+					$uuid = x::uuidv4();
 				}
 				$spl = str_replace($url, "[$uuid]", $spl);
-				array_push ($arruuidYoutube, "[$uuid]");
+				array_push($arruuidUrls,"[$uuid]");
 				$prevurl = $url;
 			}
-
+			foreach ($urls['youtube'] as $url){
+				if ($url!=$prevurl){
+					$uuid=x::uuidv4();
+				}
+				$spl=str_replace($url,"[$uuid]",$spl);
+				array_push($arruuidYoutube,"[$uuid]");
+				$prevurl=$url;
+			}
 			$i = -1;
-			$syn = $this->mb_str_split($spl);
+			$syn = x::mb_str_split($spl);
 			foreach ($syn as $key) {
 				$i++;
 				if (!$ignore) {
@@ -70,9 +77,9 @@ class syntax extends xlib {
 								$name	=	$exp[1]; //Имя стикера
 								$uuid	=	$exp[2]; //Ид пака
 								if (file_exists("../sticker/$uuid/$name")) {
-									$src	=	$this->getPathModules("xmessage/sticker/$uuid/$name");
+									$src	=	x::getPathModules("xmessage/sticker/$uuid/$name");
 									$img = "<img src=\"$src\" style=\"pointer-events:none;\">";
-									$val	=	$this->str_replace("<c>=$name=$uuid", $img, $val, 1);
+									$val	=	x::str_replace("<c>=$name=$uuid", $img, $val, 1);
 									$val	.=	'</img>';
 								}
 								unset($startxIndex);
@@ -173,123 +180,206 @@ class syntax extends xlib {
 					$ignore = false;
 				}
 			}
-			if ($this->index && !$index) {
+			if($this->index&&!$index){
 				$index = $this->index;
 				$val = "<$index>$val</$index>";
 			}
 			$ch = -1;
-			foreach ($arruuidUrls as $uuid) {
-				$ch++;
-				$val = str_replace($uuid, $urls['other'][$ch], $val);
+			foreach($arruuidUrls as $uuid){
+				$val=str_replace($uuid,NULL, $val);
 			}
-			$chs = -1;
-			foreach ($arruuidYoutube as $uuid) {
-				$chs++;
-				$val = str_replace($uuid, $urls['youtube'][$chs], $val);
-			}
-			$val = trim($val);
+			foreach($arruuidYoutube as $uuid){$val=str_replace($uuid,NULL,$val);}
+			$val=trim($val);
 		}
 		if ($checkval == true) {
-			$index = $this->index;
-			$val .= "</$index>";
+			$index=$this->index;
+			if($index){
+				$val.="</$index>";
+			}
 		}
 		return trim($val);
 	}
-
 	/**
 	 * Возвращает отформатированный текст
 	 */
-	public function getText ($text = 'text') {
-		$xlib = new xlib();
-		$descriptionArray = explode("\n", trim($text));
-		foreach ($descriptionArray as $text) {
-			$output .= "\n";
-			$output .= $this->getHtml($text);
-			if (trim($output) != null) {
-				$output .= '</br>';
+	public function getText($text = 'text'){
+		$descriptionArray=explode("\n",trim($text));
+		foreach ($descriptionArray as $text){
+			$output.="\n";
+			$output.=self::getHtml($text);
+			if (trim($output)!=null) {
+				$output.='</br>';
 			}
 		}
 		return $output;
 	}
-
 	/**
 	 * Возвращает отформатированный текст и получает только ссылки
 	 */
-	public function getUrl ($text = 'text') {
-    	$outputs	=	[];
-		$xlib = new xlib();
-		$ls = explode("\n", $text);
-		foreach ($ls as $ass) {
-			$descriptionArray = explode(" ", $ass);
-			foreach ($descriptionArray as $value) {
+	public function getUrl($text='text'){
+		$skinmanager=new skinmanager();
+    	$outputs=[];
+		$xlib=new xlib();
+		$ls=explode("\n",$text);
+		foreach($ls as $ass){
+			$descriptionArray=explode(" ", $ass);
+			foreach($descriptionArray as $value){
 				preg_match('#(?:https?://)?(?:www\.)?(?:youtu\.be/|youtube\.com(?:/embed/|/v/|/watch?.*?v=))([\w\-]{10,12})#x', $value, $str);
-				if (!$str[1]) {
-					preg_match('/(https?:\/\/|ftp:\/\/|www\.)((?![.,?!;:()]*(\s|$))[^\s]){2,}/', $value, $url);
-					if ($url[0]) {
-						$outputs['other'][] .= trim($url[0]);
+				if(!$str[1]){
+					preg_match('/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/',$value,$url);
+					$url=strip_tags(trim($url[0]));
+					if($url){
+						switch($xlib->getExtension($url)){
+							case 'jpg':
+								$outputs['img'][].=$url;
+							break;
+							case 'jpeg':
+								$outputs['img'][].=$url;
+							break;
+							case 'png':
+								$outputs['img'][].=$url;
+							break;
+							default:
+								foreach($outputs['other'] as $k){
+									if($k==$url){
+										break 2;
+									}
+								}
+								$outputs['other'][].=$url;
+							break;
+						}
 					}
-				} else {
-					$outputs['youtube'][] .= trim($str[0]);
+				}else{
+					$outputs['youtube'][].=trim($str[0]);
 				}
 			}
 		}
 		return $outputs;
 	}
-
 	/**
-	 * Возвращаем готовую форму
+	 * Возвращаем готовую форму в виде массива
 	 * -------------------------
 	 */
-	 public function getForm ($index = 0, $time = '2019-07-12=>14:00:46', $idChat = '@1562940046419
-', $name = 'Неизвестный', $text, $src_youtube, $src_img, $theme) {
-	    $skinmanager    =   new skinmanager();
-     	$youtube		=	new youtube();
-     	if ($_SERVER['REQUEST_METHOD'] == 'POST' && $this->geturi(7) == 'saveSettings.php') {
-     		if ($_REQUEST['number']) {
-        		$title	.=	"[$index]->";
+	 public function getForm($index=0,$time='2019-07-12=>14:00:46',$idChat='@1562940046419
+',$name='Неизвестный',$text,$src_youtube,$src_img,$theme){
+	    $skinmanager=new skinmanager();
+     	$youtube=new youtube();
+     	if($_SERVER['REQUEST_METHOD']=='POST'&&$this->geturi(7)=='saveSettings.php'){
+     		if($_REQUEST['number']){
+        		$title.="[$index]->";
         	}
-            if ($_REQUEST['date']) {
-        		$title	.=	"[$time]->";
+            if($_REQUEST['date']){
+        		$title.="[$time]->";
         	}
-            if ($_REQUEST['idMessage']) {
-        		$title	.=	"[$idChat]->";
+            if($_REQUEST['idMessage']){
+        		$title.="[$idChat]->";
         	}
-        } else {
-        	if ($_COOKIE['__xmessage_number']) {
-            	$title	.=	"[$index]->";
+        }else{
+        	if($_COOKIE['__XMSG_NUMBER']){
+            	$title.="[$index]->";
             }
-        	if ($_COOKIE['__xmessage_date']) {
-            	$title	.=	"[$time]->";
+        	if($_COOKIE['__XMSG_DATE']){
+            	$title.="[$time]->";
             }
-            if ($_COOKIE['__xmessage_IdMessage']) {
-        		$title	.=	"[$idChat]->";
+            if($_COOKIE['__XMSG_ID']){
+        		$title.="[$idChat]->";
         	}
         }
-		$title			.=	"$name";
-     	foreach (unserialize($src_img) as $img) {
-			$srcimg .= $skinmanager->border([
-				'style' => "margin:5px;width:35%;height: 0%;",
-				'content' => $skinmanager->lightbox(['src' => $img, 'stretch' => true])
+		$title.="$name";
+     	foreach(unserialize($src_img) as $img){
+			$srcimg.=$skinmanager->border([
+				'css'=>['margin'=>'5px','width'=>'35%','height'=>'0%'],
+				'content'=>$skinmanager->lightbox(['src'=>$img,'stretch'=>true])
 			]);
 		}
-     	foreach (unserialize($src_youtube) as $val) {
-        	$other	.=	$youtube->getIframe($val);
+		//--->youtube (ютуб видео)
+     	foreach(unserialize($src_youtube) as $val){
+     		if($this->isJs()){
+        		$other.=$youtube->getIframe($val);
+        	}else{
+        		$other.=$youtube->video($val);
+        	}
         }
-		if (trim($text)) {
-        	$text = $this->margin(['left' => '5px', 'content' => $text]);
-			if (trim($other) != null || $srcimg) {
-				$content = $text . "<div style=\"display:flex;flex-wrap:wrap;\">$other $srcimg</div>";
-			} else {
-				$content = $text;
+        //--->Текста
+		if(trim($text)){
+        	//$text = $this->padding(['bottom' => '5px', 'content' => $text]);
+			if(trim($other)!=null||$srcimg){
+				$content=$text."<div style=\"display:flex;flex-wrap:wrap;\">$other $srcimg</div>";
+			}else{
+				$content=$text;
 			}
-		} else {
+		}else{
 			$content = "<div style=\"display:flex;flex-wrap:wrap;\">$other $srcimg</div>";
 		}
-		$html = $skinmanager->panel([
+		return $skinmanager->panel([
 			'title' => $title,
 			'theme' => $theme,
 			'content' => $content
 		]);
-		return $html;
+	 }
+	/**
+	 * Возвращаем готовую форму в виде массива
+	 * -------------------------
+	 */
+	 public function getFormToArray($result,$theme){
+	 	$arr=[];
+	 	$DATA=[];
+	 	while($R=mysqli_fetch_array($result)){
+	 		$i++;
+	 		unset($title);
+	 		unset($content);
+	 		$ava=sm::img(['src'=>xp::getCacheSmallAva($R['__xprivate_auth']),'css'=>['width'=>'50px','border-radius'=>'100px','pointer-events'=>'none']]);
+	 		$account=xp::getViewAccount($R['__xprivate_auth']);
+	 		$name=sm::a(['title'=>xp::getDataId($R['__xprivate_auth'])['name'],'href'=>"#$account",'modal'=>$account]);
+	 		$tweak=x::div(['content'=>$name]).$ava;
+			$txt=$R['text'];
+			$src_img=$R['img'];
+			$src_youtube=$R['youtube'];
+			$time=explode('(',$R['time']);
+			$idMsg=substr(($time[1]),0,-1);
+			//$srcCount=-1;
+			$time=$time[0];
+			$tweak=x::div(['content'=>x::div(['content'=>$time]).$name]).$ava;
+			unset($srcimg);
+			unset($other);
+	    	if(!empty($_COOKIE['__XMSG_NUMBER'])){
+	        	$title.="[$i]->";
+	        }
+	    	if(!empty($_COOKIE['__XMSG_DATE'])){
+	        	$title.="[$time]->";
+	        }
+	        if(!empty($_COOKIE['__XMSG_ID'])){
+	    		$title.="[$idMsg]->";
+	    	}
+			$title.=x::div(['content'=>$tweak,'id'=>$idMsg]);
+			//--->Картинки (gif,jpg,jpeg,png)
+			$src_img=unserialize($src_img);
+			$srcCount+=count($src_img);
+		 	foreach($src_img as $img){
+		 		if($i==mysqli_num_rows($result)){
+		 			$src_count=$srcCount;
+		 		}
+				$srcimg.=sm::border([
+					'css'=>['margin'=>'5px','height'=>'0%','min-width'=>'64px','max-width'=>'max-content','max-width'=>'-moz-max-content'],
+					'content'=>sm::lightbox(['src'=>$img,'stretch'=>true,'max'=>$src_count])
+				]);
+			}
+			//--->youtube (ютуб видео)
+		 	foreach(unserialize($src_youtube) as $val){
+		    	$other.=yt::video($val);
+		    }
+		    //--->Текста
+		    foreach(self::getUrl($txt)['other'] as $url){
+	    		$url=strip_tags($url);
+	    		$txt=str_replace($url,sm::a(['href'=>$url,'title'=>$url]),$txt);
+		    }
+			$content.=$txt;
+			//--->Контент
+			if(trim($other)!=null||$srcimg){
+				$content.=xlib::div(['css'=>['display'=>'table'],'content'=>$other.$srcimg]);
+			}
+			$DATA+=[$title=>$content];
+		}
+		return sm::panelToArray(['data'=>$DATA]);
 	 }
 }

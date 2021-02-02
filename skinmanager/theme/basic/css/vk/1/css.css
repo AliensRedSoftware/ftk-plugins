@@ -1,0 +1,121 @@
+*{
+	padding					:0px;
+	margin					:0px;
+}
+
+/* dropdown выпадающий список */
+ul li{
+	display					:inline-block;
+}
+
+ul li:hover ul {
+	display					:block;
+} 
+
+ul li ul{
+	padding-top				:5px;
+	display					:none;
+}
+
+ul li ul li{
+	display					:block;
+}
+/* Обводки */
+.border{
+	background				:white;
+	padding			        :5px;
+}
+p{
+	padding-bottom			:5px;
+}
+/* стили модального окна */
+.popup {
+	top						:5%;
+	right					:0;
+	left					:0%;
+	z-index					:20;
+	margin					:auto;
+	width					:85%;
+	min-width				:320px;
+	max-width				:600px;
+/* фиксированное позиционирование, окно стабильно при прокрутке */
+	position				:absolute;
+	background				:white;
+	box-shadow				:0 2px 10px rgba(0, 0, 0, 0.40);
+	border-radius			:4px 4px 4px 4px;
+}
+/* формируем кнопку закрытия */
+.close {
+	background				:url(./img/cross_popup.png) no-repeat 12px 21px;
+	background-position		:center;
+	top						:0px;
+	right					:0px;
+	position				:absolute;
+	padding					:21px 25px 21px 12px;
+	opacity					:.75;
+	outline					:0;
+}
+.close:before {
+	opacity					:1;
+}
+.close:hover {
+	opacity					:1;
+}
+/* Styles the close link, adds the slide down transition */
+a.lightbox-close {
+	right					:0;
+	top						:0;
+}
+/* Styles the close link, adds the slide down transition */
+a.lightbox-back {
+	margin					:auto;
+	bottom					:0;
+}
+/* Styles the close link, adds the slide down transition */
+a.lightbox-next {
+	margin					:auto;
+	bottom					:0;
+	right					:0;
+}
+a.lightboxBtn{
+	position				:absolute;
+	animation				:morph 5s linear 1s infinite;
+	background				:red;
+	width					:100px;
+	height					:100px;
+}
+@keyframes morph{
+	0%{
+ 		background-color	:red
+  	}
+ 	25%{
+ 		background-color	:green
+  	}
+ 	50%{
+ 		background-color	:blue
+  	}
+ 	80%{
+ 		background-color	:white
+	}
+ 	100%{
+ 		background-color	:red
+	}
+}
+.lightbox-target:target img {
+	max-height				:100%;
+	max-width				:100%;
+}
+/* modal form */
+/* Header */
+.modal-header{
+	padding					:15px;
+	word-wrap				:break-word;
+	background-color		:#f0f2f5;
+	border-bottom			:1px solid #e5ebf1;
+	border-radius			:4px 4px 0px 0px;
+}
+/* body */
+.modal-body{
+	padding					:15px;
+	word-wrap				:break-word;
+}

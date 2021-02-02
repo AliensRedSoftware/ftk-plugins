@@ -32,11 +32,12 @@ class getNameThread {
      * -------------------
      * @return string
      */
-    public function getName ($space, $id) {
+    public function getName ($id) {
         $xlib = new xlib();
     	require_once $_SERVER['DOCUMENT_ROOT'] . $xlib->getPathModules('capi/execute/getThreads.php');
     	$getThreads	=	new getThreads();
-    	$arr 	=	$getThreads->getToArray($space);
+    	$arr 	=	$getThreads->getToArray($id);
+        
     	foreach ($arr as $key => $value) {
     		if ($id == $arr[$key]['opt']['id']) {
     			return $key;

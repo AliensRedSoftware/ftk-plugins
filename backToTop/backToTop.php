@@ -15,7 +15,8 @@ class backToTop {
 				$height			=	40,
 				$margin_left	=	'margin-left: 40px;',
 				$margin_bottom	=	'margin-bottom: 40px;',
-				$animation		=	'bounce';
+				$animation		=	'bounce',
+				$image 			=	false;
 
 	/**
 	 * Создание кнопки наверх
@@ -32,8 +33,14 @@ class backToTop {
 		$animation		=	$this->animation;
 		$animShow		=	$animation . 'Out';
 		$animExit		=	$animation . 'In';
-		$style = "<style>.back-to-top{visibility: visible;position: fixed;background-color: $color;width: $width;height: $height;$align cursor: pointer;opacity: 0;$margin_left$margin_bottom$margin_right$margin_top}.back-to-top:hover{background-color: $colorHover;opacity: 1}.back-to-top.show {visibility: visible;position: fixed;$align z-index: 90;opacity: 1;transition: all .6s;}</style>";
-		return $style . "<a href='#' class='back-to-top animated show $animExit' id='back-to-top' title='$title'></a>";
+		$image 			=	$this->image;
+		if ($image) {
+			$style = "<style>.back-to-top{visibility: visible;position: fixed;width: $width;height: $height;$align cursor: pointer;opacity: 0;$margin_left$margin_bottom$margin_right$margin_top}.back-to-top.show {visibility: visible;position: fixed;$align z-index: 1;opacity: 1;transition: all .6s;}</style>";
+			return $style . "<a href='#' class='back-to-top animated show $animExit' id='back-to-top' title='$title'><img class='back-to-top-image' src=\"$image\" style=\"width: $width;height: $height;\"></img></a>";
+		} else {
+			$style = "<style>.back-to-top{visibility: visible;position: fixed;background-color: $color;width: $width;height: $height;$align cursor: pointer;opacity: 0;$margin_left$margin_bottom$margin_right$margin_top}.back-to-top:hover{background-color: $colorHover;opacity: 1}.back-to-top.show {visibility: visible;position: fixed;$align z-index: 1;opacity: 1;transition: all .6s;}</style>";
+			return $style . "<a href='#' class='back-to-top animated show $animExit' id='back-to-top' title='$title'></a>";
+		}
 	}
 
 	/**
@@ -86,6 +93,17 @@ class backToTop {
 	}
 
 	/**
+	 * Установить картинку
+	 * --------------------
+	 * img	-	Картинка (green.png)
+	 */
+	public function setImage ($img = 'green.png') {
+		$xlib = new xlib();
+		$img = $xlib->getPathModules(__CLASS__ . DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR . $img);
+		$this->image = $img;
+	}
+
+	/**
 	 * Установить подсказку
 	 * --------------------
 	 * title	-	Значение (Подняться наверх!)
@@ -118,7 +136,7 @@ class backToTop {
 	 * height	-	Значение (40px)
 	 */
 	public function setHeight ($height = '40px') {
-		$this->width = $height;
+		$this->height = $height;
 	}
 
 	/**

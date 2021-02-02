@@ -1,77 +1,96 @@
 <?php
-
-class logger {
+use xlib as x;
+class logger{
 
     /**
      * Выполняется при подключение модуля
      */
-    static function execute () {
-        $xlib = new xlib();
-        $path = $_SERVER['DOCUMENT_ROOT'] . $xlib->getPathModules('logger');
-        if (!is_writable($path)) {
-            echo "записи нет у этого файла $path";
-            echo "</br>Пожалуйста укажите разрешение на запись в вашей системы!";
-            echo "</br>sudo chmod 0777 $path";
-            echo "</br>" . $xlib->getPathModules('logger');
-            chmod($xlib->getPathModules('logger'), 0777);
-            die();
+    function execute(){
+        if(!x::isJs()){
+            $nameProxy=self::getNameProxy();
+            $ProxyIp=self::getProxyIp();
+            if($nameProxy){
+                $nameProxy="\n[nameProxy] => ".self::getNameProxy();
+            }
+            if($ProxyIp){
+                $ProxyIp="\n[proxy] => ".self::getProxyIp();
+            }
+            //php
+            file_put_contents(__DIR__.'/log',file_get_contents(__DIR__.'/log') . '---------->' . self::getTimeSession() . "\n" . "[ip] => " . self::getIp() . $nameProxy . $ProxyIp . "\n" . self::getRequest_uri() . "\n" . self::getUserAgent() . "\n");
+        }else{
+            //php
+            $execute=x::getPathModules('logger/js.php');
+            $ip=self::getIp();
+            $nameProxy=self::getNameProxy();
+            $ProxyIp=self::getProxyIp();
+            $path=urldecode($_SERVER['REQUEST_URI']);
+            //js
+            x::js("
+var r = new XMLHttpRequest();
+var screenX=window.screen.width;
+var screenY=window.screen.height;
+var platform=navigator.platform;
+var core=navigator.hardwareConcurrency;
+var memory=navigator.deviceMemory;
+r.open('GET','$execute?'+'screenX='+screenX+'&'+'screenY='+screenY+'&ip=$ip&nameProxy=$nameProxy&proxy=$proxy&path=$path&platform='+platform+'&core='+core+'&memory='+memory);
+r.send();
+");
         }
-        chmod("$path/log", 0727);
-        file_put_contents("$path/log", 
-            file_get_contents("$path/log") . '---------->' . logger::getTimeSession() . "\n" .
-            logger::getIp() . "\n" .
-            logger::getRequest_uri() . "\n" .
-            logger::getUserAgent() . "\n"
-        );
-        chmod("$path/log", 0222);
+    }
+
+    /**
+     * Возвращает имя прокси подключенного ;)
+     */
+    function getNameProxy(){
+        return $_SERVER['HTTP_VIA'];
+    }
+    
+    /**
+     * Возвращает ip прокси подключенного ;)
+     */
+    function getProxyIp($proxy=true){
+        return $_SERVER['HTTP_X_FORWARDED_FOR'];
     }
 
     /**
      * Возвращает ip подключенного ;)
      */
-    static function getIp () {
-        $client  = @$_SERVER['HTTP_CLIENT_IP'];
-        $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-        $remote  = @$_SERVER['REMOTE_ADDR'];
-
-        if(filter_var($client, FILTER_VALIDATE_IP)) $ip = $client;
-        elseif(filter_var($forward, FILTER_VALIDATE_IP)) $ip = $forward;
-        else $ip = $remote;
-        return "[ip] => " $ip;
+    function getIp(){
+        return $_SERVER['REMOTE_ADDR'];
     }
 
     /**
      * Возвращает путь выполнение скрипта ;)
      */
-    static function getRequest_uri () {
+    function getRequest_uri(){
         return "[REQUEST_URI] => " . urldecode($_SERVER['REQUEST_URI']);
     }
 
     /**
      * Возвращает user-agent браузера
      */
-    static function getUserAgent () {
+    function getUserAgent(){
         return "[HTTP_USER_AGENT] => " . $_SERVER['HTTP_USER_AGENT'];
     }
 
     /**
      * Возвращает Время и дату
      */
-    static function getTimeSession () {
+    function getTimeSession(){
         return date('Y-m-d') . ':' . date('H:i:s', time() - date('Z'));
     }
 
     /**
      * Возвращает Время
      */
-    static function getTime () {
+    function getTime(){
         return date('H:i:s', time() - date('Z'));
     }
 
     /**
      * Возвращает Минуты
      */
-    static function getTimeMinutes () {
+    function getTimeMinutes(){
         return date('i', time() - date('Z'));
     }
 }

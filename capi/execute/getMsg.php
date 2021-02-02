@@ -12,8 +12,9 @@ class getMsg {
 		$dot		=	$_REQUEST['dot'];
 		$space		=	$_REQUEST['space'];
 		$selected	=	$_REQUEST['selected'];
+		$count		=	$_REQUEST['count'];
 		$capi		=	new capi();
-		$msg		=	getMsg::Msg($dot, $space, $selected);
+		$msg		=	getMsg::Msg($dot, $space, $selected, $count);
 		if ($msg) {
 			$capi->setStatus(200);
 			$capi->setResponse($msg);
@@ -29,8 +30,9 @@ class getMsg {
 	 * space	-	Пространство
 	 * dot		-	Точка (Все)
 	 * selected	-	Выбранная точка
+	 * count 	-	Кол-во (все)
 	 */
-	public function Msg ($dot, $space = false, $selected = false) {
+	public function Msg ($dot, $space = false, $selected = false, $count = 5) {
 		$xlib		=	new xlib();
 		$xmessage	=	new xmessage();
 		$r			=	[];
@@ -38,7 +40,7 @@ class getMsg {
 			foreach ($xmessage->getIdToArray($space, $dot) as $id) {
 				if ($selected == $id || empty($selected)) {
 					$sql		=	$xlib->getmysql();
-					$result		=	mysqli_query($sql, "SELECT * FROM `$id` ORDER BY `id` DESC");
+					$result		=	mysqli_query($sql, "SELECT * FROM `$id` ORDER BY `id` DESC LIMIT $count");
 					while ($row = mysqli_fetch_array($result)) {
 						if ($selected) {
 							$r['count'] = $result->num_rows;
@@ -100,7 +102,7 @@ class getMsg {
 				foreach ($xmessage->getIdToArray($space, $dot) as $id) {
 					if ($selected == $id || empty($selected)) {
 						$sql		=	$xlib->getmysql();
-						$result		=	mysqli_query($sql, "SELECT * FROM `$id` ORDER BY `id` DESC");
+						$result		=	mysqli_query($sql, "SELECT * FROM `$id` ORDER BY `id` DESC LIMIT $count");
 						while ($row = mysqli_fetch_array($result)) {
 							if ($selected) {
 								$r[$space]['count'] = $result->num_rows;

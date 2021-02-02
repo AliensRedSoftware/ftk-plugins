@@ -1,0 +1,1890 @@
+---------->2020-12-30:15:03:33
+[ip] => 72.28.239.15
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2020-12-30:15:03:48
+[ip] => 19.41.59.17
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2020-12-31:03:34:24
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 198.133.34.123
+[proxy] => 222.244.122.160
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4; rv:52.0) Gecko/20100101 Firefox/52.0|20200316213829
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2020-12-31:03:35:27
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 104.29.158.247
+[proxy] => 219.84.37.199
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4; rv:52.0) Gecko/20100101 Firefox/52.0|20200316213829
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2020-12-31:11:45:30
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 64.158.36.91
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4; rv:62.0) Gecko/20100101 Firefox/62.0|20200316213829
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2020-12-31:11:45:47
+[ip] => 127.0.0.1
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[memory] => 8 GB
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-01:10:13:24
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 20.84.217.55
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4; rv:52.0) Gecko/20100101 Firefox/52.0|20200316213829
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:19:34
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 237.170.48.60
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:22:42
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 5.233.63.86
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:31:10
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 206.229.40.84
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:36:22
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 192.221.157.228
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:37:51
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 34.250.158.16
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:38:41
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 170.103.67.254
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:39:12
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 155.43.193.36
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:39:42
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 138.181.177.9
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:45:57
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 7.214.10.217
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:46:30
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 93.69.3.45
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:46:31
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 54.32.78.231
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:47:57
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 12.86.244.134
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:18:47:59
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 76.231.141.27
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:01:12:53
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 43.220.92.162
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:01:14:35
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 50.44.144.216
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:01:14:58
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 18.157.245.141
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:01:15:11
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 124.144.128.126
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:01:18:32
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 52.239.233.228
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:01:19:44
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 244.164.250.233
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:01:19:45
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 8.223.44.6
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:01:19:47
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 125.219.8.226
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:21:18
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 206.48.219.253
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:21:36
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 193.79.92.153
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:22:38
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 29.233.98.63
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:23:46
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 217.91.99.144
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:24:09
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 222.107.224.151
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:24:36
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 221.6.97.57
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:25:06
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 161.243.88.221
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:25:48
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 77.1.119.217
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:26:13
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 83.95.54.91
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:26:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 76.61.54.172
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:27:43
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 105.221.41.100
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:28:19
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 102.201.6.120
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:28:26
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 111.74.37.22
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:30:46
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 64.134.218.124
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:31:08
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 16.14.193.203
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:32:58
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 127.227.58.241
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:34:01
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 223.171.115.72
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:02:34:09
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 136.178.205.159
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-02:06:40:30
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 122.54.222.140
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-03:00:09:30
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 2.159.66.133
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-05:22:09:08
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 171.203.164.91
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-05:22:09:59
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 18.251.233.230
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-05:03:30:45
+[ip] => 10.42.0.202[nameProxy] => 
+[proxy] => 
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Dalvik/2.1.0 (Linux; U; Android 10; SM-A015F Build/QP1A.190711.020)
+---------->2021-01-05:03:31:01
+[ip] => 10.42.0.202[nameProxy] => 
+[proxy] => 
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Linux; arm; Android 10; SM-A015F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 YaApp_Android/20.113.1 YaSearchBrowser/20.113.1 BroPP/1.0 SA/3 Mobile Safari/537.36
+---------->2021-01-05:03:31:16
+[ip] => 10.42.0.202
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Linux; arm; Android 10; SM-A015F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 YaApp_Android/20.113.1 YaSearchBrowser/20.113.1 BroPP/1.0 SA/3 Mobile Safari/537.36
+[CookieEnabled] => Да
+[platform] => Linux armv8l
+[core] => 8
+[screenX] => 360
+[screenY] => 760
+---------->2021-01-05:06:58:56
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 8.136.236.172
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-05:06:58:59
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 105.160.247.140
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-05:06:59:07
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 231.110.8.186
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:09:49:26
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 117.61.111.226
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:17:23
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 108.123.202.109
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:29:49
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 243.139.228.82
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:36:54
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 219.16.122.143
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:39:56
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 68.87.27.45
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:40:27
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 44.23.169.232
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:40:28
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 137.73.236.214
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:40:29
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 229.153.38.43
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:40:30
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 104.152.49.42
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:40:31
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 232.240.155.195
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:40:32
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 196.73.1.213
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:40:33
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 219.52.220.100
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-07:16:40:37
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 137.144.160.162
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-08:17:27:37
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 247.167.214.113
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-08:18:03:42
+[ip] => 127.0.0.1[nameProxy] => 1.1 10.215.218.56
+[proxy] => 66.106.221.168
+[REQUEST_URI] => /googiehost/images/icons/favicon.png
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:09:49:16
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 141.216.40.66
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-08:12:32:35
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 45.20.60.188
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-08:14:29:01
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 93.232.46.126
+[proxy] => 22.187.107.100
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:14:29:28
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 239.161.10.237
+[proxy] => 162.232.176.59
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:14:30:30
+[ip] => 127.0.0.1
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:14:30:31
+[ip] => 127.0.0.1
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:14:30:31
+[ip] => 127.0.0.1
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:14:30:32
+[ip] => 127.0.0.1
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:14:30:32
+[ip] => 127.0.0.1
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:14:30:32
+[ip] => 127.0.0.1
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:14:30:54
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 84.40.117.22
+[proxy] => 216.17.52.70
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:14:31:26
+[ip] => 127.0.0.11.1 123.204.228.157244.163.83.11
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:15:19:31
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 187.158.72.226
+[proxy] => 35.68.106.166
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:15:19:32
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 185.62.234.47
+[proxy] => 99.202.156.127
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:15:19:33
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 238.232.141.156
+[proxy] => 24.92.135.87
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:15:47:18
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 83.17.93.142
+[proxy] => 237.252.229.151
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:03:09
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 89.185.224.101
+[proxy] => 16.218.129.132
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:03:09
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 60.30.60.67
+[proxy] => 140.192.124.15
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:03:14
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 206.220.132.119
+[proxy] => 213.92.149.163
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:03:14
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 45.86.103.9
+[proxy] => 162.35.28.208
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:03:38
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 207.119.248.252
+[proxy] => 114.178.217.159
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:03:38
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 86.180.91.200
+[proxy] => 60.93.244.93
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:03:43
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 190.191.59.141
+[proxy] => 53.92.152.130
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:03:43
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 106.161.121.220
+[proxy] => 65.100.95.132
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:03:47
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 86.44.121.78
+[proxy] => 203.129.3.44
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:03:47
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 182.245.210.73
+[proxy] => 163.236.38.86
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:04:03
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 216.33.117.235
+[proxy] => 209.50.98.63
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:04:03
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 145.169.101.219
+[proxy] => 187.169.81.175
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:27:45
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 33.136.9.228
+[proxy] => 220.3.196.44
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:27:45
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 68.137.250.236
+[proxy] => 60.234.148.210
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:28:02
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 43.87.236.35
+[proxy] => 210.111.98.217
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:28:03
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 89.120.18.116
+[proxy] => 191.186.128.60
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:28:59
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 7.205.68.49
+[proxy] => 47.144.86.23
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:28:59
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 221.130.160.14
+[proxy] => 109.166.152.149
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:29:06
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 207.81.244.140
+[proxy] => 191.45.83.56
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:29:06
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 115.143.243.130
+[proxy] => 117.26.141.115
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:29:26
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 185.147.87.95
+[proxy] => 81.5.218.208
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:29:26
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 202.112.4.120
+[proxy] => 46.23.160.237
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:29:27
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 224.239.246.23
+[proxy] => 223.93.25.119
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/css/fullpage.min.css.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:29:50
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 189.110.225.60
+[proxy] => 230.57.234.129
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:29:50
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 46.15.150.175
+[proxy] => 90.215.133.5
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:29:51
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 213.206.121.110
+[proxy] => 182.46.192.139
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/css/fullpage.min.css.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:08
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 254.216.12.11
+[proxy] => 251.67.73.172
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:08
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 229.196.35.30
+[proxy] => 220.22.46.64
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:20
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 59.54.167.80
+[proxy] => 35.213.132.244
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:20
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 33.97.174.34
+[proxy] => 155.17.223.15
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:32
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 28.210.112.156
+[proxy] => 203.195.247.64
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:32
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 133.230.199.162
+[proxy] => 184.176.65.83
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:39
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 252.58.235.198
+[proxy] => 57.137.163.58
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:39
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 98.250.176.85
+[proxy] => 136.254.239.241
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 115.209.183.16
+[proxy] => 1.62.13.37
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 4.192.138.42
+[proxy] => 71.106.144.170
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:48
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 207.243.216.113
+[proxy] => 113.202.18.231
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:49
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 51.220.53.26
+[proxy] => 20.62.186.23
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-08:16:30:49
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 128.122.62.252
+[proxy] => 90.76.128.223
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/css/fullpage.min.css.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:09
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 66.225.26.212
+[proxy] => 100.103.61.89
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:09
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 12.202.74.14
+[proxy] => 128.212.3.245
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:18
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 252.3.30.157
+[proxy] => 103.192.73.173
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:18
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 124.30.186.153
+[proxy] => 151.117.20.17
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:19
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 71.161.167.96
+[proxy] => 67.221.205.83
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/css/fullpage.min.css.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:26
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 71.12.8.230
+[proxy] => 87.174.152.15
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:26
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 64.228.148.160
+[proxy] => 216.181.66.69
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:36
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 15.9.215.111
+[proxy] => 95.90.176.5
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:37
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 167.78.90.120
+[proxy] => 85.141.202.136
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:38
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 84.133.173.138
+[proxy] => 51.209.73.223
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/css/fullpage.min.css.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:45
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 126.87.231.102
+[proxy] => 229.161.243.59
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:45
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 135.62.67.239
+[proxy] => 89.133.34.149
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:53
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 141.146.89.188
+[proxy] => 204.103.250.58
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:19:43:53
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 114.90.61.196
+[proxy] => 94.146.80.151
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:20:37:09
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 46.244.194.25
+[proxy] => 225.179.249.184
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:20:37:09
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 38.253.85.232
+[proxy] => 123.1.203.117
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:20:37:37
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 173.113.83.83
+[proxy] => 56.189.104.31
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:20:37:37
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 32.132.198.32
+[proxy] => 213.115.78.173
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:20:37:44
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 98.74.215.128
+[proxy] => 205.113.97.151
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:20:37:45
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 15.247.10.222
+[proxy] => 227.186.148.206
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:20:38:00
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 21.22.88.208
+[proxy] => 197.236.135.176
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:20:38:00
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 77.161.216.9
+[proxy] => 15.191.202.53
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:08:43:32
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 63.164.206.69
+[proxy] => 235.78.75.26
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:08:43:32
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 223.162.252.136
+[proxy] => 153.158.96.180
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:09:16:41
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 190.8.104.127
+[proxy] => 134.49.168.126
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:09:16:42
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 130.84.214.110
+[proxy] => 108.159.166.168
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:11:10
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 188.29.1.117
+[proxy] => 245.48.252.101
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:11:11
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 43.24.103.165
+[proxy] => 83.185.254.195
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:11:17
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 89.162.244.210
+[proxy] => 91.130.26.57
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:11:17
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 128.254.128.72
+[proxy] => 58.8.194.193
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:11:23
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 2.98.244.71
+[proxy] => 124.149.222.51
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:11:23
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 248.216.148.168
+[proxy] => 192.101.91.129
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:11:24
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 4.183.144.108
+[proxy] => 141.114.58.135
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/css/fullpage.min.css.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:11:34
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 198.80.213.248
+[proxy] => 104.122.238.100
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:11:34
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 46.172.119.80
+[proxy] => 196.231.107.237
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:11:57
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 44.178.250.208
+[proxy] => 187.81.51.146
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:11:58
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 191.101.74.119
+[proxy] => 177.187.230.136
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:14
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 23.72.164.207
+[proxy] => 25.105.9.18
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:15
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 238.91.121.36
+[proxy] => 86.180.96.202
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:16
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 194.63.247.56
+[proxy] => 14.80.202.124
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/css/fullpage.min.css.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:33
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 40.154.9.250
+[proxy] => 164.35.97.45
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:34
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 204.137.252.75
+[proxy] => 164.176.82.22
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:34
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 111.208.195.241
+[proxy] => 79.131.11.228
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/css/fullpage.min.css.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 173.57.99.50
+[proxy] => 90.50.218.37
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 85.248.38.35
+[proxy] => 9.33.237.246
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:41
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 66.237.57.102
+[proxy] => 32.88.113.27
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/css/fullpage.min.css.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:43
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 130.158.203.100
+[proxy] => 163.141.237.81
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:44
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 196.171.193.105
+[proxy] => 23.99.46.78
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:45
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 202.159.38.31
+[proxy] => 196.46.123.208
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/css/fullpage.min.css.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:51
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 75.94.53.25
+[proxy] => 41.137.146.173
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:12:51
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 101.62.106.171
+[proxy] => 244.211.244.160
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:16:20
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 186.173.188.200
+[proxy] => 164.192.50.238
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:16:21
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 179.191.249.140
+[proxy] => 144.242.8.30
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:16:26
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 29.26.238.105
+[proxy] => 151.135.231.173
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:16:26
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 180.241.160.177
+[proxy] => 68.229.193.251
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:16:36
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 108.81.8.22
+[proxy] => 175.163.154.82
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:16:37
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 228.228.156.7
+[proxy] => 201.22.176.74
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:16:46
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 52.114.216.252
+[proxy] => 249.135.86.22
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:16:46
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 4.219.163.144
+[proxy] => 35.210.1.151
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:17:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 246.74.175.180
+[proxy] => 204.139.7.121
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:17:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 126.107.26.55
+[proxy] => 41.37.38.25
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:17:51
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 41.233.20.199
+[proxy] => 215.194.20.115
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:17:51
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 182.113.242.254
+[proxy] => 252.144.121.132
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:18:11
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 11.240.160.7
+[proxy] => 145.109.26.124
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:18:11
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 147.45.70.73
+[proxy] => 12.202.247.42
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:18:53
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 244.172.171.193
+[proxy] => 168.235.25.191
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:18:53
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 29.216.160.41
+[proxy] => 94.33.78.40
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:03
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 146.19.139.136
+[proxy] => 151.132.30.252
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:03
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 198.152.134.230
+[proxy] => 171.63.51.165
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:10
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 246.233.205.54
+[proxy] => 253.65.49.140
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:10
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 140.203.76.50
+[proxy] => 185.221.241.60
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:19
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 189.16.174.195
+[proxy] => 149.227.226.114
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:19
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 174.27.40.71
+[proxy] => 118.7.14.139
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:26
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 93.10.96.95
+[proxy] => 101.177.158.230
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:27
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 98.162.116.107
+[proxy] => 156.117.205.251
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:30
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 52.38.165.243
+[proxy] => 187.92.246.187
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:31
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 137.240.64.200
+[proxy] => 106.59.159.1
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:37
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 196.239.102.67
+[proxy] => 155.129.32.54
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:37
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 182.75.233.153
+[proxy] => 98.58.81.117
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:41
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 200.120.93.4
+[proxy] => 177.45.2.121
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:41
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 87.99.48.217
+[proxy] => 148.169.197.77
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:45
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 66.253.41.137
+[proxy] => 80.209.74.95
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:19:45
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 13.180.219.189
+[proxy] => 182.94.27.13
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:20:14
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 252.149.108.253
+[proxy] => 112.140.21.253
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:20:14
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 194.154.113.38
+[proxy] => 222.136.31.52
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:20:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 23.80.233.92
+[proxy] => 43.106.134.208
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:20:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 205.88.156.188
+[proxy] => 203.240.166.217
+[REQUEST_URI] => /theme/kinoxxx/linux/plugins/jFullpage/js/fullpage.min.js.map
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-09:12:22:53
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 226.61.42.231
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:12:23:58
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 170.52.23.141
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:12:24:14
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 105.170.229.35
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:12:37:53
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 120.222.149.1
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:12:38:13
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 94.4.13.75
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:12:40:14
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 23.7.137.74
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:12:43:15
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 160.235.61.243
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:12:47:42
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 168.52.30.56
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:13:08:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 70.107.37.17
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:15:17:29
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 132.226.146.3
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:15:19:41
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 30.161.22.70
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:15:20:07
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 189.158.125.133
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:15:23:48
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 55.75.154.39
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:15:24:17
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 59.153.132.80
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:16:14:33
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 54.238.68.10
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:16:15:25
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 41.35.127.117
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:16:15:26
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 153.81.44.177
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:16:19:34
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 153.102.244.202
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-09:16:48:27
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 221.193.221.102
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-10:19:06:20
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 175.173.247.109
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-10:19:13:59
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 92.48.107.71
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-10:19:14:14
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 34.194.105.209
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-10:19:14:42
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 184.243.109.133
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-10:19:16:51
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 18.191.5.96
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-10:19:17:22
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 164.54.201.70
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-10:19:24:45
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 220.39.18.147
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-10:19:24:49
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 74.155.130.71
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-10:19:24:51
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 183.143.218.230
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-10:07:18:06
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 84.196.220.219
+[proxy] => 89.84.50.57
+[REQUEST_URI] => /index
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-10:07:18:09
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 192.104.14.116
+[proxy] => 125.179.149.99
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-10:07:18:38
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 99.158.172.147
+[proxy] => 201.135.145.19
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-10:07:18:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 77.148.229.132
+[proxy] => 124.50.137.97
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-10:07:18:40
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 89.63.26.135
+[proxy] => 27.166.238.124
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-10:07:18:58
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 243.36.31.56
+[proxy] => 128.249.33.79
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-10:07:20:09
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 214.148.17.137
+[proxy] => 204.12.10.74
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-10:07:20:25
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 166.234.227.193
+[proxy] => 120.50.229.168
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-10:07:20:51
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 70.11.148.3
+[REQUEST_URI] => /
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+[CookieEnabled] => Да
+[platform] => Linux x86_64
+[core] => 12
+[screenX] => 1280
+[screenY] => 1024
+---------->2021-01-14:11:46:23
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 156.16.111.173
+[proxy] => 17.69.179.130
+[REQUEST_URI] => /index
+[HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/10.0 Safari/605.1.15
+---------->2021-01-14:12:01:58
+[ip] => 127.0.0.1
+[nameProxy] => 1.1 146.15.111.83
+[proxy] => 101.221.176.144
+[REQUEST_URI] => /index
+[HTTP_USER_AGENT] => 

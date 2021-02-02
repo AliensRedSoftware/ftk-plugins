@@ -1,5 +1,4 @@
 <?php
-error_reporting(0);
 require_once $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 /**
@@ -8,20 +7,21 @@ require_once $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'bootstrap.php';
  */
 class manual {
 
-	function execute () {
+	/**
+     * Выполнение
+     */
+	public function execute () {
 		$xlib = new xlib();
 		$view = new view();
 		$skinmanager = new skinmanager();
 		require_once '.' . $xlib->getTheme() . $xlib->getPlatform() . '/' . $xlib->getLibPath() . '/head.php';
 		$head = new head();
-		$head->execute('Дока по capi v1.0');
+		$head->execute('Дока по capi v1.1');
 		require_once '.' . $xlib->getTheme() . $xlib->getPlatform() . '/' . $xlib->getLibPath() . '/body.php';
 		$body = new body();
 		require_once '.' . $xlib->getTheme() . $xlib->getPlatform() . '/' . $xlib->getLibPath() . '/footer.php';
 		$footer = new footer();
-		$footer->execute();
 		$skinmanager->applyJs();
-		$view->setDisabled(true);
 		$getDot = $skinmanager->panel([
 				'title' => 'getDot <= Возвращаем точки :)',
 				'content' => '
@@ -92,5 +92,6 @@ class manual {
 				'
 		]);
 		echo $body->layout($info . $cmd);
+		die($footer->execute());
     }
 }

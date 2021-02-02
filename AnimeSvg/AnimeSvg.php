@@ -1,6 +1,6 @@
 <?php
-
-class AnimeSvg extends xlib {
+use xlib as x;
+class AnimeSvg{
 
 	/**
 	 * Возвращаем аниме тян 0
@@ -11,7 +11,7 @@ class AnimeSvg extends xlib {
     	$width	=	$opt['width'];
     	$hair	=	$opt['hair'];
     	$body	=	$opt['body'];
-    	$css	=	$this->css($opt['css']);
+    	$css	=	x::css($opt['css']);
     	if (!$width) {
         	$width	=	640;
         }

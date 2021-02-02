@@ -1,50 +1,38 @@
-
 <?php
-error_reporting(0);
-require_once $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'bootstrap.php';
-class refresh extends xlib {
-
-	/*
+require_once $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'bootstrap.php';
+use xlib as x;
+use skinmanager as sm;
+use xmessage as xm;
+use xcatalog as xc;
+class refresh{
+	/**
 	 * Возвращаем нить
 	 * ----------------
-	 * id		-	Адрес нити
+	 * id		-	Идентификатор нити
 	 * count	-	Кол-во постов (Все)
 	 * title	-	Загаловок
 	 * ----------------
-	 * @return object
+	 * @return string
 	 */
-	function get ($id, $count, $title = 'Сообщение') {
-		require_once		'syntax.php';
-		$syntax	        =	new syntax();
-		$skinmanager    =	new skinmanager();
-		if (!$id) {
-			$id = $this->geturi(4);
+	function get($id,$count,$title=NULL){
+		require_once'syntax.php';
+		$syntax=new syntax();
+		$id=explode('?',$id)[0];
+		if($count>0){
+			$count="LIMIT $count";
+			$sql=mysqli_query(x::getmysql(),"SELECT * FROM `$id` ORDER BY `id` DESC $count");
+			$DATA=$syntax->getFormToArray($sql,$theme);
+		}elseif($count<0){
+			$count=substr($count,-1);
+			$count="LIMIT $count";
+			$sql=mysqli_query(x::getmysql(),"SELECT * FROM `$id` ORDER BY `id` ASC $count");
+			$DATA=$syntax->getFormToArray($sql,$theme);
+		}else{
+			$sql=mysqli_query(x::getmysql(),"SELECT * FROM `$id` ORDER BY `id` DESC $count");
+			$DATA=$syntax->getFormToArray($sql,$theme);
 		}
-		$sql			=	$this->getmysql();
-		$result		    =	mysqli_query($sql, "SELECT * FROM `$id` ORDER BY `id` DESC");
-    	$xcatalog		=	new xcatalog();
-    	$form = [];
-		while ($row = mysqli_fetch_array($result)) {
-			$index++;
-			if ($index <= $count || $count == 0) {
-				$name		=	$row['name'];
-				$text		=	$row['text'];
-				$src_img	=	$row['img'];
-        		$src_video	=	$row['vidos'];
-				$time	=	explode('(', $row['time']);
-				$idChat	=	substr(($time[1]), 0, -1);
-        		array_push($form, $syntax->getForm($index, $time[0], $idChat, $name, $text, $src_video, $src_img, $theme));
-			} else {
-				break;
-			}
-		}
-		if ($index > 0) {
-			$title .= ' ' . $skinmanager->badge($result->num_rows);
-		}
-		return $skinmanager->panel([
-					'title'		=> $title,
-					'content'	=> $xcatalog->getPagination(['max' => 100, 'indent' => '10', 'content' => $form])
-				]);
+		
+		return sm::panel(['title'=>$title,'content'=>xc::getPagination(['max'=>100,'indent'=>'10','data'=>$DATA])]);
 	}
 
     /**
@@ -56,8 +44,8 @@ class refresh extends xlib {
 		$mysql		=	new mysql();
 		$sql		=	mysqli_connect($mysql->ip, $mysql->user , $mysql->password, $mysql->database);
 		$youtube	=	new youtube();
-		if (strlen($id) != 13) {
-			echo $bootstrap->alert($bootstrap->ico('exclamation-sign') . "id должен содержать 13 символов ти шото задумал ?)", 'danger');
+		if (!$this->is_uuidv4($id)) {
+			echo $bootstrap->alert($bootstrap->ico('exclamation-sign') . "id должен содержать uuidv4 ти шото задумал ?)", 'danger');
 			die();
 		}
 		$result = mysqli_query($sql , "SELECT * FROM `$id` ORDER BY `id` DESC");

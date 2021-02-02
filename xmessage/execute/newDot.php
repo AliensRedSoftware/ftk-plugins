@@ -1,8 +1,13 @@
 <?php
-error_reporting(0);
-require_once $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'bootstrap.php';
-class newDot extends xlib {
-
+session_start();
+$key=$_SESSION[$_POST['session_key']];
+require_once $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'bootstrap.php';
+xlib::LoadWebUrl();//Загрузка локальной страницы прошлой
+use xlib as x;
+use xmessage as xm;
+use skinmanager as sm;
+use perms as pm;
+class newDot{
 	/**
 	 * Создать новой точки
 	 * -------------------
@@ -10,121 +15,85 @@ class newDot extends xlib {
 	 * head	-	Загаловок страницы
 	 * body	-	Тело страницы
 	 */
-	public function create ($dot, $head, $body) {
+	public function create($dot){
+		$path=str_replace('?'.x::getData(),NULL,$_POST['path']);
 		require_once "../../../../../options.php";
-		$options	=	new options();
-		$ini		=	new ini("options");
-        $list		=	$ini->getSections();
-        foreach ($list as $val) {
-            if ($dot == $val) {
-				echo $head->execute('[Создание точки] -> ошибка!');
-				$body->layout_post('[Создание точки] -> ошибка!', "Не удается создать [<b>$dot</b>] потому что такая уже есть :(");
+		$options=new options();
+        foreach(scandir("../../../../uri".$path) as $val){
+            if ($dot==$val){
+				sm::modal(['open'=>true,'title'=>'[Создание точки] -> ошибка!','content'=>'[Создание точки] -> ошибка!', "Не удается создать [<b>$dot</b>] потому что такая уже есть :("]);
+				die();
             }
         }
-        if (count($ini->getKeys($list[count($list) - 1])) < 1 && count($list) != 0) {
-			$get = $list[count($list) - 1];
-			echo $head->execute('[Создание точки] -> ошибка!');
-			$body->layout_post('[Создание точки] -> ошибка!', "Не удается создать точку <b>[$dot]</b> потому что в последней точки <b>[$get]</b> ничего нету зачем создавать еще пустую точку ?)!");
-        } else {
-        	$ini->addSection($dot);
-			$this->isDir("../../../../uri/о");
-			$this->isDir("../../../../uri/о/$dot");
-file_put_contents("../../../../uri/о/$dot.php", '<?php
-class ftk extends xlib {
-	function __construct() {
-		$this->req(["head", "body", "footer"]);
-		$head = new head();
-		$body = new body();
-		$footer = new footer();
-		$this->execute($head, $body, $footer);
+		mkdir("../../../../uri".$path.'/'.$dot,0777,true);
+		$redirect="$path$dot";
+		foreach(new RecursiveTreeIterator(new RecursiveDirectoryIterator("../../../../uri".xm::getROOT(), RecursiveDirectoryIterator::SKIP_DOTS)) as $path=>$key){
+			if(!pathinfo($path,PATHINFO_EXTENSION)){
+				file_put_contents("$path.php", '<?php
+class ftk extends xlib{
+	function __construct(){
+		$this->req(["head","body","footer"]);
+		$H = new head();
+		$B = new body();
+		$F = new footer();
+		$this->execute($H,$B,$F);
 	}
-	function execute ($head, $body, $footer) {
-		$selected = urldecode($this->geturi(2));
-		$head->execute("/о/" . $selected);
-		$body->layout_Dot();
-		$footer->execute();
+	function execute($H,$B,$F){
+		$H->execute($this->geturi());
+		$B->layout_Dot();
+		$F->execute();
 	}
 }
 ');
-			echo $head->execute('[Создание точки] -> Успешно :)');
-			$body->layout_post('[Создание точки] -> Успешно :)', "Точка успешно создалась <b>[$dot]</b> :)");
+			}
 		}
+		echo "<meta http-equiv=\"refresh\" content=\"0;url=$redirect\">";
 	}
 
 	/**
 	 * Выполнить
 	 * ----------
 	 */
-    public function execute () {
+    public function execute($key){
 		//Переменные
-			$dot	=	$_POST["dot"];
-			require_once "../../../page/head.php";
-			$head	=	new head();
-			require_once "../../../page/body.php";
-			$body	=	new body();
-		//
-        $charlower	=	$this->islowupper($dot);
-        if ($charlower) {
-			echo $head->execute('[Создание точки] -> ошибка!');
-			$body->layout_post('[Создание точки] -> ошибка!', 'Большие буквы нельзя использовать :(');
+		$dot=$_POST['dot'];
+		//key
+		$session_key=$_POST['session_key'];
+		if($key!=$session_key){
+			sm::modal(['open'=>true,'title'=>'[Создание поста] -> ошибка!','content'=>"Ключ неверный $session_key :("]);
+			die();
+		}
+		//-------------------------
+		if(empty($dot)){
+			sm::modal(['open'=>true,'title'=>'[Создание точки] -> ошибка!','content'=>'Название точки не должно быть пустое :(']);
+			die();
+		}
+		if(mb_strlen($dot)>32){
+			sm::modal(['open'=>true,'title'=>'[Создание точки] -> ошибка!','content'=>'Символов в название не более чем 32 :(']);
+			die();
+		}
+		//Проверка на бажность символьность
+		$arr=x::getENGToArray(x::getRUSToArray(x::getNumberToArray(['@','$','_','-','='])));
+        if(!x::isCharArray($arr,$dot)){
+			sm::modal(['open'=>true,'title'=>'[Создание поста] -> ошибка!','content'=>'Некоторые символы нельзя использовать в название! :(']);
+			die();
         }
-		if(!$dot) {
-			echo $head->execute('[Создание точки] -> ошибка!');
-			$body->layout_post('[Создание точки] -> ошибка!', 'Название точки не должно быть пустое :(');
+		//PERMS
+	    $isDot=xm::isDot(); //isDot
+		if(!pm::isAccess()){
+			sm::modal(['open'=>true,'title'=>'[Создание точки] -> ошибка!','content'=>'В доступе отказано']);
+			die();
 		}
-		if(strlen($name) >= 16) {
-			echo $head->execute('[Создание точки] -> ошибка!');
-			$body->layout_post('[Создание точки] -> ошибка!', 'Символов в название не более чем 15 :(');
+		if(x::is_uuidv4($dot)){
+		    sm::modal(['open'=>true,'title'=>'[Создание точки] -> ошибка!','content'=>"Содержит uuidv4 <b>[$dot]</b> :("]);
+			die();
 		}
-		$char		=	$this->getCharToArray();
-		$number		=	$this->getNumberToArray();
-		$badName	=	$this->isCharArray($char, $dot);
-		if ($badName) {
-			echo $head->execute('[Создание точки] -> ошибка!');
-			$body->layout_post('[Создание точки] -> ошибка!', "такой символ <b>[$badName]</b> нельзя использовать :(");
-		}
-		$badName	=	$this->isCharArray($number, $dot);
-		if ($badName) {
-			echo $head->execute('[Создание точки] -> ошибка!');
-			$body->layout_post('[Создание точки] -> ошибка!', "такую цифру <b>[$badName]</b> нельзя использовать :(");
-		}
-		$this->create($dot, $head, $body);
+		$this->create($dot);
 	}
 }
-$xlib = new xlib();
-if($_SERVER["REQUEST_METHOD"] == 'POST' && constant() == NULL) {
-	$event = new newDot();
-	$event->execute();
-} else {
-	echo $xlib->alert();
+if($_SERVER["REQUEST_METHOD"]=='POST') {
+	$e = new newDot();
+	$e->execute($key);
+}else{
+	echo x::alert();
 }
-
-/*
-require_once '../../xlib/xlib.php';
-$xlib = new xlib();
-$execute = $_POST['execute'] . '4';
-$token = $_POST['token'];
-if ($xlib->is_uuidv4($_POST['execute']) == false) {
-	echo $xlib->alert();
-	die();
-}
-ini_set("session.save_path", "/");
-session_start();
-if (constant() == NULL) {
-	echo 'test';
-}
-if ($_SESSION[$execute] == $token && isset($_SESSION[$execute]) == true && isset($token) == true) {
-	if($_SERVER["REQUEST_METHOD"] == 'POST') {
-		$event = new newDot();
-		$event->newDot();
-		session_regenerate_id(true);
-		//session_reset();
-	} else {
-		echo $xlib->alert();
-		die();
-	}
-} else {
-	echo $xlib->alert();
-	die();
-}
-*/

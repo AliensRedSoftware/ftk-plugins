@@ -1,0 +1,7 @@
+.form-control{
+    display: unset;
+    width: unset;
+}
+.modal{
+    overflow-y: auto;
+}
