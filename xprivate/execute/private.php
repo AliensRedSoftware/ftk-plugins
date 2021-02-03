@@ -11,6 +11,7 @@ class cfg{
 	 */
 	function execute(){
     	$name=$_REQUEST['NAME'];
+    	$gender=$_REQUEST['gender'];
     	$desc=$_REQUEST['DESC'];
     	$dateIn=$_REQUEST['dateIn'];
     	$data=xp::getData();
@@ -49,6 +50,15 @@ class cfg{
             }
         	$change.="</br>[Имя] - \"$oldName\" изменилось на \"$name\"";
         }
+        //-->Установка имени
+    	$isGender=self::setGender($gender);//Установить Гендер
+        if($isGender){
+		    $oldGender=$data['gender'];
+        	if(!$oldGender){
+            	$oldGender='Не определено';
+            }
+        	$change.="</br>[Гендер] - \"$oldGender\" изменилось на \"$gender\"";
+        }
         //-->Установка описание
     	$isDesc=self::setDesc($desc);//Установить описание
         if($isDesc){
@@ -58,30 +68,6 @@ class cfg{
     	$isDateIn=self::setDateIn($dateIn);//Установить описание
         if($isDateIn){
             $change.="</br>[Дата начало] - Установлен $dateIn";
-        }
-        //-->Установка номер поста
-    	$isDate=self::setDate($date);
-    	if(!empty($isDate)){
-        	$newDate=$_COOKIE['__XMSG_DATE'];
-        	if(!empty($newDate)){
-            	$newDate='Не установлен';
-            	$_REQUEST['DATE']=false;
-            }else{
-                $newDate='Установлен';
-            }
-        	$change.="</br>[Дата отправки] - $newDate";
-        }
-        //-->Установка номер поста
-    	$isIdMessage=self::setIdMessage($IdMessage);
-    	if(!empty($isIdMessage)){
-        	$newIdMessage=$_COOKIE['__XMSG_ID'];
-        	if(!empty($newIdMessage)){
-            	$newIdMessage='Не установлен';
-            	$_REQUEST['IDMSG']=false;
-            }else{
-                $newIdMessage='Установлен';
-            }
-        	$change.="</br>[Ид сообщение] - $newIdMessage";
         }
         $xprivate=sm::p(['content'=>sm::a(['title'=>sm::ico('heart').' '.'Личный кабинет','href'=>"#xprivate",'modal'=>'xprivate'])]);
         x::LoadWebUrl();
@@ -111,6 +97,23 @@ class cfg{
 		}elseif(xp::getData()['name']!=$name){
         	xp::setData(['name'=>$name]);
         	return true;
+        }
+        return false;
+    }
+    /**
+	 * Установить Дата начало
+	 * ----------------------------------
+	 */
+	function setGender($val){
+	    if($val){
+		    if($val!='Мальчик'&&$val!='Девачка'){
+		        x::LoadWebUrl();
+                sm::modal(['open'=>1,'title'=>'Личная информация','content'=>"Гендер не может быть установлен $val :("]);
+                die();
+            }elseif(xp::getData()['gender']!=$val){
+            	xp::setData(['gender'=>$val]);
+            	return true;
+            }
         }
         return false;
     }
@@ -157,30 +160,6 @@ class cfg{
         	return true;
         }
         return false;
-    }
-	/**
-	 * Установить возвращение Дата отправки
-	 * ----------------------------------
-	 */
-	public function setDate($val){
-    	if($val!=$_COOKIE['__XMSG_DATE']){
-        	setcookie('__XMSG_DATE',$val,time()+(86400*30),'/');
-        	return true;
-        }else{
-        	return false;
-        }
-    }
-	/**
-	 * Установить возвращение Id_Message
-	 * ----------------------------------
-	 */
-	public function setIdMessage($val){
-    	if($val!=$_COOKIE['__XMSG_ID']){
-        	setcookie('__XMSG_ID',$val,time()+(86400*30),'/');
-        	return true;
-        }else{
-        	return false;
-        }
     }
 }
 if($_SERVER["REQUEST_METHOD"]=='POST'){

@@ -150,7 +150,7 @@ class bootstrap3{
 		$placeholder	=	$opt['placeholder'];
 		$size			=	$opt['size'];
 		$enabled		=	$opt['enabled'];
-		$readonly=$opt['readonly'];
+		$readonly		=	$opt['readonly'];
 		$class			=	$opt['class'];
 		$checked		=	$opt['checked'];
 		$required		=	$opt['required'];
@@ -239,28 +239,30 @@ class bootstrap3{
 		if($readonly){
 			$tag.='readonly ';
 		}
-		$tag	.=	$enabled;
 		if($type == 'radio'){
 			$tag.="value=\"$value\" ";
-			x::addCss(['display' => 'unset', 'width' => '0px', 'height' => '0px']);
-			$css = x::getCss();
-			$tag	.=	$css;
+			x::addCss(['height'=>'auto']);
+			$css=x::getCss();
+			$tag.=$css;
 			if ($checked) {
-				$tag	.=	'checked';
+				$tag	.=	'checked ';
 			}
+			$tag	.=	$enabled;
         	$tag	=	trim($tag);
 			return	"<label><input $tag> $value</label>";
 		} if ($type == 'checkbox') {
-			x::addCss(['display' => 'unset', 'width' => '0px', 'height' => '0px']);
+			x::addCss(['height'=>'auto']);
 			$css = x::getCss();
 			$tag	.=	$css;
-			if ($checked) {
-				$tag	.=	'checked';
+			if($checked){
+				$tag	.=	'checked ';
 			}
+			$tag	.=	$enabled;
 			$tag	=	trim($tag);
 			return	"<label><input $tag> $value</label>";
         }
 		$tag	.=	$css;
+		$tag	.=	$enabled;
         $tag	=	trim($tag);
 		return	"<input $tag>";
 	}

@@ -171,24 +171,24 @@ class xprivate{
 		if(!$_COOKIE['__XPRIVATE_AUTH']){
 			if(empty($type)){
 				$id=str_replace('-',NULL,x::uuidv4());
-				//auth id
-				if($id){
-					setcookie('__XPRIVATE_AUTH',$id,0,'/');
-					$_COOKIE['__XPRIVATE_AUTH']=$id;
-				}
+				//Ид
+				setcookie('__XPRIVATE_AUTH',$id,0,'/');
+				$_COOKIE['__XPRIVATE_AUTH']=$id;
+				//Пароль
 				$pass=x::uuidv4();
 				//Создание пользователя анонимного
-				mkdir(__DIR__."/account/anon/$id");
-				chmod(__DIR__."/account/anon/$id",0777);
+				mkdir(__DIR__.DIRECTORY_SEPARATOR.'account'.DIRECTORY_SEPARATOR.'anon'.DIRECTORY_SEPARATOR.$id);
+				chmod(__DIR__.DIRECTORY_SEPARATOR.'account'.DIRECTORY_SEPARATOR.'anon'.DIRECTORY_SEPARATOR.$id,0777);
 				//ava
-				mkdir(__DIR__."/account/anon/$id/ico");
-				chmod(__DIR__."/account/anon/$id/ico",0777);
+				mkdir(__DIR__.DIRECTORY_SEPARATOR.'account'.DIRECTORY_SEPARATOR.'anon'.DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.'ico');
+				chmod(__DIR__.DIRECTORY_SEPARATOR.'account'.DIRECTORY_SEPARATOR.'anon'.DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.'ico',0777);
 				//информация
 $data=[
 	'id'		=>$id,
 	'pass'		=>$pass,
 	'auth'		=>false,
 	'name'		=>'Нейзвестный',
+	'gender'	=>false,
 	'dateIn'	=>date('Y')-50,
     'desc'		=>'Ничего не найдено',
     'attempt'	=>3,
@@ -197,7 +197,6 @@ $data=[
 ];
 				file_put_contents(__DIR__.DIRECTORY_SEPARATOR.'account'.DIRECTORY_SEPARATOR.'anon'.DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.'user.json',json_encode($data));
 				chmod(__DIR__.DIRECTORY_SEPARATOR.'account'.DIRECTORY_SEPARATOR.'anon'.DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.'user.json',0777);
-
 			}
 		}else{
 			if(empty($type)){
@@ -240,6 +239,28 @@ $data=[
 		//-->Имя создателя поста
 		$name=sm::text(['text'=>'Имя или ник:']);
 		$name=$name.sm::p(['content'=>sm::input(['name'=>'NAME','value'=>$data['name'],'placeholder'=>'Имя или ник (32)'])]);
+		//-->Гендер
+		$gender=sm::text(['text'=>'Гендер:']);
+		switch($data['gender']){
+			case 'Мальчик':
+				$gender=$gender.sm::p(['content'=>
+						sm::input(['name'=>'gender','type'=>'radio','value'=>'Мальчик','checked'=>1]).' или '.
+						sm::input(['name'=>'gender','type'=>'radio','value'=>'Девачка'])
+					]);
+			break;
+			case 'Девачка':
+				$gender=$gender.sm::p(['content'=>
+						sm::input(['name'=>'gender','type'=>'radio','value'=>'Мальчик']).' или '.
+						sm::input(['name'=>'gender','type'=>'radio','value'=>'Девачка','checked'=>1])
+					]);
+			break;
+			default:
+				$gender=$gender.sm::p(['content'=>
+					sm::input(['name'=>'gender','type'=>'radio','value'=>'Мальчик']).' или '.
+					sm::input(['name'=>'gender','type'=>'radio','value'=>'Девачка'])
+				]);
+			break;
+		}
 		//-->Описание
 		$desc=sm::text(['text'=>'Описание:']);
 		$desc=$desc.sm::p(['content'=>sm::textarea(['name'=>'DESC','value'=>$data['desc'],'css'=>['width'=>'100%','resize'=>'vertical'],'placeholder'=>'Описание (2048)','rows'=>4])]);
@@ -260,7 +281,7 @@ $data=[
     	$max=$data['dateIn']+100;
     	$dateOut=sm::text(['text'=>'Дата окончание:']);
 		$dateOut=$dateOut.sm::p(['content'=>sm::input(['enabled'=>false,'type'=>'number','value'=>$max,'placeholder'=>'Дата окончание'])]);
-    	$account=sm::modal(['id'=>'private','title'=>'Конфигурация личной информаций','content'=>sm::form(['method'=>'post','id'=>x::RedirectUpdate(),'action'=>$action,'enctype'=>'multipart/form-data','content'=>$ava.$file.$HTR.$name.$dateIn.$dateOut.$desc.$change.$xprivate])]);
+    	$account=sm::modal(['id'=>'private','title'=>'Конфигурация личной информаций','content'=>sm::form(['method'=>'post','id'=>x::RedirectUpdate(),'action'=>$action,'enctype'=>'multipart/form-data','content'=>$ava.$file.$HTR.$name.$gender.$dateIn.$dateOut.$desc.$change.$xprivate])]);
 		return	sm::p(['content'=>sm::a(['title'=>sm::ico('cog').'Конфигурация личной информаций','href'=>"#$account",'modal'=>$account])]);
     }
     /**
@@ -315,16 +336,40 @@ $data=[
 	    }else{
 		    $data=self::getDataId($id);
 		    //Дополнительные
-		    foreach(x::getModules() as $module){
-		    	switch($module){
-					case 'rialto':
-						$plugins.=rt::getWalletObject($data);
-					break;
-		    	}
-		    }
+		    if($data['id']!='undefined'){
+				foreach(x::getModules() as $module){
+					switch($module){
+						case 'rialto':
+							$plugins.=rt::getWalletObject($data);
+						break;
+					}
+				}
+			}
 		    //-->Имя создателя поста
 		    $name=sm::text(['text'=>'Имя или ник:']);
 		    $name=$name.sm::p(['content'=>sm::input(['value'=>$data['name'],'readonly'=>1])]);
+		    //-->Гендер
+			$gender=sm::text(['text'=>'Гендер:']);
+			switch($data['gender']){
+				case 'Мальчик':
+					$gender=$gender.sm::p(['content'=>
+							sm::input(['enabled'=>0,'name'=>'gender','type'=>'radio','value'=>'Мальчик','checked'=>1]).' или '.
+							sm::input(['enabled'=>0,'name'=>'gender','type'=>'radio','value'=>'Девачка'])
+						]);
+				break;
+				case 'Девачка':
+					$gender=$gender.sm::p(['content'=>
+							sm::input(['enabled'=>0,'name'=>'gender','type'=>'radio','value'=>'Мальчик']).' или '.
+							sm::input(['enabled'=>0,'name'=>'gender','type'=>'radio','value'=>'Девачка','checked'=>1])
+						]);
+				break;
+				default:
+					$gender=$gender.sm::p(['content'=>
+						sm::input(['enabled'=>0,'name'=>'gender','type'=>'radio','value'=>'Мальчик']).' или '.
+						sm::input(['enabled'=>0,'name'=>'gender','type'=>'radio','value'=>'Девачка'])
+					]);
+				break;
+			}
 		    //-->ava
 		    $ava=sm::img(['src'=>self::getCacheAva($id),'css'=>['width'=>'128px','pointer-events'=>'none','border-radius'=>'100px']]);
 			//-->Дата начало
@@ -342,7 +387,7 @@ $data=[
 		    $desc=sm::text(['text'=>'Описание:']);
 		    $desc=$desc.sm::p(['content'=>sm::textarea(['value'=>$data['desc'],'readonly'=>1,'css'=>['width'=>'100%','resize'=>'vertical'],'rows'=>4])]);
 		    $id=substr($data['id'],0,12);
-		    return sm::modal(['id'=>"$id-private",'title'=>$data['name']." $age",'content'=>$ava.$plugins.$name.$dateIn.$dateOut.$desc]);
+		    return sm::modal(['id'=>"$id-private",'title'=>$data['name']." $age",'content'=>$ava.$plugins.$name.$gender.$dateIn.$dateOut.$desc]);
 		}
 	}
     /**

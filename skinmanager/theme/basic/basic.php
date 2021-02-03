@@ -207,22 +207,26 @@ class basic{
 		if($readonly){
 			$tag.='readonly ';
 		}
-		$tag.=$css;
-		$tag.=$enabled;
 		if($type=='radio'){
 			$tag.="value=\"$value\" ";
 			if($checked){
-				$tag.='checked';
+				$tag.='checked ';
 			}
+			$tag.=$css;
+			$tag.=$enabled;
 			$tag=trim($tag);
 			return self::label(['text'=>"<input $tag> $value"]);
 		}elseif($type=='checkbox'){
         	if($checked){
-				$tag.='checked';
+				$tag.='checked ';
 			}
+			$tag.=$css;
+			$tag.=$enabled;
 			$tag=trim($tag);
         	return self::label(['text'=>"<input $tag> $value"]);
         }else{
+        	$tag.=$css;
+			$tag.=$enabled;
 			$tag=trim($tag);
         	return"<input $tag>";
 		}

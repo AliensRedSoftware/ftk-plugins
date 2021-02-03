@@ -231,28 +231,30 @@ class bootstrap4{
 		if($readonly){
 			$tag.='readonly ';
 		}
-		$tag	.=	$enabled;
 		if($type == 'radio'){
 			$tag.="value=\"$value\" ";
-			x::addCss(['display'=>'unset','width'=>'0px','height'=>'0px']);
+			x::addCss(['height'=>'auto']);
 			$css = x::getCss();
 			$tag	.=	$css;
 			if ($checked) {
-				$tag	.=	'checked';
+				$tag	.=	'checked ';
 			}
+			$tag	.=	$enabled;
         	$tag	=	trim($tag);
 			return	"<label class='text-light'><input $tag> $value</label>";
 		}if($type == 'checkbox'){
-			x::addCss(['display'=>'unset','width'=>'0px','height'=>'0px']);
+			x::addCss(['height'=>'auto']);
 			$css = x::getCss();
 			$tag	.=	$css;
 			if ($checked) {
-				$tag	.=	'checked';
+				$tag	.=	'checked ';
 			}
+			$tag	.=	$enabled;
 			$tag	=	trim($tag);
 			return	"<label class='text-light'><input $tag> $value</label>";
         }
 		$tag	.=	$css;
+		$tag	.=	$enabled;
         $tag	=	trim($tag);
 		return	"<input $tag>";
 	}
