@@ -63,6 +63,9 @@ class bootstrap4{
 		$modal		=	$opt['modal'];
 		$css		=	x::css($opt['css']);
 		$theme		=	self::getThemeA($opt['theme']);
+		if(is_numeric(x::mb_str_split($modal)[0])){
+			$modal="a$modal";
+		}
 		if ($href && !$modal) {
 			$tag	.=	"href=\"$href\" ";
 		}
@@ -140,27 +143,27 @@ class bootstrap4{
 	 * -------------------------
 	 * @return string
 	 */
-	public function input ($opt) {
-    	$form			=	$opt['form'];
-		$name			=	$opt['name'];
-		$type			=	$opt['type'];
-		$value			=	$opt['value'];
-		$placeholder	=	$opt['placeholder'];
-		$size			=	$opt['size'];
-		$enabled		=	$opt['enabled'];
-		$readonly		=	$opt['readonly'];
-		$class			=	$opt['class'];
-		$checked		=	$opt['checked'];
-		$required		=	$opt['required'];
-		$min			=	$opt['min'];
-		$max			=	$opt['max'];
-		$accept			=	$opt['accept'];
-		$multiple		=	$opt['multiple'];
-		$step			=	$opt['step'];
-		$pattern		=	$opt['pattern'];
-		$theme			=	self::getTheme($opt['theme']);
-		$css			=	x::css($opt['css']);
-		$tag			.=	"type=\"$type\" ";
+	public function input($opt){
+    	$form=$opt['form'];
+		$name=$opt['name'];
+		$type=$opt['type'];
+		$value=$opt['value'];
+		$placeholder=$opt['placeholder'];
+		$size=$opt['size'];
+		$enabled=$opt['enabled'];
+		$readonly=$opt['readonly'];
+		$class=$opt['class'];
+		$checked=$opt['checked'];
+		$required=$opt['required'];
+		$min=$opt['min'];
+		$max=$opt['max'];
+		$accept=$opt['accept'];
+		$multiple=$opt['multiple'];
+		$step=$opt['step'];
+		$pattern=$opt['pattern'];
+		$theme=self::getTheme($opt['theme']);
+		$css=x::css($opt['css']);
+		$tag.="type=\"$type\" ";
     	if ($form) {
         	$tag		.=	"form=\"$form\" ";
         }
@@ -263,11 +266,12 @@ class bootstrap4{
 	 * Возвращаем многострочное поле (textarea)
 	 * -----------------------------------------
 	 * enabled		-	Доступность
-	 * readonly     -   Чтивость
 	 * name 		-	Имя
 	 * placeholder	-	Подсказка
 	 * value		-	Значение
 	 * rows			-	Наборы или возврат значения атрибута строк области текста
+	 * max			-	Максимальное символов (кол-во)
+	 * readonly     -   Чтивость
 	 * required		-	Проверка
 	 * theme		-	Тема
 	 * css			-	Стиль
@@ -276,11 +280,12 @@ class bootstrap4{
 	 */
 	public function textarea($opt){
 		$enabled=$opt['enabled'];
-		$readonly=$opt['readonly'];
 		$name=$opt['name'];
 		$placeholder=$opt['placeholder'];
 		$value=$opt['value'];
 		$rows=$opt['rows'];
+		$max=$opt['max'];
+		$readonly=$opt['readonly'];
 		$required=$opt['required'];
 		$theme=self::getTheme($opt['theme']);
 		$css=x::css($opt['css']);
@@ -293,11 +298,14 @@ class bootstrap4{
 		if($rows){
 			$tag.="rows=\"$rows\" ";
 		}
-		if($required){
-			$tag.='required ';
+		if($max>0){
+			$tag.="maxlength=\"$max\" ";
 		}
 		if($readonly){
 		    $tag.='readonly ';
+		}
+		if($required){
+			$tag.='required ';
 		}
 		$tag.=$css;
 		$tag.=$enabled;
@@ -313,8 +321,8 @@ class bootstrap4{
 	 * ------------------------
 	 * @return string
 	 */
-	public function text($opt){
-		$txt=$opt['text'];
+	public function txt($opt){
+		$txt=$opt['txt'];
 		$theme=self::getThemeText($opt['theme']);
 		$css=x::css($opt['css']);
 		return self::p(['content'=>$txt,'css'=>$css,'theme'=>$theme]);
@@ -331,30 +339,11 @@ class bootstrap4{
 		$src=$opt['src'];
 		$css=x::css($opt['css']);
 		if($src){
-			$tag.="src=\"$src\" ";
+			$tag.="data-src-lazyload=\"$src\" ";
 		}
 		$tag.=$css;
 		$tag=trim($tag);
 		return"<img $tag/>";
-	}
-	/**
-	 * Возвращаем обводку (border)
-	 * ----------------------------
-	 * body		-	Тело
-	 * size		-	Размер
-	 * content	-	Контент
-	 * theme	-	Тема
-	 * css		-	Стиль
-	 * ----------------------------
-	 * @return string
-	 */
-	public function border($opt){
-    	$content=$opt['content'];
-		$theme=self::getTheme($opt['theme']);
-    	$css=x::css($opt['css']);
-		$tag.=$css;
-		$tag=trim($tag);
-		return"<div class=\"card bg-$theme\" $tag><div class=\"card-body\">$content</div></div>";
 	}
     /**
      * Возвращаем выпадающий список (combobox)
@@ -462,29 +451,73 @@ class bootstrap4{
 		return"<a $tag>$title</a>";
 	}
 	/**
+	 * Возвращаем обводку (border)
+	 * ----------------------------
+	 * content	-	Контент
+	 * body		-	Тело
+	 * size		-	Размер
+	 * stretch	-	Растягивание
+	 * theme	-	Тема
+	 * css		-	Стиль
+	 * ----------------------------
+	 * @return string
+	 */
+	public function border($opt){
+    	$content=$opt['content'];
+		$theme=self::getTheme($opt['theme']);
+    	$css=$opt['css'];
+    	if(!$opt['stretch']){
+    		$css['display']='table';
+    	}
+    	$tag.=x::css($css);
+		$tag=trim($tag);
+		return"<div class=\"card bg-$theme\" $tag><div class=\"card-body\">$content</div></div>";
+	}
+	/**
 	 * Возвращаем панель (panel)
 	 * -------------------------
 	 * title	-	Загаловок
-	 * theme	-	Тема
 	 * content	-	Контент
+	 * last		-	Отступ (Использовать)
+	 * stretch	-	Растягивание
+	 * theme	-	Тема
 	 * css		-	Стиль
 	 * -------------------------
 	 * @return string
 	 */
 	public function panel($opt){
 		$title=$opt['title'];
-    	$theme=self::getTheme($opt['theme']);
 		$content=$opt['content'];
-		$css=x::css($opt['css']);
+		$last=$opt['last'];
+		$theme=self::getTheme($opt['theme']);
 		if(empty($title)){
 			$title='Пустое название ;)';
 		}
 		if(empty($content)){
 			$content='Пустой контент ;)';
 		}
+		//css
+		if(isset($last)){
+			$PanelCss['margin-bottom']='unset';
+		}
+    	if(!$opt['stretch']){
+    		$PanelCss['display']='table';
+    	}
 		$tag.=$css;
 		$tag=trim($tag);
-		return"<div class=\"card bg-$theme\"><div class=\"card-header text-$theme\">$title</div><div class=\"card-body text-$theme\" $css>$content</div></div>";
+		$title=x::div([
+					'class'		=>	"card-header text-$theme",
+					'content'	=>	$title
+		]);
+return  x::div([
+			'class'		=>	"card bg-$theme",
+			'css'		=>	$PanelCss,
+			'content'	=>	$title	.	x::div([
+											'class'		=>		"card-body text-$theme",
+											'css'		=>		$opt['css'],
+											'content'	=>		$content
+										])
+		]);
 	}
 	/**
 	 * Возвращаем панель (panel)
@@ -496,17 +529,11 @@ class bootstrap4{
 	 * @return string
 	 */
 	public function panelToArray($opt){
-		$arr=$opt['data'];
 		$css=$opt['css'];
-		foreach($arr as $title =>$content){
+		foreach($opt['data'] as $title =>$content){
 			$i++;
-			if(count($arr)==$i){
-				/*$css['display']='table';
-				$title = bootstrap337::border(['css'=>$css,'content'=>$title]);
-				unset($css['display']);
-				$content=bootstrap337::border(['css'=>$css,'content'=>$content]);
-				$panel.=$title.$content;*/
-				$panel.=self::panel(['title'=>$title,'content'=>$content,'css'=>$css]);
+			if(count($opt['data'])==$i){
+				$panel.=self::panel(['title'=>$title,'content'=>$content,'last'=>true,'css'=>$css]);
 			}else{
 				$panel.=self::panel(['title'=>$title,'content'=>$content,'css'=>$css]);
 			}
@@ -655,7 +682,7 @@ class bootstrap4{
 			}
 			$head="<div class=\"modal-header bg-$theme\">$title$exit</div>";
 		}
-		$content=self::text(['text'=>$content]);
+		$content=self::txt(['txt'=>$content]);
 		echo"<div class=\"modal fade $id\" tabindex=\"-1\" id=\"$id\" role=\"dialog\"><div class=\"modal-dialog\" role=\"document\"><div class=\"modal-content\">$head<div class=\"modal-body bg-$theme\" $css>$content</div></div></div></div>";
 		if($open){
 		    x::js("$('#$id').modal('toggle')");
@@ -735,6 +762,7 @@ class bootstrap4{
 	 * Возвращаем lightbox (lightbox)
 	 * -------------------------------
 	 * src	-	Изоброжение
+	 * box  -   Режим коробки
 	 * -------------------------------
 	 * @return string
 	 */
@@ -748,8 +776,11 @@ class bootstrap4{
         	$style_lightbox='style="width:50%;"';
         	$style_img='style="width:inherit;"';
         }
-        sm::setSuperBox('<div id="sb-container"><div id="sb-overlay"></div><div id="sb-wrapper"><div id="sb-title"><div id="sb-title-inner"></div></div><div id="sb-wrapper-inner"><div id="sb-body"><div id="sb-body-inner"></div><div id="sb-loading"><div id="sb-loading-inner"><span>loading</span></div></div></div></div><div id="sb-info"><div id="sb-info-inner"><div id="sb-counter"></div><div id="sb-nav"><a id="sb-nav-close" title="Close" onclick="Shadowbox.close()"></a><a id="sb-nav-next" title="Next" onclick="Shadowbox.next()"></a><a id="sb-nav-play" title="Play" onclick="Shadowbox.play()"></a><a id="sb-nav-pause" title="Pause" onclick="Shadowbox.pause()"></a><a id="sb-nav-previous" title="Previous" onclick="Shadowbox.previous()"></a></div></div></div></div></div>');
-		return"<a $style_lightbox href=\"$src\" rel=\"shadowbox[img]\"><img $style_img src=\"$src\" data-src=\"$src\"/></img></a>";
+        if($opt['box']){//BOX
+        	sm::setSuperBox('<div id="sb-container"><div id="sb-overlay"></div><div id="sb-wrapper"><div id="sb-title"><div id="sb-title-inner"></div></div><div id="sb-wrapper-inner"><div id="sb-body"><div id="sb-body-inner"></div><div id="sb-loading"><div id="sb-loading-inner"><span>loading</span></div></div></div></div><div id="sb-info"><div id="sb-info-inner"><div id="sb-counter"></div><div id="sb-nav"><a id="sb-nav-close" title="Close" onclick="Shadowbox.close()"></a><a id="sb-nav-next" title="Next" onclick="Shadowbox.next()"></a><a id="sb-nav-play" title="Play" onclick="Shadowbox.play()"></a><a id="sb-nav-pause" title="Pause" onclick="Shadowbox.pause()"></a><a id="sb-nav-previous" title="Previous" onclick="Shadowbox.previous()"></a></div></div></div></div></div>');
+			return"<a $style_lightbox href=\"$src\" rel=\"shadowbox[img]\"><img $style_img data-src-lazyload=\"$src\"/></a>";
+		}
+		return"<img $style_img data-src-lazyload=\"$src\"/>";
 	}
 	/**
 	 * Возвращает тему

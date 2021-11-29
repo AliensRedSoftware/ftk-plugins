@@ -7,60 +7,60 @@
 use xlib as x;
 use skinmanager as sm;
 use jquery as jq;
-class atei{
+class atei {
+
     /**
 	 * Возвращаем версию
 	 * ------------------
 	 * @return string
 	 */
-	public function getVersion () {
-		return' ('.__CLASS__.' '.sm::badge(['txt'=>'0.35']).')';
-	}
+    public function getVersion () {
+		return ' (' . __CLASS__ . ' ' . sm::badge(['txt'=>'0.40']) . ')';
+    }
+
     /**
      * Возвращает форму доната
+     * ------------------
+     * @return object
      */
     public function getDonate(){
         $ya=self::getDonateYandex();
         //-->img
-        $img=sm::p(['content'=>sm::img(['src'=>x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR."ico/donate"),'css'=>['width'=>'128px','pointer-events'=>'none']])]);
+        $img=sm::p(['content'=>sm::img(['src'=>x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'donate'),'css'=>['width'=>'128px','pointer-events'=>'none']])]);
         //-->donate
-	    $ya=sm::p(['content'=>sm::a(['title'=>sm::ico('heart').' '.'Яндекс.Деньги','href'=>"#$ya",'modal'=>$ya])]);
+	    $ya=sm::p(['content'=>sm::a(['title'=>sm::ico('heart').' '.'Юмони','href'=>"#$ya",'modal'=>$ya])]);
 	    //-->Возвращение
-		$return=sm::p(['content'=>sm::a(['title'=>sm::ico('heart').' '.'Вернуться в храм атей','href'=>"#atei",'modal'=>'atei'])]);
+		$return=sm::p(['content'=>sm::a(['title'=>sm::ico('heart').' '.'Вернуться','href'=>'#atei','modal'=>'atei'])]);
         return sm::modal(['id'=>'donate','title'=>sm::ico('heart').' '.'Способы искупление вины'.self::getVersion(),'content'=>$ya.$return.$img]);
     }
+
     /**
      * Возвращает форму доната
-     * account-Номер кошелька
-     * text-Назначение перевода
-     * pay-стандартная сумма перевода
-     * width-Ширина формы
-     * height-Высота формы
+     * account  -   Номер кошелька
+     * txt      -   Назначение перевода
+     * pay      -   сумма перевода
+     * width    -   Ширина
+     * height   -   Высота
+     * ------------------
+     * @return object
      */
     public function getDonateYandex(array $options=['account','title','pay','comment','content']){
-        $optionsOLD=[
-            'account'=>410018314785030,
-            'title'=>"Донат",
-            'pay'=>10,
-            'comment'=>'Хотелось бы дистанционного управления.',
-            'content'=>null
-        ];
         $account=$options['account'];
         $title=$options['title'];
         $pay=$options['pay'];
         $comment=$options['comment'];
         $content=$options['content'];
-        if($account==null){
-            $account=$optionsOLD['account'];
+        if(empty($account)){
+            $account=410018314785030;
         }
-        if($title==null){
-            $title=$optionsOLD['title'];
+        if(empty($title)){
+            $title='Пожертвование';
         }
-        if($pay==null){
-            $pay=$optionsOLD['pay'];
+        if(empty($pay)){
+            $pay=10;
         }
-        if($comment==null){
-            $comment=$optionsOLD['comment'];
+        if(empty($comment)){
+            $comment='Хотелось бы дистанционного управления.';
         }
         if($width==null){
             $width=$optionsOLD['width'];
@@ -68,43 +68,51 @@ class atei{
         if($height==null){
             $height=$optionsOLD['height'];
         }
-        if($content==null){
+        if(empty($content)){
             $content=$optionsOLD['content'];
         }
         //-->img
-        $img=sm::p(['content'=>sm::img(['src'=>x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR."ico/donate"),'css'=>['width'=>'128px','pointer-events'=>'none']])]);
-        //if(x::isJs()){
+        $img=sm::p(['content'=>sm::img(['src'=>x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'donate'),'css'=>['width'=>'128px','pointer-events'=>'none']])]);
+        if(x::isJs()){
             $content="<iframe src=\"https://promo-money.ru/quickpay/shop-widget?targets=&targets-hint=&default-sum=300&button-text=13&payment-type-choice=on&mobile-payment-type-choice=on&hint=&successURL=&quickpay=shop&account=$account\" width='100%' frameborder=\"0\" allowtransparency=\"true\" scrolling=\"no\"></iframe>$img";
-        //}else{
+        }else{
             $account=sm::input(['name'=>'receiver','value'=>$account,'type'=>'hidden']);
             $quickform=sm::input(['name'=>'quickpay-form','value'=>'donate','type'=>'hidden']);
             $title=sm::input(['name'=>'targets','value'=>$title,'type'=>'hidden']);
         $sum=sm::p(['content'=>sm::input(['name'=>'sum','width'=>'100%','value'=>$pay,'type'=>'number','placeholder'=>300,'min'=>10,'max'=>1000000000,'required'=>true])]);
-            $ya=sm::p(['content'=>sm::input(['name'=>'paymentType','type'=>'radio','value'=>'Яндекс.Деньгами'])]);
-            $bank=sm::p(['content'=>sm::input(['name'=>'paymentType','type'=>'radio','value'=>'Банковской картой','checked'=>true])]);
+            //combobox...
+            $methods=[];
+		    $methods+=['Юмони'=>[]];
+		    $methods+=['Банковской картой'=>[]];
+		    $atei_yoomoney_type=sm::combobox(['name'=>'atei_yoomoney_type','selected'=>$_POST['atei_yoomoney_type'],$methods]);
             $send=sm::p(['content'=>sm::input(['type'=>'submit','value'=>'Искупить вину'])]);
-            $desc=sm::text(['text'=>'Внимание:пожертвование на слим спейсе вы повышаете себе карму!']);
-            $content="<form method=\"POST\" action=\"https://money.yandex.ru/quickpay/confirm.xml\">$account$quickform$title$sum$ya$bank$send$desc$img</form>";
-        //}
+            $desc=sm::txt(['txt'=>'Внимание:пожертвование на слим спейсе вы повышаете себе карму!']);
+            $content="<form method=\"POST\" action=\"https://yoomoney.ru/quickpay/confirm.xml\">$account$quickform$title$sum$atei_yoomoney_type$send$desc$img</form>";
+        }
         //-->donate
-		$donate=sm::p(['content'=>sm::a(['title'=>sm::ico('heart').' '.'Выбрать другой способ искупление вины','href'=>"#donate",'modal'=>'donate'])]);
+		$donate=sm::p(['content'=>sm::a(['title'=>sm::ico('heart').' '.'Выбрать другой способ искупление вины','href'=>'#donate','modal'=>'donate'])]);
 		//-->Храм атей
-		$atei=sm::p(['content'=>sm::a(['title'=>sm::ico('heart').' '.'Вернуться в храм атей','href'=>"#atei",'modal'=>'atei'])]);
+		$atei=sm::p(['content'=>sm::a(['title'=>sm::ico('heart').' '.'Вернуться в храм атей','href'=>'#atei','modal'=>'atei'])]);
 		$content.=$donate;
 		$content.=$atei;
         return sm::modal(['title'=>sm::ico('heart').' '.'Искупление вины'.self::getVersion(),'content'=>$content]);
     }
+
     /**
      * Возвращаем Конфигурация храма
-     */
-     public function getSettings(){
-        return sm::modal(['id'=>'atei','title'=>sm::ico('heart').' '.'Храм атей'.self::getVersion(),'content'=>self::menuObject()]);
-     }
-    /**
-     * Возвращаем меню храма в виде объекта
+     * ------------------
      * @return object
      */
-     public function menuObject(){
+    public function getSettings(){
+        return sm::modal(['id'=>'atei','title'=>sm::ico('heart').' '.'Храм атей'.self::getVersion(),'content'=>self::menuObject()]);
+    }
+
+    /**
+     * Возвращаем меню храма в виде объекта
+     * ------------------
+     * @return object
+     */
+    public function menuObject(){
         $donate=self::getDonate();
         $rule=self::getRule();
         //-->donate
@@ -112,15 +120,17 @@ class atei{
 	    //-->rule
 		$rule=sm::p(['content'=>sm::a(['title'=>sm::ico('heart').' '.'Общие правила','href'=>"#$rule",'modal'=>$rule])]);
 		//-->logo
-    	$logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR."ico/logo"),'css'=>['width'=>'128px','pointer-events'=>'none']])]);
+    	$logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'logo'),'css'=>['width'=>'128px','pointer-events'=>'none']])]);
 		return $donate.$rule.$logo;
-     }
+    }
+
     /**
      * Правила сайта
-     * @return string
+     * ------------------
+     * @return object
      */
     public function getRule(){
-        $atei=sm::a(['title'=>sm::ico('heart').' '.'Храм атей','href'=>"#atei",'modal'=>'atei']);
+        $atei=sm::a(['title'=>sm::ico('heart').' '.'Храм атей','href'=>'#atei','modal'=>'atei']);
         $return=sm::a(['title'=>'Вернуться','href'=>"#atei",'modal'=>'atei']);
        	$rule="
 Общие правила поведения на сайте:
@@ -141,11 +151,11 @@ class atei{
 </br>
 6.Оскорбление администраторов или модераторов также караются баном - уважайте чужой труд.</br>
 7.По возможности посещать и искупать свою карму в $atei";
-    		//-->logo
-    		$logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR."ico/rule"),'css'=>['width'=>'128px','pointer-events'=>'none']])]);
-    		//-->rule
-       		$rule=sm::text(['text'=>$rule]);
-       		$rule=sm::modal(['title'=>'Общие правила нашего сайта','content'=>$rule.$logo.$return]);
-       		return $rule;
-       }
+	    //-->logo
+	    $logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'rule'),'css'=>['width'=>'128px','pointer-events'=>'none']])]);
+	    //-->rule
+	    $rule=sm::txt(['txt'=>$rule]);
+	    $rule=sm::modal(['title'=>'Общие правила нашего сайта','content'=>$rule.$logo.$return]);
+	    return $rule;
+    }
 }

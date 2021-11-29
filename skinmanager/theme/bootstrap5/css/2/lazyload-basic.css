@@ -1,0 +1,10 @@
+img {
+    opacity: 1;
+    transition: opacity 1s;
+    visibility:visible
+}
+
+img[data-src] {
+    visibility:hidden;
+    opacity: 0;
+}

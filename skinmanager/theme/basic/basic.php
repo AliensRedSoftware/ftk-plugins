@@ -88,7 +88,7 @@ class basic{
 		$method=$opt['method'];
 		$action=x::BURL($opt['action']);
 		$content=$opt['content'];
-		$enctype=	$opt['enctype'];
+		$enctype=$opt['enctype'];
 		$css=x::css($opt['css']);
 		if($id){
 			$tag.="id=\"$id\" ";
@@ -215,7 +215,7 @@ class basic{
 			$tag.=$css;
 			$tag.=$enabled;
 			$tag=trim($tag);
-			return self::label(['text'=>"<input $tag> $value"]);
+			return self::label(['txt'=>"<input $tag> $value"]);
 		}elseif($type=='checkbox'){
         	if($checked){
 				$tag.='checked ';
@@ -223,7 +223,7 @@ class basic{
 			$tag.=$css;
 			$tag.=$enabled;
 			$tag=trim($tag);
-        	return self::label(['text'=>"<input $tag> $value"]);
+        	return self::label(['txt'=>"<input $tag> $value"]);
         }else{
         	$tag.=$css;
 			$tag.=$enabled;
@@ -235,11 +235,12 @@ class basic{
      * Возвращаем многострочное поле (textarea)
      * ----------------------------------------
      * enabled		-	Доступность
-     * readonly     -   Чтивость
      * name 		-	Имя
      * placeholder	-	Подсказка
      * value		-	Значение
      * rows			-	Наборы или возврат значения атрибута строк области текста
+     * max			-	Максимальное символов (кол-во)
+     * readonly     -   Чтивость
      * required		-	Проверка
      * css			-	Стиль
      * ----------------------------------------
@@ -247,11 +248,12 @@ class basic{
      */
 	public function textarea($opt){
 		$enabled=$opt['enabled'];
-		$readonly=$opt['readonly'];
 		$name=$opt['name'];
-		$placeholder= $opt['placeholder'];
+		$placeholder=$opt['placeholder'];
 		$value=$opt['value'];
 		$rows=$opt['rows'];
+		$max=$opt['max'];
+		$readonly=$opt['readonly'];
 		$required=$opt['required'];
 		$css=x::css($opt['css']);
     	if($name){
@@ -263,28 +265,31 @@ class basic{
 		if($rows){
 			$tag.="rows=\"$rows\" ";
 		}
+		if($max>0){
+			$tag.="maxlength=\"$max\" ";
+		}
 		if($required){
 			$tag.='required ';
 		}
+		if($readonly){
+		    $tag.='readonly ';
+		}
 		$tag.=$css;
 		$tag.=$enabled;
-		if($readonly){
-		    $tag.=' readonly';
-		}
 		$tag=trim($tag);
 		return"<textarea $tag>$value</textarea>";
     }
     /**
      * Возвращаем текст (label)
      * -----------------------
-     * text		-	Текст
+     * txt		-	Текст
      * for		-	Идентификатор элемента, с которым следует установить связь. (input - ID)
      * css		-	Стиль
      * -----------------------
      * @return string
      */
 	public function label($opt){
-		$text=$opt['text'];
+		$txt=$opt['txt'];
 		$for=$opt['for'];
 		$css=x::css($opt['css']);
 		if($for){
@@ -292,20 +297,20 @@ class basic{
 		}
 		$tag.=$css;
 		$tag=trim($tag);
-		return	"<label $tag>$text</label>";
+		return	"<label $tag>$txt</label>";
 	}
     /**
      * Возвращаем текст многорастянутый (text)
      * -----------------------
-     * text		-	Текст
+     * txt		-	Текст
      * css		-	Стиль
      * -----------------------
      * @return string
      */
-	public function text($opt){
-		$text=$opt['text'];
+	public function txt($opt){
+		$txt=$opt['txt'];
 		$css=x::css($opt['css']);
-		return self::p(['content'=>$text,'css'=>$css]);
+		return self::p(['content'=>$txt,'css'=>$css]);
 	}
     /**
      * Возвращаем картинку (img)
@@ -329,6 +334,8 @@ class basic{
      * Возвращаем обводку (border)
      * ---------------------------
      * content	-	Контент
+     * last		-	Отступ (Использовать)
+     * stretch	-	Растягивание
      * css		-	Стиль
      * ---------------------------
      * @return string
@@ -336,12 +343,14 @@ class basic{
 	public function border($opt){
 		$content=$opt['content'];
 		$last=$opt['last'];
-		$css=x::css($opt['css']);
-		if(!$last){
-			x::addCss(['margin-bottom' => '5px']);
+		$css=$opt['css'];
+		if(!isset($last)){
+			$css['margin-bottom']='5px';
 		}
-		$css=x::getCss();
-		$tag.=$css;
+		if(!$opt['stretch']){
+    		$css['display']='table';
+    	}
+		$tag.=x::css($css);
 		$tag=trim($tag);
 		return"<div class=\"border\" $tag>$content</div>";
 	}
@@ -350,6 +359,8 @@ class basic{
 	 * -------------------------
 	 * title	-	Загаловок
 	 * content	-	Контент
+	 * last		-	Отступ (Использовать)
+	 * stretch	-	Растягивание
 	 * css		-	Стиль
 	 * -------------------------
 	 * @return string
@@ -357,38 +368,34 @@ class basic{
 	public function panel($opt){
 		$title=$opt['title'];
 		$content=$opt['content'];
+		$last=$opt['last'];
+		$stretch=$opt['stretch'];
 		$css=$opt['css'];
-		$css['display']='table';
-    	$title=self::border(['css'=>$css,'content'=>$title]);
-    	unset($css['display']);
-    	$content=self::border(['css'=>$css,'content'=>$content]);
+    	$title=self::border(['css'=>['display'=>'table'],'content'=>$title]);
+    	$content=self::border(['css'=>$css,'stretch'=>$stretch,'last'=>$last,'content'=>$content]);
     	$panel=$title.$content;
 		$tag.=$css;
 		$tag=trim($tag);
 		return $panel;
 	}
 	/**
-	 * Возвращаем панель (panel)
+	 * Возвращаем панель (panel) в виде массива
 	 * -------------------------
-	 * title	-	Загаловок
-	 * content	-	Контент
+	 * data		-	[title]=content
+	 * stretch	-	Растягивание
 	 * css		-	Стиль
 	 * -------------------------
 	 * @return string
 	 */
 	public function panelToArray($opt){
-		$arr=$opt['data'];
+		$stretch=$opt['stretch'];
 		$css=$opt['css'];
-		foreach($arr as $title =>$content){
+		foreach($opt['data'] as $title=>$content){
 			$i++;
-			if(count($arr)==$i){
-				$css['display']='table';
-				$title = self::border(['css'=>$css,'content'=>$title]);
-				unset($css['display']);
-				$content=self::border(['css'=>$css,'content'=>$content,'last'=>true]);
-				$panel.=$title.$content;
+			if(count($opt['data'])==$i){
+				$panel.=self::panel(['title'=>$title,'content'=>$content,'last'=>true,'stretch'=>$stretch,'css'=>$css]);
 			}else{
-				$panel.=self::panel(['title'=>$title,'content'=>$content,'css'=>$css]);
+				$panel.=self::panel(['title'=>$title,'content'=>$content,'stretch'=>$stretch,'css'=>$css]);
 			}
 			$panel.="\n";
 		}
@@ -714,6 +721,7 @@ class basic{
 	 * src		-	Изоброжение
 	 * stretch	-	Растягивание
 	 * max		-	Максимальный контент
+	 * box      -   Режим коробки
 	 * -------------------------------
 	 * @return string
 	 */
@@ -721,13 +729,6 @@ class basic{
 		$src=$opt['src'];
     	$stretch=$opt['stretch'];
     	$max=$opt['max'];
-		$id+=$_REQUEST['SKINMANAGER_BASIC_LB']+1;
-		$_REQUEST['SKINMANAGER_BASIC_LB']=$id;
-		$form="img$id";
-		$id++;
-		$srcN="img$id";
-		$id-=2;
-		$srcB="img$id";
     	if($stretch){
         	$style_lightbox	=	'style="width:100%;"';
         	$style_img		=	"style=\"width:inherit;content:url($src);\"";
@@ -735,31 +736,58 @@ class basic{
         	$style_lightbox	=	'style="width:50%;"';
         	$style_img		=	"style=\"width:inherit;content:url($src);\"";
         }
-        $next=sm::a(['class'=>'lightboxBtn lightbox-next','href'=>"#$srcN"]);
-        $back=sm::a(['class'=>'lightboxBtn lightbox-back','href'=>"#$srcB"]);
-        $close=sm::a(['class'=>'lightboxBtn lightbox-close','href'=>"#x"]);
-$img=x::div(['css'=>['background-image'=>"url('$src')",'position'=>'absolute','top'=>0,'right'=>0,'bottom'=>0,'left'=>0,'margin'=>'auto','height'=>'calc(100%/2)','background-repeat'=>'no-repeat','background-position-x'=>'center','background-size'=>'contain']]);
-		$box=sm::a(['href'=>$src,'title'=>$img]);
-		//preloading
-		$o=x::strRand();
-		//styles
-		x::style(".$o{top:0;height:100%;position:fixed;background:rgba(0,0,0,.7);width:100%;z-index:10;display:none;}");
-		//target
-		x::style(".$o:target{display:block;}");
-        if($_REQUEST['SKINMANAGER_BASIC_LB']!=1){
-			sm::addSuperBox(x::div(['class'=>$o,'id'=>$form,'id'=>$form,'content'=>$box.$next.$back.$close]));
-		}else{
-			sm::addSuperBox(x::div(['class'=>$o,'id'=>$form,'id'=>$form,'content'=>$box.$next.$close]));
-		}
-		//target
+    	//target
 		$control=x::strRand();
-		$ico=x::getPathModules('skinmanager/theme/basic/img/preloading.png');
-		x::style("#$control{}#$control:checked + label > a{background-image:url(\"$src\");background-repeat:no-repeat;background-size:100%;height:320px;padding-left:320px;display:table;}");
-		$selected=sm::input(['css'=>['width'=>'100%','margin-bottom'=>'5px']]);
-		if(!$_COOKIE['__LIGHTBOX_VIEW']){
-			return"<input type='checkbox' id='$control' style=\"width: 100%;margin-bottom: 5px;\"/><label style='width:100%;' for='$control'><a href='#$form'><div class=\"lightbox\" style='min-height:64px;background-image:url($ico);'></div></a></label>";
-		}else{
-			return"<input checked type='checkbox' id='$control' style=\"width: 100%;margin-bottom: 5px;\"/><label style='width:100%;' for='$control'><a href='#$form'><div class=\"lightbox\" style='min-height:64px;background-image:url($ico);'></div></a></label>";
+        $ico=x::getPathModules('skinmanager/theme/basic/img/preloading.png');
+        $selected=sm::input(['css'=>['width'=>'100%','margin-bottom'=>'5px']]);
+        //size
+        if(is_file($_SERVER['DOCUMENT_ROOT'].$src)){//LOCAL
+        	$size=getimagesize($_SERVER['DOCUMENT_ROOT'].$src);
+			if(x::getExtension($src)=='moja'){//moja
+				$w=$size[0].'px';
+        		$h=$size[1].'px';
+				x::style("#$control{}#$control:checked + label > a{background-image:url(\"$src\");background-repeat:no-repeat;background-size:100%;height:$h;padding-left:$w;display:table;}");
+			}else{//OTHER
+				$w=$size[0] / 2 . 'px';
+        		$h=$size[1] / 2 . 'px';
+        		x::style("#$control{}#$control:checked + label > a{background-image:url(\"$src\");background-repeat:no-repeat;background-size:100%;height:$h;padding-left:$w;display:table;}");
+        	}
+        }else{//INET
+        	x::style("#$control{}#$control:checked + label > a{background-image:url(\"$src\");background-repeat:no-repeat;background-size:100%;height:320px;padding-left:320px;display:table;}");
+        }
+
+        //mode selected
+        if($opt['box']){//BOX
+        	$id+=$_REQUEST['SKINMANAGER_BASIC_LB']+1;
+			$_REQUEST['SKINMANAGER_BASIC_LB']=$id;
+			$form="img$id";
+			$id++;
+			$srcN="img$id";
+			$id-=2;
+			$srcB="img$id";
+		    $next=sm::a(['class'=>'lightboxBtn lightbox-next','href'=>"#$srcN"]);
+		    $back=sm::a(['class'=>'lightboxBtn lightbox-back','href'=>"#$srcB"]);
+		    $close=sm::a(['class'=>'lightboxBtn lightbox-close','href'=>"#x"]);
+	$img=x::div(['css'=>['background-image'=>"url('$src')",'position'=>'absolute','top'=>0,'right'=>0,'bottom'=>0,'left'=>0,'margin'=>'auto','height'=>'calc(100%/2)','background-repeat'=>'no-repeat','background-position-x'=>'center','background-size'=>'contain']]);
+			$box=sm::a(['href'=>$src,'title'=>$img]);
+			//preloading
+			$o=x::strRand();
+			//styles
+			x::style(".$o{top:0;height:100%;position:fixed;background:rgba(0,0,0,.7);width:100%;z-index:10;display:none;}");
+			//target
+			x::style(".$o:target{display:block;}");
+		    if($_REQUEST['SKINMANAGER_BASIC_LB']!=1){
+				sm::addSuperBox(x::div(['class'=>$o,'id'=>$form,'id'=>$form,'content'=>$box.$next.$back.$close]));
+			}else{
+				sm::addSuperBox(x::div(['class'=>$o,'id'=>$form,'id'=>$form,'content'=>$box.$next.$close]));
+			}
+			if(!$_COOKIE['__LIGHTBOX_VIEW']){
+				return"<input type='checkbox' id='$control' style=\"width: 100%;margin-bottom: 5px;min-width: 64px;\"/><label style='width:100%;' for='$control'><a href='#$form'><div class=\"lightbox\" style='min-height:64px;background-image:url($ico);'></div></a></label>";
+			}else{
+				return"<input checked type='checkbox' id='$control' style=\"width: 100%;margin-bottom: 5px;min-width: 64px;\"/><label style='width:100%;' for='$control'><a href='#$form'><div class=\"lightbox\" style='min-height:64px;background-image:url($ico);'></div></a></label>";
+			}
+		}else{//NOT BOX
+			return"<input type='checkbox' id='$control' style=\"width: 100%;margin-bottom: 5px;min-width: 64px;\"/><label style='width:100%;' for='$control'><a><div class=\"lightbox\" style='min-height:64px;background-image:url($ico);'></div></a></label>";
 		}
 	}
 }

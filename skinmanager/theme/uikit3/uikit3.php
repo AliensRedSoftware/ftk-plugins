@@ -65,6 +65,9 @@ class uikit3{
 		$modal	=	$opt['modal'];
 		$css	=	x::css($opt['css']);
 		$theme	=	self::getThemeA($opt['theme']);
+		if(is_numeric(x::mb_str_split($modal)[0])){
+			$modal="a$modal";
+		}
 		if ($href && !$modal) {
 			$tag	.=	"href=\"$href\" ";
 		}
@@ -247,23 +250,27 @@ class uikit3{
 		if($readonly){
 			$tag.='readonly ';
 		}
-		$tag.=$enabled;
-		$tag=trim($tag);
 		if($type=='radio'){
 		    $tag.="value=\"$value\" ";
 		    if($checked){
-		    	$tag.='checked';
+		    	$tag.='checked ';
 		    }
+		    $tag.=$css;
+		    $tag.=$enabled;
+		    $tag=trim($tag);
 			return"<label><input $tag>$value</label>";
 		}elseif($type=='checkbox'){
-			$tag.=$css;
-        	$tag=trim($tag);
         	if($checked) {
-				$tag.='checked';
+				$tag.='checked ';
 			}
+			$tag.=$css;
+		    $tag.=$enabled;
+		    $tag=trim($tag);
         	return"<label><input $tag>$value</label>";
         }else{
 			$tag.=$css;
+		    $tag.=$enabled;
+		    $tag=trim($tag);
 			return"<input $tag>";
 		}
 	}
@@ -272,11 +279,12 @@ class uikit3{
 	 * Возвращаем многострочное поле (textarea)
 	 * -----------------------------------------
 	 * enabled		-	Доступность
-	 * readonly     -   Чтивость
 	 * name 		-	Имя
 	 * placeholder	-	Подсказка
 	 * value		-	Значение
 	 * rows			-	Наборы или возврат значения атрибута строк области текста
+	 * max			-	Максимальное символов (кол-во)
+	 * readonly     -   Чтивость
 	 * required		-	Проверка
 	 * css			-	Стиль
 	 * -----------------------------------------
@@ -284,14 +292,15 @@ class uikit3{
 	 */
 	public function textarea($opt){
 		$enabled=$opt['enabled'];
-		$readonly=$opt['readonly'];
 		$name=$opt['name'];
 		$placeholder=$opt['placeholder'];
-		$value= $opt['value'];
+		$value=$opt['value'];
 		$rows=$opt['rows'];
+		$max=$opt['max'];
+		$readonly=$opt['readonly'];
 		$required=$opt['required'];
 		$css=x::css($opt['css']);
-		if($name){
+		if(!empty($name)){
 			$tag.="name=\"$name\" ";
 		}
 		if($placeholder){
@@ -300,11 +309,14 @@ class uikit3{
 		if($rows){
 			$tag.="rows=\"$rows\" ";
 		}
-		if($required){
-			$tag.='required ';
+		if($max>0){
+			$tag.="maxlength=\"$max\" ";
 		}
 		if($readonly){
 		    $tag.='readonly ';
+		}
+		if($required){
+			$tag.='required ';
 		}
 		$tag.=$css;
 		$tag.=$enabled;
@@ -339,11 +351,11 @@ class uikit3{
 	 * ------------------------
 	 * @return string
 	 */
-	public function text($opt){
-		$txt=$opt['text'];
+	public function txt($opt){
+		$txt=$opt['txt'];
 		$theme=self::getThemeText($opt['theme']);
 		$css=x::css($opt['css']);
-		return	self::p(['content'=>$txt,'css'=>$css,'theme'=>$theme]);
+		return self::p(['content'=>$txt,'css'=>$css,'theme'=>$theme]);
 	}
 	/**
 	 * Возвращаем картинку (img)
@@ -362,54 +374,6 @@ class uikit3{
 		$tag.=$css;
 		$tag=trim($tag);
 		return "<img $tag/>";
-	}
-	/**
-	 * Возвращаем обводку (border)
-	 * ----------------------------
-	 * body		-	Тело
-	 * size		-	Размер
-	 * content	-	Контент
-	 * theme	-	Тема
-	 * css		-	Стиль
-	 * ----------------------------
-	 * @return string
-	 */
-	public function border ($opt) {
-		$body		=	$opt['body'];
-		$size		=	$opt['size'];
-		$content	=	$opt['content'];
-		$last	=	$opt['last'];
-		$theme		=	self::getThemeCard($opt['theme']);
-		$css		=	x::css($opt['css']);
-		if(!$last){
-			x::addCss(['margin-bottom' => '5px']);
-		}
-		switch ($size) {
-			case 'small':
-				$size	=	"uk-card-$size";
-			break;
-			case 'small':
-				$size	=	"uk-card-$size";
-			break;
-			default:
-				$size	=	"uk-card-small";
-
-			break;
-		}
-		if ($body) {
-			$body	=	'uk-card-body';
-		}else{
-			x::addCss(['display' => 'table']);
-		}
-		$css = x::getCss();
-		$class	=	"uk-card uk-card-$theme $size $body";
-		$class	=	$class;
-		if ($class) {
-			$tag	.=	"class=\"$class\" ";
-		}
-		$tag	.=	$css;
-		$tag	=	trim($tag);
-        return "<div $tag>$content</div>";
 	}
 
     /**
@@ -513,6 +477,59 @@ class uikit3{
 		return"<ul class=\"uk-nav uk-dropdown-nav\"><li><a $tag>$title</a></li></ul>";
 	}
 	/**
+	 * Возвращаем обводку (border)
+	 * ----------------------------
+	 * content	-	Контент
+	 * last		-	Отступ (Использовать)
+	 * stretch	-	Растягивание
+	 * body		-	Тело
+	 * size		-	Размер
+	 * theme	-	Тема
+	 * css		-	Стиль
+	 * ----------------------------
+	 * @return string
+	 */
+	public function border($opt){
+		$body=$opt['body'];
+		$size=$opt['size'];
+		$content=$opt['content'];
+		$last=$opt['last'];
+		$theme=self::getThemeCard($opt['theme']);
+		$css=$opt['css'];
+		if(!$last){
+			$css['margin-bottom']='5px';
+		}
+		if(!$opt['stretch']){
+    		$css['display']='table';
+    	}
+		switch ($size) {
+			case 'small':
+				$size	=	"uk-card-$size";
+			break;
+			case 'small':
+				$size	=	"uk-card-$size";
+			break;
+			default:
+				$size	=	"uk-card-small";
+
+			break;
+		}
+		if ($body) {
+			$body	=	'uk-card-body';
+		}else{
+			$css['display']='table';
+		}
+		$css=x::css($css);
+		$class	=	"uk-card uk-card-$theme $size $body";
+		$class	=	$class;
+		if ($class) {
+			$tag	.=	"class=\"$class\" ";
+		}
+		$tag	.=	$css;
+		$tag	=	trim($tag);
+        return "<div $tag>$content</div>";
+	}
+	/**
 	 * Возвращаем панель (panel)
 	 * -------------------------
 	 * title	-	Загаловок
@@ -533,7 +550,7 @@ class uikit3{
 		if(!$content){
 			$content='Пустой контент ;)';
 		}
-        $content=self::border(['css'=>$css,'theme'=>$theme,'body'=>true,'content'=>$content]);
+        $content=self::border(['css'=>$css,'theme'=>$theme,'body'=>true,'stretch'=>$opt['stretch'],'content'=>$content]);
         unset($css['height']);
         unset($css['display']);
     	$title=self::border(['css'=>$css,'theme'=>$theme,'body'=>false,'content'=>$title]);
@@ -552,19 +569,21 @@ class uikit3{
 	 * @return string
 	 */
 	public function panelToArray($opt){
-		$arr=$opt['data'];
 		$css=$opt['css'];
-		foreach($arr as $title =>$content){
+		foreach($opt['data'] as $title =>$content){
 			$i++;
-			if(count($arr)==$i){
+			if(count($opt['data'])==$i){
+				/*
 				$css['display']='table';
 				//$title=$xlib->div(['class' => 'uk-card-title', 'css' => ['padding' => '10px'], 'content' => $opt['title']]);
 				$title=self::border(['css'=>$css,'content'=>x::div(['class'=>'uk-card-title','css'=>['padding'=>'10px'],'content'=>$title])]);
 				unset($css['display']);
 				$content=self::border(['css'=>$css,'body' => true,'content'=>$content,'last'=>true]);
 				$panel.=$title.$content;
+				*/
+				$panel.=self::panel(['title'=>$title,'content'=>$content,'last'=>true,'stretch'=>$opt['stretch'],'css'=>$css]);
 			}else{
-				$panel.=self::panel(['title'=>$title,'content'=>$content,'css'=>$css]);
+				$panel.=self::panel(['title'=>$title,'content'=>$content,'stretch'=>$opt['stretch'],'css'=>$css]);
 			}
 			$panel.="\n";
 		}
@@ -839,7 +858,7 @@ class uikit3{
         }
         $css['width']=$width;
 		$css=x::css($css);
-        $share.="<div><a class=\"uk-inline\" href=\"$src\" $css><img $style_img src=\"$src\" width=\"50%\" uk-img></a></div>";
+        $share.="<div><a class=\"uk-inline\" href=\"$src\" $css><img $style_img data-src=\"$src\" width=\"50%\" uk-img></img></a></div>";
 		return	"<div uk-lightbox=\"animation: fade\">$share</div>";
 	}
 	/**

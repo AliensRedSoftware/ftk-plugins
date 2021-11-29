@@ -1,12 +1,13 @@
 <?php
 /**
  * Упрощенный текстовый редактор
- * @ver 1.0
+ * @ver 1.435
  */
 use xlib as x;
 use skinmanager as sm;
 use youtube as yt;
 use xprivate as xp;
+use xmotion as moja;
 class syntax{
 	public $index;
 	/**
@@ -14,38 +15,41 @@ class syntax{
 	 * -----------------------------
 	 * text	-	Текст
 	 */
-	public function getHtml($text = 'Привет /s Как дела ммм ? / /b Привет / dsf /b test /'){
-		$split = explode("\n", $text);
-		foreach ($split as $spl) {
-			$arruuidUrls = [];
-			$arruuidYoutube = [];
-			$urls=self::getUrl($spl);
-			/*foreach ($urls['other'] as $url) {
-				if ($url != $prevurl) {
-					$uuid = $this->uuidv4();
-				}
-				$spl = str_replace($url, "[$uuid]", $spl);
-				array_push($arruuidUrls,"[$uuid]");
-				$prevurl = $url;
-			}*/
-			foreach ($urls['img'] as $url) {
-				if ($url != $prevurl) {
-					$uuid = x::uuidv4();
-				}
-				$spl = str_replace($url, "[$uuid]", $spl);
-				array_push($arruuidUrls,"[$uuid]");
-				$prevurl = $url;
+	public function getHtml($txt = 'Привет /s Как дела ммм ? / /b Привет / dsf /b test /'){
+		$arruuidUrls = [];
+		$arruuidYoutube = [];
+		$urls=self::getUrl($txt);
+		//img URL
+		foreach($urls['img'] as $url) {
+			if($url != $prevurl){
+				$uuid = x::uuidv4();
 			}
-			foreach ($urls['youtube'] as $url){
-				if ($url!=$prevurl){
-					$uuid=x::uuidv4();
-				}
-				$spl=str_replace($url,"[$uuid]",$spl);
-				array_push($arruuidYoutube,"[$uuid]");
-				$prevurl=$url;
+			$txt=str_replace($url,"[$uuid]",$txt);
+			array_push($arruuidUrls,"[$uuid]");
+			$prevurl=$url;
+		}
+		//youtube URL
+		foreach($urls['youtube'] as $url){
+			if($url!=$prevurl){
+				$uuid=x::uuidv4();
 			}
+			$txt=str_replace($url,"[$uuid]",$txt);
+			array_push($arruuidYoutube,"[$uuid]");
+			$prevurl=$url;
+		}
+		//other URL
+		foreach($urls['other'] as $url){
+			if($url!=$prevurl){
+				$uuid=x::uuidv4();
+			}
+			$txt=str_replace($url,"[$uuid]",$txt);
+			$arruuidUrls[$uuid]=$url;
+			$prevurl=$url;
+		}
+		//SYNTAX
+		foreach(explode("\n",$txt) as $spl){
 			$i = -1;
-			$syn = x::mb_str_split($spl);
+			$syn = mb_str_split($spl);
 			foreach ($syn as $key) {
 				$i++;
 				if (!$ignore) {
@@ -185,10 +189,12 @@ class syntax{
 				$val = "<$index>$val</$index>";
 			}
 			$ch = -1;
-			foreach($arruuidUrls as $uuid){
-				$val=str_replace($uuid,NULL, $val);
+			foreach($arruuidUrls as $uuid=>$url){
+				$val=str_replace("[$uuid]",$url,$val);
 			}
-			foreach($arruuidYoutube as $uuid){$val=str_replace($uuid,NULL,$val);}
+			foreach($arruuidYoutube as $uuid){
+				$val=str_replace($uuid,NULL,$val);
+			}
 			$val=trim($val);
 		}
 		if ($checkval == true) {
@@ -204,11 +210,15 @@ class syntax{
 	 */
 	public function getText($text = 'text'){
 		$descriptionArray=explode("\n",trim($text));
-		foreach ($descriptionArray as $text){
+		$i=0;
+		foreach($descriptionArray as $txt){
+			$i++;
 			$output.="\n";
-			$output.=self::getHtml($text);
-			if (trim($output)!=null) {
-				$output.='</br>';
+			$output.=self::getHtml($txt);
+			if(count($descriptionArray)!=$i){
+				if (!empty(trim($output))) {
+					$output.='</br>';
+				}
 			}
 		}
 		return $output;
@@ -217,40 +227,50 @@ class syntax{
 	 * Возвращает отформатированный текст и получает только ссылки
 	 */
 	public function getUrl($text='text'){
-		$skinmanager=new skinmanager();
     	$outputs=[];
-		$xlib=new xlib();
-		$ls=explode("\n",$text);
-		foreach($ls as $ass){
-			$descriptionArray=explode(" ", $ass);
+		foreach(explode("\n",$text) as $ls){
+			$descriptionArray=explode(" ", $ls);
 			foreach($descriptionArray as $value){
-				preg_match('#(?:https?://)?(?:www\.)?(?:youtu\.be/|youtube\.com(?:/embed/|/v/|/watch?.*?v=))([\w\-]{10,12})#x', $value, $str);
-				if(!$str[1]){
-					preg_match('/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/',$value,$url);
-					$url=strip_tags(trim($url[0]));
-					if($url){
-						switch($xlib->getExtension($url)){
-							case 'jpg':
-								$outputs['img'][].=$url;
-							break;
-							case 'jpeg':
-								$outputs['img'][].=$url;
-							break;
-							case 'png':
-								$outputs['img'][].=$url;
-							break;
-							default:
-								foreach($outputs['other'] as $k){
-									if($k==$url){
-										break 2;
-									}
-								}
-								$outputs['other'][].=$url;
-							break;
-						}
+				$url=parse_url($value);
+				if(!empty($url['host'])){
+					//parse host
+					if($url['query']){
+						$url['path'].='?'.$url['query'];
 					}
-				}else{
-					$outputs['youtube'][].=trim($str[0]);
+					switch($url['host']){
+						//Ютуб
+						case 'youtu.be':
+							$outputs['youtube'][].=$url['scheme'].'://'.$url['host'].$url['path'];
+						break;
+						case 'www.youtube.com':
+							$outputs['youtube'][].=$url['scheme'].'://'.$url['host'].$url['path'];
+						break;
+						//Прочие
+						default:
+							//parse ext
+							switch(x::getExtension($url['path'])){
+								case 'jpg':
+									$outputs['img'][].=$url['scheme'].'://'.$url['host'].$url['path'];
+								break;
+								case 'jpeg':
+									$outputs['img'][].=$url['scheme'].'://'.$url['host'].$url['path'];
+								break;
+								case 'png':
+									$outputs['img'][].=$url['scheme'].'://'.$url['host'].$url['path'];
+								break;
+								case 'gif':
+									$outputs['img'][].=$url['scheme'].'://'.$url['host'].$url['path'];
+								break;
+								case 'webp':
+									$outputs['img'][].=$url['scheme'].'://'.$url['host'].$url['path'];
+								break;
+								case 'html_':
+									$outputs['other'][].=$url['scheme'].'://'.$url['host'].substr($url['path'],0,-1);
+								break;
+							}
+							$outputs['other'][].=$url['scheme'].'://'.$url['host'].$url['path'];
+						break;
+					}
 				}
 			}
 		}
@@ -324,22 +344,40 @@ class syntax{
 	 public function getFormToArray($result,$theme){
 	 	$arr=[];
 	 	$DATA=[];
+	 	$l='';
 	 	while($R=mysqli_fetch_array($result)){
 	 		$i++;
 	 		unset($title);
 	 		unset($content);
-	 		$ava=sm::img(['src'=>xp::getCacheSmallAva($R['__xprivate_auth']),'css'=>['width'=>'50px','border-radius'=>'100px','pointer-events'=>'none']]);
-	 		$account=xp::getViewAccount($R['__xprivate_auth']);
-	 		$name=sm::a(['title'=>xp::getDataId($R['__xprivate_auth'])['name'],'href'=>"#$account",'modal'=>$account]);
-	 		$tweak=x::div(['content'=>$name]).$ava;
+	 		$time=explode('(',$R['time']);
+	 		$idMsg=substr(($time[1]),0,-1);
+	 		$time=$time[0];
+	 		//Дополнительные модули
+	 		if(x::isModule('xprivate',false)){
+	 			unset($SS);
+				$ava=sm::img(['src'=>xp::getCacheSmallAva($R['__xprivate_auth']),'css'=>['width'=>'50px','border-radius'=>'100px','pointer-events'=>'none']]);
+				$account=xp::getViewAccount($R['__xprivate_auth']);
+				//data...
+				$data=xp::getDataId($R['__xprivate_auth']);
+				//Метка SS
+				if($data['root']){
+					$SS=' '.sm::badge(['txt'=>'SS']);
+				}
+				//Метка времени
+				$time=' '.sm::badge(['txt'=>$time]);
+				//item
+				$item['item']=[];
+				$item['item']+=['Посмотреть'=>['href'=>"#$account",'modal'=>$account]];
+				$name=sm::dropdown([$data['private']['name'].$SS.$time=>$item]);
+			}else{
+				$name='Неизвестный';
+			}
 			$txt=$R['text'];
 			$src_img=$R['img'];
+			$mojas=$R['mojas'];
 			$src_youtube=$R['youtube'];
-			$time=explode('(',$R['time']);
-			$idMsg=substr(($time[1]),0,-1);
 			//$srcCount=-1;
-			$time=$time[0];
-			$tweak=x::div(['content'=>x::div(['content'=>$time]).$name]).$ava;
+			$tweak=$ava.' | '.$name;
 			unset($srcimg);
 			unset($other);
 	    	if(!empty($_COOKIE['__XMSG_NUMBER'])){
@@ -369,17 +407,33 @@ class syntax{
 		    	$other.=yt::video($val);
 		    }
 		    //--->Текста
-		    foreach(self::getUrl($txt)['other'] as $url){
-	    		$url=strip_tags($url);
-	    		$txt=str_replace($url,sm::a(['href'=>$url,'title'=>$url]),$txt);
+		    foreach(self::getUrl($txt) as $type=>$urls){
+		    	foreach($urls as $url){
+					switch($type){
+						case 'youtube':
+							$url=strip_tags($url);
+							$txt=str_replace($url,sm::a(['href'=>$url,'title'=>$url]),$txt);
+						break;
+						default:
+							$url=strip_tags($url);
+							$txt=str_replace($url,sm::a(['href'=>$url,'title'=>$url]),$txt);
+						break;
+					}
+					break;
+				}
 		    }
 			$content.=$txt;
 			//--->Контент
 			if(trim($other)!=null||$srcimg){
-				$content.=xlib::div(['css'=>['display'=>'table'],'content'=>$other.$srcimg]);
+				$content.=x::div(['css'=>['display'=>'table'],'content'=>$other.$srcimg]);
+			}
+			//--->xmotion (Умные эмоций)
+			$mojas=unserialize($mojas);
+			foreach($mojas as $moja){
+				$content.=moja::getShowBox($moja);
 			}
 			$DATA+=[$title=>$content];
 		}
-		return sm::panelToArray(['data'=>$DATA]);
+		return sm::panelToArray(['stretch'=>false,'data'=>$DATA]);
 	 }
 }

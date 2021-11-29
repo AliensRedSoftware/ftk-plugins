@@ -7,6 +7,11 @@ switch($_POST['effect']){
         }
         echo "<meta http-equiv=\"refresh\" content=\"0;url=$url\">";
     break;
+    case 'Конфигурация':
+    	require_once$_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'bootstrap.php';
+    	xlib::LoadWebUrl();
+        skinmanager::OpenModal('changeThread'.basename(explode(':',$_POST['threads'])[1]));
+    break;
     case 'Удалить':
         require_once$_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'bootstrap.php';
         xlib::LoadWebUrl();

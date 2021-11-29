@@ -1,53 +1,54 @@
 <?php
-session_start();
-$key=$_SESSION[$_POST['session_key']];
+session_start();//start session
+$key=$_SESSION[$_POST['session_key']];//get key
+session_destroy();//session_destroy
 require_once $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'bootstrap.php';
-xlib::LoadWebUrl();//Загрузка локальной страницы прошлой
 use xlib as x;
 use xmessage as xm;
 use skinmanager as sm;
-use perms as pm;
+use xprivate as xp;
 class newDot{
 	/**
 	 * Создать новой точки
 	 * -------------------
 	 * dot	-	Название точки
-	 * head	-	Загаловок страницы
-	 * body	-	Тело страницы
 	 */
 	public function create($dot){
 		$path=str_replace('?'.x::getData(),NULL,$_POST['path']);
-		require_once "../../../../../options.php";
-		$options=new options();
-        foreach(scandir("../../../../uri".$path) as $val){
-            if ($dot==$val){
-				sm::modal(['open'=>true,'title'=>'[Создание точки] -> ошибка!','content'=>'[Создание точки] -> ошибка!', "Не удается создать [<b>$dot</b>] потому что такая уже есть :("]);
+        foreach(x::scandir('../../../../uri'.$path) as $val){
+            if($dot==$val){
+            	x::LoadWebUrl();
+            	$logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules('xmessage'.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'fail.webp'),'css'=>['width'=>'256px','pointer-events'=>'none']])]);
+				sm::modal(['open'=>true,'title'=>'Создание точки','content'=>$logo."Не удается создать '<b>$dot</b>' потому что такая уже есть :("]);
 				die();
             }
         }
-		mkdir("../../../../uri".$path.'/'.$dot,0777,true);
-		$redirect="$path$dot";
-		foreach(new RecursiveTreeIterator(new RecursiveDirectoryIterator("../../../../uri".xm::getROOT(), RecursiveDirectoryIterator::SKIP_DOTS)) as $path=>$key){
+		mkdir('../../../../uri'.$path.DIRECTORY_SEPARATOR.$dot,0777,true);
+		$_POST['redirect']=$path.$dot;
+		foreach(new RecursiveTreeIterator(new RecursiveDirectoryIterator('../../../../uri'.xm::getROOT(), RecursiveDirectoryIterator::SKIP_DOTS)) as $path=>$key){
 			if(!pathinfo($path,PATHINFO_EXTENSION)){
 				file_put_contents("$path.php", '<?php
-class ftk extends xlib{
+class ftk{
 	function __construct(){
-		$this->req(["head","body","footer"]);
-		$H = new head();
-		$B = new body();
-		$F = new footer();
-		$this->execute($H,$B,$F);
-	}
-	function execute($H,$B,$F){
-		$H->execute($this->geturi());
-		$B->layout_Dot();
+		xlib::req([\'head\',\'body\',\'footer\']);
+		$H=new head();
+		$B=new body();
+		$F=new footer();
+		$H->execute(xlib::geturi());
+		$B->execute();
 		$F->execute();
 	}
 }
 ');
 			}
 		}
-		echo "<meta http-equiv=\"refresh\" content=\"0;url=$redirect\">";
+		//Выдача прав всех рут
+		if(x::isModule('xprivate',false)){
+			xp::setData(['xmessage'=>['dots'=>[$_POST['redirect']=>['root'=>true]]]]);
+		}
+		x::LoadWebUrl();
+		$logo=sm::img(['src'=>x::getPathModules('xmessage'.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'thread.webp'),'css'=>['width'=>'240px','pointer-events'=>'none']]);
+		sm::modal(['open'=>true,'title'=>'Успешно создание точки :)','content'=>$logo.'</br>Пожалуйста вы можете полностью '.sm::a(['href'=>$_POST['redirect'],'title'=>'Залитеть в точку']).'</br></br>Удачи в использование своей точки ;)']);
 	}
 
 	/**
@@ -57,43 +58,62 @@ class ftk extends xlib{
     public function execute($key){
 		//Переменные
 		$dot=$_POST['dot'];
+		//xprivate модуль
+		if(x::isModule('xprivate')){
+    		$data=xp::$data;
+		}
 		//key
 		$session_key=$_POST['session_key'];
 		if($key!=$session_key){
-			sm::modal(['open'=>true,'title'=>'[Создание поста] -> ошибка!','content'=>"Ключ неверный $session_key :("]);
+			x::LoadWebUrl();
+			$logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules('xmessage'.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'fail.webp'),'css'=>['width'=>'256px','pointer-events'=>'none']])]);
+			sm::modal(['open'=>true,'title'=>'Создание точки','content'=>"$logoКлюч неверный '<b>$session_key</b>' :("]);
 			die();
 		}
 		//-------------------------
 		if(empty($dot)){
-			sm::modal(['open'=>true,'title'=>'[Создание точки] -> ошибка!','content'=>'Название точки не должно быть пустое :(']);
+			x::LoadWebUrl();
+			$logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules('xmessage'.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'fail.webp'),'css'=>['width'=>'256px','pointer-events'=>'none']])]);
+			sm::modal(['open'=>true,'title'=>'Создание точки','content'=>$logo.'Название точки не должно быть пустое :(']);
 			die();
 		}
-		if(mb_strlen($dot)>32){
-			sm::modal(['open'=>true,'title'=>'[Создание точки] -> ошибка!','content'=>'Символов в название не более чем 32 :(']);
+		//Ммаксимум символов
+		$max=__XMESSAGE_DOT_TITLE_MAX;
+		if(mb_strlen($dot)>$max){
+			x::LoadWebUrl();
+			$logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules('xmessage'.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'fail.webp'),'css'=>['width'=>'256px','pointer-events'=>'none']])]);
+			sm::modal(['open'=>true,'title'=>'Создание точки','content'=>$logo."Символов в название не более чем $max :("]);
 			die();
 		}
 		//Проверка на бажность символьность
-		$arr=x::getENGToArray(x::getRUSToArray(x::getNumberToArray(['@','$','_','-','='])));
-        if(!x::isCharArray($arr,$dot)){
-			sm::modal(['open'=>true,'title'=>'[Создание поста] -> ошибка!','content'=>'Некоторые символы нельзя использовать в название! :(']);
+		$arr=x::isCharArray(x::getENGLongToArray(x::getRUSLongToArray(x::getENGToArray(x::getRUSToArray(x::getNumberToArray(['@','$','_','-','=']))))),$dot,true);
+		if(!is_null($arr)&&!$arr&&!is_numeric($arr)){
+        	x::LoadWebUrl();
+        	$logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules('xmessage'.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'fail.webp'),'css'=>['width'=>'256px','pointer-events'=>'none']])]);
+			sm::modal(['open'=>true,'title'=>'Создание точки','content'=>$logo.'Некоторые символы нельзя использовать в название! :(']);
 			die();
         }
-		//PERMS
-	    $isDot=xm::isDot(); //isDot
-		if(!pm::isAccess()){
-			sm::modal(['open'=>true,'title'=>'[Создание точки] -> ошибка!','content'=>'В доступе отказано']);
-			die();
-		}
+        //uuidv4 check
 		if(x::is_uuidv4($dot)){
-		    sm::modal(['open'=>true,'title'=>'[Создание точки] -> ошибка!','content'=>"Содержит uuidv4 <b>[$dot]</b> :("]);
+			x::LoadWebUrl();
+			$logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules('xmessage'.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'fail.webp'),'css'=>['width'=>'256px','pointer-events'=>'none']])]);
+		    sm::modal(['open'=>true,'title'=>'Создание точки','content'=>$logo."Содержит uuidv4 '<b>$dot</b>' :("]);
 			die();
 		}
+        //permission
+        $path=xm::getPathSelected();
+		if(!$data['xmessage']['dots'][$path]['new']&&!$data['xmessage']['dots'][$path]['root']&&!$data['root']){
+			x::LoadWebUrl();
+			$logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules('xmessage'.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'fail.webp'),'css'=>['width'=>'256px','pointer-events'=>'none']])]);
+			sm::modal(['open'=>true,'title'=>'Создание точки','content'=>$logo.'В доступе отказано :(']);
+			die();
+		}
+		//processing create dot
 		$this->create($dot);
 	}
 }
-if($_SERVER["REQUEST_METHOD"]=='POST') {
+if($_SERVER['REQUEST_METHOD']=='POST'){
+	//request
 	$e = new newDot();
 	$e->execute($key);
-}else{
-	echo x::alert();
 }

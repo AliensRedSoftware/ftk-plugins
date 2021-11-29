@@ -1,7 +1,11 @@
 <?php
+/**
+ * Работа с каталогом
+ */
 use xlib as x;
 use skinmanager as sm;
-class xcatalog{
+class xcatalog {
+
 	/**
 	 * Возвращаем меню пагинацию
 	 * --------------------------

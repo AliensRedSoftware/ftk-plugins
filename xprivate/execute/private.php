@@ -14,7 +14,8 @@ class cfg{
     	$gender=$_REQUEST['gender'];
     	$desc=$_REQUEST['DESC'];
     	$dateIn=$_REQUEST['dateIn'];
-    	$data=xp::getData();
+    	$data=xp::$data;
+    	$logo=sm::p(['content'=>sm::img(['src'=>x::getPathModules('xmessage'.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'fail.webp'),'css'=>['width'=>'256px','pointer-events'=>'none']])]);
     	if($data['pass']!=$_COOKIE['__XPRIVATE_PASS']){
     	    x::LoadWebUrl();
     	    sm::modal(['open'=>1,'title'=>'Личная информация','content'=>'В доступе отказано :(</br>Пожалуйста введите пароль доступа в '.sm::a(['title'=>sm::ico('heart').' '.'Личный кабинет','href'=>"#xprivate",'modal'=>'xprivate'])]);
@@ -22,29 +23,34 @@ class cfg{
     	}
     	if($_FILES['upload']['type']){
         	//-->Размер
-		    if($_FILES['upload']['size']>2000048){
+        	$max=ini_get('upload_max_filesize');
+        	$size=$_FILES['upload']['size'];
+		    if($size>$max*1024*1024){//MAX
+		        $size=$size / 1024 / 1024 . 'M';
 		        x::LoadWebUrl();
-			    sm::modal(['open'=>true,'title'=>'[Создание поста] -> ошибка!','content'=>"Невозможно загрузить с размером больше ".$size]);
+			    sm::modal(['open'=>true,'title'=>'Личная информация','content'=>"$logoНевозможно загрузить с размером больше <b>$size</b>"]);
 			    die();
-		    }elseif($_FILES['upload']['size']==0){
+		    }elseif($size<=0){
 		        x::LoadWebUrl();
-			    sm::modal(['open'=>true,'title'=>'[Создание поста] -> ошибка!','content'=>"Невозможно загрузить с размером больше 2мб"]);
+			    sm::modal(['open'=>true,'title'=>'Личная информация','content'=>"$logoНевозможно загрузить с размером меньше 0кб или больше '<b>$max</b>'"]);
 			    die();
 		    }
-		    if($_FILES['upload']['type']=='image/jpg'||$_FILES['upload']['type']=='image/jpeg'||$_FILES['upload']['type']=='image/png'||$_FILES['upload']['type']=='image/gif'){
-			    move_uploaded_file($_FILES["upload"]["tmp_name"],'.././account/anon/'.$data['id'].'/ico/ava');
+		    if($_FILES['upload']['type']=='image/jpg'||$_FILES['upload']['type']=='image/jpeg'||$_FILES['upload']['type']=='image/png'||$_FILES['upload']['type']=='image/gif'||$_FILES['upload']['type']=='image/webp'){
+		        $path='..'.DIRECTORY_SEPARATOR.'.'.DIRECTORY_SEPARATOR.'account'.DIRECTORY_SEPARATOR.'anon'.DIRECTORY_SEPARATOR.$data['id'].DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'ava';
+			    move_uploaded_file($_FILES["upload"]["tmp_name"],$path);
+			    chmod($path,0777);
 			    //Кэширование аккаунта
-			    xp::cacheAva();
+			    xp::cacheAva();//AVA
 		    }else{
 		        x::LoadWebUrl();
-			    sm::modal(['open'=>1,'title'=>'[Создание поста] -> ошибка!','content'=>"Невозможно загрузить расширение с ".$_FILES['upload']['type']]);
+			    sm::modal(['open'=>1,'title'=>'Личная информация','content'=>'Невозможно загрузить расширение с '.$_FILES['upload']['type']]);
 			    die();
 		    }
 		}
     	//-->Установка имени
     	$isName=self::setName($name);//Установить имя
         if(!empty($isName)){
-		    $oldName=$data['name'];
+		    $oldName=$data['private']['name'];
         	if(empty($oldName)){
             	$oldName='Нейзвестный';
             }
@@ -53,7 +59,7 @@ class cfg{
         //-->Установка имени
     	$isGender=self::setGender($gender);//Установить Гендер
         if($isGender){
-		    $oldGender=$data['gender'];
+		    $oldGender=$data['private']['gender'];
         	if(!$oldGender){
             	$oldGender='Не определено';
             }
@@ -70,6 +76,11 @@ class cfg{
             $change.="</br>[Дата начало] - Установлен $dateIn";
         }
         $xprivate=sm::p(['content'=>sm::a(['title'=>sm::ico('heart').' '.'Личный кабинет','href'=>"#xprivate",'modal'=>'xprivate'])]);
+        //off cache
+        header('Cache-Control: no-cache, no-store, must-revalidate');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+        //Load web url
         x::LoadWebUrl();
     	sm::modal(['open'=>1,'title'=>'Личная информация','content'=>'Изменение успешно изменились :)'.$change.$xprivate]);
     }
@@ -79,9 +90,9 @@ class cfg{
 	 * @return bool
 	 */
 	function setName($name){
-	$arr=x::getENGLongToArray(x::getRUSLongToArray(x::getENGToArray(x::getRUSToArray(x::getNumberToArray(['@','$','_','-','=',' '])))));
+		$arr=x::getENGLongToArray(x::getRUSLongToArray(x::getENGToArray(x::getRUSToArray(x::getNumberToArray(['@','$','_','-','=',' '])))));
 	    $access=x::isCharArray($arr,$name,true);
-	    if(!is_null($access)&&!$access){
+	    if(!is_null($access)&&!$access&&!is_numeric($access)){
 	        x::LoadWebUrl();
             sm::modal(['open'=>1,'title'=>'Личная информация','content'=>'Некоторые символы нельзя использовать в имени :(']);
 	        die();
@@ -94,8 +105,8 @@ class cfg{
             x::LoadWebUrl();
 		    sm::modal(['open'=>1,'title'=>'Личная информация','content'=>'Нужно ввести имя более 2 символов. :(']);
 		    die();
-		}elseif(xp::getData()['name']!=$name){
-        	xp::setData(['name'=>$name]);
+		}elseif(xp::$data['private']['name']!=$name){
+        	xp::setData(['private'=>['name'=>$name]]);
         	return true;
         }
         return false;
@@ -110,8 +121,8 @@ class cfg{
 		        x::LoadWebUrl();
                 sm::modal(['open'=>1,'title'=>'Личная информация','content'=>"Гендер не может быть установлен $val :("]);
                 die();
-            }elseif(xp::getData()['gender']!=$val){
-            	xp::setData(['gender'=>$val]);
+            }elseif(xp::$data['private']['gender']!=$val){
+            	xp::setData(['private'=>['gender'=>$val]]);
             	return true;
             }
         }
@@ -123,9 +134,9 @@ class cfg{
 	 * @return bool
 	 */
 	function setDesc($desc){
-	$arr=x::getENGLongToArray(x::getRUSLongToArray(x::getENGToArray(x::getRUSToArray(x::getNumberToArray(['@','$','_','-','=',' '])))));
+		$arr=x::getENGLongToArray(x::getRUSLongToArray(x::getENGToArray(x::getRUSToArray(x::getNumberToArray(['?','@','$','_','-','=',' '])))));
 	    $access=x::isCharArray($arr,$desc,true);
-	    if(!is_null($access)&&!$access){
+	    if(!is_null($access)&&!$access&&!is_numeric($access)){
 	        x::LoadWebUrl();
             sm::modal(['open'=>1,'title'=>'Личная информация','content'=>'Некоторые символы нельзя использовать в описание :(']);
 	        die();
@@ -134,8 +145,8 @@ class cfg{
 		    x::LoadWebUrl();
             sm::modal(['open'=>1,'title'=>'Личная информация','content'=>'Требуется ввести описание не более 2048 символов. :(']);
             die();
-        }elseif(xp::getData()['desc']!=$desc){
-        	xp::setData(['desc'=>$desc]);
+        }elseif(xp::$data['private']['desc']!=$desc){
+        	xp::setData(['private'=>['desc'=>$desc]]);
         	return true;
         }
         return false;
@@ -155,14 +166,14 @@ class cfg{
 		    x::LoadWebUrl();
             sm::modal(['open'=>1,'title'=>'Личная информация','content'=>"Требуется ввести дата начало более $min :("]);
             die();
-        }elseif(xp::getData()['dateIn']!=$val){
-        	xp::setData(['dateIn'=>$val]);
+        }elseif(xp::$data['private']['dateIn']!=$val){
+        	xp::setData(['private'=>['dateIn'=>$val]]);
         	return true;
         }
         return false;
     }
 }
-if($_SERVER["REQUEST_METHOD"]=='POST'){
+if($_SERVER['REQUEST_METHOD']=='POST'){
 	$e=new cfg();
 	$e->execute();
 }else{echo xlib::alert();}

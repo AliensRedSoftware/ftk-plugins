@@ -1,0 +1,60 @@
+.btn-gentoo{
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: normal;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.42857143;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color: #fff;
+	background-color: #54487A;
+	border-color: #493f6a;
+	color: white !important;
+}
+.btn-gentoo:hover, .btn-gentoo:focus, .btn-gentoo.focus {
+    color: #333;
+    text-decoration: none;
+}
+.btn-gentoo:hover{
+    color: #fff;
+    background-color: #3e355a;
+    border-color: #2e2843;
+}
+.text-gentoo{
+    color: #54487A !important;
+}
+.bg-gentoo{
+    border-color: #61538D;
+    background:#f0edff;
+}
+.bg-gentoo > .bg-heading {
+    color: white;
+    background-color: #61538D;
+    border-color: #61538D;
+}
+.bg-gentoo > .bg-heading .badge {
+    color: white;
+    background-color: #54487a;
+}
+.label-gentoo{
+    background-color: #54487a;
+}
+.badge-gentoo{
+    color: #fff;
+    background-color: #54487a;
+}
+.bg-gentoo > .card-header {
+	background-color: #61538D;
+	color: white;
+}

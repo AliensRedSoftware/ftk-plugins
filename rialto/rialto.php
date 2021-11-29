@@ -1,24 +1,24 @@
 <?php
+/**
+ * Работа с биржей
+ */
 use xlib as x;
 use xprivate as xp;
 use skinmanager as sm;
 class rialto{
-	function execute(){
-		
-	}
+
 	/**
 	 * Возвращаем конфигурация бирже
 	 * @return string
 	 */
 	public function getCfgRialto(){
-		$data=xp::getData();
+		$data=xp::$data;
 		foreach(self::getWallets() as $wallet){
 			$about=self::getAbout($wallet);
 			$change=self::getChangeWallet($wallet);
 		    $cfg=sm::a(['title'=>'Изменить','modal'=>$change,'href'=>"#$change"]);
-			$HTR=sm::text(['text'=>'Баланс кошелька:'.sm::badge(['txt'=>$wallet['name']])]);
-			$wallets.=$HTR.sm::p(['content'=>sm::input(['value'=>$data[$wallet['name']],'type'=>'number','step'=>'0.001','readonly'=>1])." $cfg $about"]);
-			
+			$HTR=sm::txt(['txt'=>'Баланс кошелька:'.sm::badge(['txt'=>$wallet['name']])]);
+			$wallets.=$HTR.sm::p(['content'=>sm::input(['value'=>$data['rialto'][$wallet['name']]['value'],'type'=>'number','step'=>'0.001','readonly'=>1])." $cfg $about"]);
 		}
 		$logo=sm::p(['content'=>sm::img(['css'=>['width'=>'200px','pointer-events'=>'none','border-radius'=>'100px'],'src'=>x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'logo.png')])]);
 		$return=sm::a(['title'=>'Вернуться','href'=>'#xprivate','modal'=>'xprivate']);
@@ -29,7 +29,7 @@ class rialto{
 	 * wallet-Кошелек
 	 */
     public function getAbout($wallet){
-		$desc=sm::text(['text'=>$wallet['desc']]);
+		$desc=sm::txt(['txt'=>$wallet['desc']]);
 		$return=sm::p(['content'=>sm::a(['title'=>'Вернуться','modal'=>'cfgRialto','href'=>'#cfgRialto'])]);
 		sm::modal(['id'=>'aboutRialto','title'=>'ЧИВО '.sm::badge(['txt'=>$wallet['name']]),'content'=>$desc.$return]);
 		return sm::a(['title'=>'ЧИВО','modal'=>'aboutRialto','href'=>'#aboutRialto']);
@@ -55,6 +55,7 @@ class rialto{
 	public function getBuy($wallet){
 		$name=$wallet['name'];
 		$i=0;
+		//-->Банковская карта
 		if($wallet['buyCard']){
 			$i++;
 			//-->Банковская карта
@@ -73,7 +74,7 @@ class rialto{
 	public function getBuyCard($wallet){
 		$name=sm::badge(['txt'=>$wallet['name']]);
 		$action=x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR.'execute'.DIRECTORY_SEPARATOR.'buyCard.php');
-		$desc=sm::text(['text'=>'Внимание: пополнение кошелька возможно только 3 раза в 1 день']);
+		$desc=sm::txt(['txt'=>'Внимание: пополнение кошелька возможно только 3 раза в 1 день']);
 		$logo=sm::img(['src'=>x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR."ico/card"),'css'=>['width'=>'320px','pointer-events'=>'none']]);
 		$security=x::div(['content'=>'100% безопасная оплата с ']).sm::img(['src'=>x::getPathModules(__CLASS__.'/ico/security'),'css'=>['width'=>'200px',
 'pointer-events'=>'none']]);
@@ -84,7 +85,7 @@ class rialto{
 		$c4='-'.sm::input(['placeholder'=>'0000','type'=>'tel','name'=>'c4','size'=>4,'max'=>4,'min'=>4,'pattern'=>'[0-9]{4}','value'=>$_POST['c4'],'required'=>true]);
 		$c5='-'.sm::input(['placeholder'=>'000','type'=>'tel','name'=>'c5','size'=>3,'max'=>3,'min'=>3,'value'=>$_POST['c5'],'pattern'=>'[0-9]{3}']);
 		$card=sm::p(['content'=>'Номер карты:','css'=>['margin'=>'0','text-align'=>'left']]).$c1.$c2.$c3.$c4.$c5;
-		$cvv=sm::p(['content'=>'CVV/CVC:','css'=>['margin'=>'0','text-align'=>'left']]).sm::input(['placeholder'=>'000','type'=>'tel','value'=>$_POST['cvv'],'name'=>'cvv','size'=>3,'max'=>3,'min'=>3,'pattern'=>'[0-9]{3}','required'=>true]);
+		$cvv=sm::p(['content'=>'CVV/CVC:','css'=>['margin'=>'0','text-align'=>'left']]).sm::input(['placeholder'=>'000','type'=>'password','value'=>$_POST['cvv'],'name'=>'cvv','size'=>3,'max'=>3,'min'=>3,'pattern'=>'[0-9]{3}','required'=>true]);
 		//Месяц
 		$month=[];
 		$month+=['01'=>[]];
@@ -105,28 +106,20 @@ class rialto{
 		$month=sm::combobox(['name'=>'month','selected'=>$_POST['month'],$month]);
 		//ГОД
 		$year=[];
-		$year+=['20'=>[]];
-		$year+=['21'=>[]];
-		$year+=['22'=>[]];
-		$year+=['23'=>[]];
-		$year+=['24'=>[]];
-		$year+=['25'=>[]];
-		$year+=['26'=>[]];
-		$year+=['27'=>[]];
-		$year+=['28'=>[]];
-		$year+=['29'=>[]];
-		$year+=['30'=>[]];
+		for($i=-1;$i<=10;$i++){
+			$year+=[substr(date('Y')+$i,2)=>[]];
+		}
 		if(!$_POST['year']){
 			$_POST['year']=array_keys($year)[rand(0,count($year)-1)];
 		}
 		$year=sm::combobox(['name'=>'year','selected'=>$_POST['year'],$year]);
 		$valid=sm::p(['content'=>'Срок действия:','css'=>['margin'=>'0','text-align'=>'left']]).$month.'/'.$year;
 		//-->Выбранный кошелек
-		$SelectedWallet=sm::p(['content'=>"Выбранный кошелек $name"]).sm::input(['min'=>10,'name'=>$wallet['name'],'max'=>999999999999999,'value'=>10,'type'=>'number']).sm::input(['name'=>'wallet','type'=>'hidden','value'=>$wallet['name']]);
+		$SelectedWallet=sm::p(['content'=>"Сумма дополнение $name"]).sm::input(['step'=>$wallet['step'],'min'=>$wallet['minCard'],'max'=>$wallet['maxCard'],'name'=>$wallet['name'],'value'=>$wallet['minCard'],'type'=>'number']).sm::input(['name'=>'wallet','type'=>'hidden','value'=>$wallet['name']]);
 		//-->Выполнение
 		$submit=sm::p(['content'=>sm::input(['type'=>'submit'])]);
-		//-->Защитай сессий
-		$key=x::generateSession(x::uuidv4());
+		//-->Защита сессий
+		$key=x::generateSession();
 		//-->Форма
 		$buy=sm::panel(['title'=>"Новое пополнение кошелька $name",'content'=>sm::form(['method'=>'post','id'=>x::RedirectUpdate(),'action'=>$action,'content'=>$key.$card.$cvv.$valid.$SelectedWallet.$security.$submit.$desc])]);
 		//-->Вернуться
@@ -136,16 +129,17 @@ class rialto{
 		return sm::p(['content'=>sm::a(['title'=>'Банковская карта','modal'=>$modal,'href'=>"#$modal"])]);
 	}
 	/**
-     * Возвратить объекты валюты ввиде объекта
+     * Возвратить объект валюты ввиде объекта
+     * --
      * data-данные пользователя
      * @return object
      */
 	public function getWalletObject($data){
      	foreach(self::getWallets() as $wallet){
-     		$change=self::getCfgWalletObject($data,$wallet);
+     		$change=self::getCfgWalletObject($data,$wallet);//Конфигурация баланса пользователя
      		$cfg=sm::a(['title'=>'Изменить','modal'=>$change,'href'=>"#$change"]);
-			$HTR=sm::text(['text'=>'Баланс кошелька:'.sm::badge(['txt'=>$wallet['name']])]);
-			$wallets.=$HTR.sm::p(['content'=>sm::input(['value'=>$data[$wallet['name']],'type'=>'number','step'=>'0.001','readonly'=>1])." $cfg"]);
+			$balance=sm::txt(['txt'=>'Баланс кошелька '.sm::badge(['txt'=>$wallet['name']])]);
+			$wallets.=$balance.sm::p(['content'=>sm::input(['value'=>$data['rialto'][$wallet['name']]['value'],'type'=>'number','step'=>$wallet['step'],'readonly'=>true])." $cfg"]);
 		}
      	return $wallets;
 	}
@@ -155,16 +149,16 @@ class rialto{
 	 * wallet-Кошелек
 	 */
 	public function getCfgWalletObject($data,$wallet){
-		$name=$data['name'];
+		$name=$data['private']['name'];
 		$id=substr($data['id'],0,12);
-		$HTR=sm::text(['text'=>'Баланс кошелька:'.sm::badge(['txt'=>$wallet['name']])]);
-		$HTR=$HTR.sm::p(['content'=>sm::input(['value'=>$data[$wallet['name']],'type'=>'number','step'=>'0.001','readonly'=>1])]);
+		$balance=sm::txt(['txt'=>'Ваш баланс кошелька '.sm::badge(['txt'=>$wallet['name']])]);
+		$balance=$balance.sm::p(['content'=>sm::input(['value'=>$data['rialto'][$wallet['name']]['value'],'type'=>'number','step'=>$wallet['step'],'readonly'=>1])]);
 		$SendWallet=self::getSendWalletObject($data,$wallet);
 		$BUY=sm::p(['content'=>sm::a(['title'=>'Пополнить '.sm::badge(['txt'=>$wallet['name']])])]);
 		$OUT=sm::p(['content'=>sm::a(['title'=>'Вывести '.sm::badge(['txt'=>$wallet['name']])])]);
 		$history=sm::p(['content'=>sm::a(['title'=>'История'])]);
 		$return=sm::p(['content'=>sm::a(['title'=>'Вернуться','modal'=>"$id-private",'href'=>"#$id-private"])]);
-		return sm::modal(['id'=>"$id-cfg".$wallet['name'],'title'=>"Конфигурация баланса пользователя '$name'",'content'=>$HTR.$SendWallet.$BUY.$OUT.$SND.$history.$return]);
+		return sm::modal(['id'=>"$id-cfg".$wallet['name'],'title'=>"Конфигурация баланса пользователя '$name'",'content'=>$balance.$SendWallet.$BUY.$OUT.$SND.$history.$return]);
 	}
 	/**
 	 * Возвращаем форму для передачи валюты другому пользователю
@@ -173,39 +167,55 @@ class rialto{
 	 */
 	public function getSendWalletObject($data,$wallet){
 		$action=x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR.'execute'.DIRECTORY_SEPARATOR.'sendWallet.php');
-		$myData=xp::getData();
-		$name=$data['name'];
+		$myData=xp::$data;
+		$name=$data['private']['name'];
 		$id=substr($data['id'],0,12);
 		$idUser=sm::input(['type'=>'hidden','name'=>'id','value'=>$id]);
-		$MYHTR=sm::text(['text'=>'Баланс кошелька:'.sm::badge(['txt'=>$wallet['name']]).' - Баланс:'.sm::badge(['txt'=>'Ваш'])]);
-		$MYHTR=$MYHTR.sm::p(['content'=>sm::input(['value'=>$myData[$wallet['name']],'type'=>'number','step'=>'0.001','readonly'=>1])]);
+		$MYHTR=sm::txt(['txt'=>'Баланс кошелька '.sm::badge(['txt'=>'Ваш'])]);
+		$MYHTR=$MYHTR.sm::p(['content'=>sm::input(['value'=>$myData['rialto'][$wallet['name']]['value'],'type'=>'number','step'=>'0.001','readonly'=>1])]);
 		$logo=sm::p(['content'=>sm::img(['css'=>['width'=>'128px',
 'pointer-events'=>'none'],'src'=>x::getPathModules(__CLASS__.DIRECTORY_SEPARATOR.'ico'.DIRECTORY_SEPARATOR.'repeat')])]);
-		$HTR=sm::text(['text'=>'Баланс кошелька:'.sm::badge(['txt'=>$wallet['name']]).' - Баланс:'.sm::badge(['txt'=>'Друга'])]);
-		$HTR=$HTR.sm::p(['content'=>sm::input(['name'=>'balance','type'=>'number','value'=>0.001,'min'=>0.001,'max'=>$myData[$wallet['name']],'step'=>'0.0001'])]);
+		$HTR=sm::txt(['txt'=>'Баланс кошелька '.sm::badge(['txt'=>'Друга'])]);
+		$HTR=$HTR.sm::p(['content'=>sm::input(['name'=>'balance','type'=>'number','value'=>$wallet['step'],'min'=>$wallet['step'],'max'=>$myData['rialto'][$wallet['name']]['value'],'step'=>$wallet['step']])]);
 		$history=sm::p(['content'=>sm::a(['title'=>'История'])]);
 		$submit=sm::input(['value'=>'Перевести','type'=>'submit']);
 		$return=sm::a(['title'=>'Вернуться','modal'=>"$id-cfg".$wallet['name'],'href'=>"#$id-cfg".$wallet['name']]);
-		$modal=sm::modal(['id'=>"$id-sendBuy".$wallet['name'],'title'=>"Перевод баланса пользователя '$name'",'content'=>sm::form(['content'=>$idUser.$MYHTR.$logo.$HTR.$SND.$history.$submit.' '.$return,'method'=>'post','action'=>$action])]);
-		return sm::p(['content'=>sm::a(['title'=>'Перевести '.sm::badge(['txt'=>'Пополнение кошелька '.$wallet['name']]),'modal'=>$modal,'href'=>"#$modal"])]);
+		//Выбранный кошелек
+		$selectedWallet=sm::input(['name'=>'wallet','type'=>'hidden','value'=>$wallet['name']]);
+		//Форма
+		$modal=sm::modal(['id'=>"$id-sendBuy".$wallet['name'],'title'=>"Перевод баланса пользователя '$name'",'content'=>sm::form(['id'=>x::RedirectUpdate(),'content'=>$selectedWallet.$idUser.$MYHTR.$logo.$HTR.$SND.$history.$submit.' '.$return,'method'=>'post','action'=>$action])]);
+		return sm::p(['content'=>sm::a(['title'=>'Перевести '.sm::badge(['txt'=>$wallet['name']]),'modal'=>$modal,'href'=>"#$modal"])]);
 	}
     /**
      * Возвратить валюты ввиде массива
      * @return array
      */
     public function getWallets(){
-    	$wallets=scandir(__DIR__.DIRECTORY_SEPARATOR.'wallet');
     	$arr=[];
-    	foreach($wallets as $wallet){
-    		if($wallet!='.'&&$wallet!='..'){
-    			require_once __DIR__.DIRECTORY_SEPARATOR.'wallet'.DIRECTORY_SEPARATOR.$wallet.DIRECTORY_SEPARATOR."$wallet.php";
-    			$cfg=call_user_func(array($wallet,'execute'));
-    			$arr[$wallet]=[
-    			 	'name'=>$cfg['name'],
-    			 	'desc'=>$cfg['desc'],
-    			 	'buyCard'=>$cfg['buyCard']
-    			];
-    		}
+    	foreach(x::scandir(__DIR__.DIRECTORY_SEPARATOR.'wallet') as $wallet){
+			require_once __DIR__.DIRECTORY_SEPARATOR.'wallet'.DIRECTORY_SEPARATOR.$wallet.DIRECTORY_SEPARATOR."$wallet.php";
+			$cfg=call_user_func(array($wallet,'execute'));
+			$arr[$wallet]=[
+//Информация об виртуальной валюты
+				'name'      =>  $cfg['name'],
+				'desc'      =>  $cfg['desc'],
+				'step'   	=>  $cfg['step'],
+//Покупка через пластиковую карту
+				'buyCard'   =>  $cfg['buyCard'],
+				'minCard'   =>  $cfg['minCard'],
+				'maxCard'   =>  $cfg['maxCard'],
+			];
+    	}
+    	return $arr;
+	}
+	/**
+     * Возвращает имена валют ввиде массива
+     * @return array
+     */
+    static function getNameWallets(){
+    	$arr=[];
+    	foreach(x::scandir(__DIR__.DIRECTORY_SEPARATOR.'wallet') as $wallet){
+    		array_push($arr,$wallet);
     	}
     	return $arr;
 	}

@@ -2,3 +2,13 @@
     display: unset;
     width: unset;
 }
+.btn-link{
+	padding:unset;
+}
+.btn{
+	white-space:unset;
+	word-wrap:anywhere;
+}
+input[type="file"]{
+	display:unset;
+}
