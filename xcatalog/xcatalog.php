@@ -1,6 +1,8 @@
 <?php
+
 /**
- * Работа с каталогом
+ * @name Работа с каталогом
+ * @version 1.0
  */
 use xlib as x;
 use skinmanager as sm;

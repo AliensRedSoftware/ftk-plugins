@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Стандартный модуль для создание сайта
- * v2.65
+ * @name Стандартный набор для работы сайта
+ * @version 2.65
  */
 use skinmanager as sm;
 class xlib{
@@ -1267,7 +1267,7 @@ class xlib{
             case 'image/gif':
             	//extract
             	$gfe=new GifFrameExtractor();
-            	$gfe->extract($img);
+            	$gfe->extract($img, true);
             	$tmp=__DIR__.DIRECTORY_SEPARATOR.self::strRand();
 				mkdir($tmp);
 				chmod($tmp,0777);

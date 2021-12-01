@@ -46,10 +46,12 @@ Old (pre-1.2) manual change log (partly parallel with the GitHub commit log):
 /**
  * Create an animated GIF from multiple images
  * 
+ * @name Работа с gif (сборка)
  * @link https://github.com/lunakid/AnimGif
  * @author Sybio (Clément Guillemain / @Sybio01), lunakid (@GitHub, @Gmail, @SO etc.)
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Clément Guillemain, Szabolcs Szász
+ * @version 1.3
  */
 
 

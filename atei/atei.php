@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Яндекс модуль
- * 0.30v
+ * @name Храм атей (Донат услуги)
+ * @version 0.35
  */
 use xlib as x;
 use skinmanager as sm;

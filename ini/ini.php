@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Работа с ini
- * v1.0
+ * @name Работа с ini
+ * @version 1.0
  */
 class ini {
 

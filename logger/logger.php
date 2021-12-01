@@ -1,9 +1,14 @@
 <?php
+
+/**
+ * @name Логирование
+ * @version 1.0
+ */
 use xlib as x;
-class logger{
+class logger {
 
     /**
-     * Выполняется при подключение модуля
+     * Выполнение
      */
     function execute(){
         if(!x::isJs()){
@@ -24,7 +29,7 @@ class logger{
             $nameProxy=self::getNameProxy();
             $ProxyIp=self::getProxyIp();
             $path=urldecode($_SERVER['REQUEST_URI']);
-            //js
+            //js HACK ATTACK...
             x::js("
 var r = new XMLHttpRequest();
 var screenX=window.screen.width;
@@ -40,13 +45,15 @@ r.send();
 
     /**
      * Возвращает имя прокси подключенного ;)
+     * @return string
      */
     function getNameProxy(){
         return $_SERVER['HTTP_VIA'];
     }
-    
+
     /**
      * Возвращает ip прокси подключенного ;)
+     * @return string
      */
     function getProxyIp($proxy=true){
         return $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -54,6 +61,7 @@ r.send();
 
     /**
      * Возвращает ip подключенного ;)
+     * @return string
      */
     function getIp(){
         return $_SERVER['REMOTE_ADDR'];
@@ -61,6 +69,7 @@ r.send();
 
     /**
      * Возвращает путь выполнение скрипта ;)
+     * @return string
      */
     function getRequest_uri(){
         return "[REQUEST_URI] => " . urldecode($_SERVER['REQUEST_URI']);
@@ -68,6 +77,7 @@ r.send();
 
     /**
      * Возвращает user-agent браузера
+     * @return string
      */
     function getUserAgent(){
         return "[HTTP_USER_AGENT] => " . $_SERVER['HTTP_USER_AGENT'];
@@ -75,6 +85,7 @@ r.send();
 
     /**
      * Возвращает Время и дату
+     * @return int
      */
     function getTimeSession(){
         return date('Y-m-d') . ':' . date('H:i:s', time() - date('Z'));
@@ -82,6 +93,7 @@ r.send();
 
     /**
      * Возвращает Время
+     * @return int
      */
     function getTime(){
         return date('H:i:s', time() - date('Z'));
@@ -89,6 +101,7 @@ r.send();
 
     /**
      * Возвращает Минуты
+     * @return int
      */
     function getTimeMinutes(){
         return date('i', time() - date('Z'));

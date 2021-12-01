@@ -1,12 +1,11 @@
 <?php
 
 /**
- * Работа api для всего сайта
- * ver 1.10
- * --------------------
+ * @name Легкое создание своего api
+ * @version 1.10
  */
 use xlib as x;
-class api{
+class api {
 
     static $data;
 

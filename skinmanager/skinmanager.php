@@ -38,9 +38,8 @@ if($_COOKIE['__SKINMANAGER_SKIN'] != 'basic'){
 }
 
 /**
- * Скин менеджер
- * --------------
- * ver beta 1.55
+ * @name Дополнительные виджета для оформление 
+ * @version 1.55
  */
 use xlib as x;
 class skinmanager{

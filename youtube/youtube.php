@@ -1,12 +1,11 @@
 <?php
 /**
- * youtube дополнительные функций
- * v1.2
- * Форма настроек-(youtube)
+ * @name Работа с youtube дополнительные функций
+ * @version 1.2
  */
 use xlib as x;
 use skinmanager as sm;
-class youtube{
+class youtube {
 
     /**
      * Настройка формы

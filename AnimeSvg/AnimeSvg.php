@@ -1,6 +1,12 @@
 <?php
+
+/**
+ * @name Аниме svg картинки
+ * @version 1.00
+ */
 use xlib as x;
-class AnimeSvg{
+class AnimeSvg {
+
 	/**
 	 * Возвращаем аниме тян 0
 	 * ---------------------

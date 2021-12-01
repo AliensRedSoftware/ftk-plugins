@@ -1,11 +1,12 @@
 <?php
 /**
- * Работа с биржей
+ * @name Работа с биржей (Создание своей бирже)
+ * @version 1.0
  */
 use xlib as x;
 use xprivate as xp;
 use skinmanager as sm;
-class rialto{
+class rialto {
 
 	/**
 	 * Возвращаем конфигурация бирже

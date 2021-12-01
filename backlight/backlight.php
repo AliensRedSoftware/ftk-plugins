@@ -1,7 +1,12 @@
 <?php
 
+/**
+ * @name фон подсветки
+ * @version 1.00
+ */
 use xlib as x;
-class backlight{
+class backlight {
+
     /**
      * Цветовая линия
      * s - Начало

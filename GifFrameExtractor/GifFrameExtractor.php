@@ -1,7 +1,7 @@
 ﻿<?php
 
 /**
- * Extract the frames (and their duration) of a GIF
+ * @name Extract the frames (and their duration) of a GIF
  * 
  * @version 1.5
  * @link https://github.com/Sybio/GifFrameExtractor
